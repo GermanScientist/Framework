@@ -4,9 +4,9 @@
 // Include GLFW
 #include <GLFW/glfw3.h>
 
-#include <common/renderer.h>
-#include <common/camera.h>
-#include <common/sprite.h>
+#include <myFramework/renderer.h>
+#include <myFramework/camera.h>
+#include <myFramework/sprite.h>
 
 int main( void )
 {
