@@ -42,9 +42,5 @@ void computeMatricesFromInputs(GLFWwindow* window, float deltaTime)
 	}
 
 	// View matrix
-	viewMatrix = glm::lookAt(
-			position, /* Camera is at (xpos,ypos,zpos), in World Space */
-			position + glm::vec3(0, 0, -1), /* and looks towards Z */
-			glm::vec3(0, 1, 0)  /* Head is up (set to 0,-1,0 to look upside-down) */
-		);
+	viewMatrix = glm::lookAt(position, position + glm::vec3(0, 0, -1), glm::vec3(0, 1, 0));
 }

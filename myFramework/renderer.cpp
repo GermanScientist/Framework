@@ -21,9 +21,10 @@ Renderer::~Renderer()
 	glDeleteProgram(_programID);
 }
 
+//Intialize renderer
 int Renderer::init()
 {
-	// Initialise GLFW
+	// Initialise GLFW library
 	if( !glfwInit() )
 	{
 		fprintf( stderr, "Failed to initialize GLFW\n" );
@@ -41,7 +42,8 @@ int Renderer::init()
 		glfwTerminate();
 		return -1;
 	}
-	glfwMakeContextCurrent(_window);
+	
+    glfwMakeContextCurrent(_window);
 
 	// Initialize GLEW
 	if (glewInit() != GLEW_OK) {
@@ -56,9 +58,10 @@ int Renderer::init()
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
 	// Enable depth test
-	//glEnable(GL_DEPTH_TEST);
-	// Accept fragment if it closer to the camera than the former one
-	//glDepthFunc(GL_LESS);
+	glEnable(GL_DEPTH_TEST);
+	
+    // Accept fragment if it closer to the camera than the former one
+	glDepthFunc(GL_LESS);
 
 	// Cull triangles which normal is not towards the camera
 	glEnable(GL_CULL_FACE);
@@ -74,10 +77,13 @@ int Renderer::init()
 	return 0;
 }
 
+//Update delta time function
 float Renderer::updateDeltaTime() {
-	// lastTime is initialised only the first time this function is called
+	
+    // lastTime is initialised only the first time this function is called
 	static double lastTime = glfwGetTime();
-	// get the current time
+	
+    // get the current time
 	double currentTime = glfwGetTime();
 
 	// Compute time difference between current and last time
@@ -88,9 +94,11 @@ float Renderer::updateDeltaTime() {
 	return deltaTime;
 }
 
+//Render a sprite
 void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float sy, float rot)
 {
-	glm::mat4 viewMatrix = getViewMatrix(); // get from Camera (Camera position and direction)
+    // get viewmatrix from Camera (Camera position and direction)
+	glm::mat4 viewMatrix = getViewMatrix(); 
 
 	// Build the Model matrix
 	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(px, py, 0.0f));
@@ -108,8 +116,10 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 
 	// Bind our texture in Texture Unit 0
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, sprite->texture());
-	// Set our "textureSampler" sampler to user Texture Unit 0
+	
+    glBindTexture(GL_TEXTURE_2D, sprite->texture());
+	
+    // Set our "textureSampler" sampler to user Texture Unit 0
 	GLuint textureID  = glGetUniformLocation(_programID, "textureSampler");
 	glUniform1i(textureID, 0);
 
@@ -117,27 +127,13 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 	GLuint vertexPositionID = glGetAttribLocation(_programID, "vertexPosition");
 	glEnableVertexAttribArray(vertexPositionID);
 	glBindBuffer(GL_ARRAY_BUFFER, sprite->vertexbuffer());
-	glVertexAttribPointer(
-		vertexPositionID, // The attribute we want to configure
-		3,          // size : x+y+z => 3
-		GL_FLOAT,   // type
-		GL_FALSE,   // normalized?
-		0,          // stride
-		(void*)0    // array buffer offset
-	);
+	glVertexAttribPointer(vertexPositionID, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 	// 2nd attribute buffer : UVs
 	GLuint vertexUVID = glGetAttribLocation(_programID, "vertexUV");
 	glEnableVertexAttribArray(vertexUVID);
 	glBindBuffer(GL_ARRAY_BUFFER, sprite->uvbuffer());
-	glVertexAttribPointer(
-		vertexUVID, // The attribute we want to configure
-		2,          // size : U+V => 2
-		GL_FLOAT,   // type
-		GL_FALSE,   // normalized?
-		0,          // stride
-		(void*)0    // array buffer offset
-	);
+	glVertexAttribPointer(vertexUVID, 2, GL_FLOAT, GL_FALSE,  0, (void*)0);
 
 	// Draw the triangles
 	glDrawArrays(GL_TRIANGLES, 0, 2*3); // 2*3 indices starting at 0 -> 2 triangles
@@ -146,6 +142,7 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 	glDisableVertexAttribArray(vertexUVID);
 }
 
+//Load the shaders
 GLuint Renderer::loadShaders(const std::string& vertex_file_path, const std::string& fragment_file_path)
 {
 	// Create the shaders
@@ -155,14 +152,16 @@ GLuint Renderer::loadShaders(const std::string& vertex_file_path, const std::str
 	// Read the Vertex Shader code from the file
 	std::string vertexShaderCode;
 	std::ifstream vertexShaderStream(vertex_file_path.c_str(), std::ios::in);
-	if (vertexShaderStream.is_open()){
-		std::string line = "";
+	
+    //Checks whether the vertex shader stream is open
+    if (vertexShaderStream.is_open()){
+        std::string line = "";
 		while (getline(vertexShaderStream, line)) {
 			vertexShaderCode += "\n" + line;
 		}
 		vertexShaderStream.close();
 	} else {
-		printf("Can't to open %s.\n", vertex_file_path.c_str());
+        printf("Can't to open %s.\n", vertex_file_path.c_str());
 		getchar();
 		return 0;
 	}
@@ -170,6 +169,8 @@ GLuint Renderer::loadShaders(const std::string& vertex_file_path, const std::str
 	// Read the Fragment Shader code from the file
 	std::string fragmentShaderCode;
 	std::ifstream fragmentShaderStream(fragment_file_path.c_str(), std::ios::in);
+
+    //Checks whether the vertex shader stream is open
 	if (fragmentShaderStream.is_open()){
 		std::string line = "";
 		while (getline(fragmentShaderStream, line)) {
@@ -194,7 +195,8 @@ GLuint Renderer::loadShaders(const std::string& vertex_file_path, const std::str
 	// Check Vertex Shader
 	glGetShaderiv(vertexShaderID, GL_COMPILE_STATUS, &result);
 	glGetShaderiv(vertexShaderID, GL_INFO_LOG_LENGTH, &infoLogLength);
-	if ( infoLogLength > 0 ){
+	
+    if ( infoLogLength > 0 ){
 		std::vector<char> vertexShaderErrorMessage(infoLogLength+1);
 		glGetShaderInfoLog(vertexShaderID, infoLogLength, NULL, &vertexShaderErrorMessage[0]);
 		printf("%s\n", &vertexShaderErrorMessage[0]);
@@ -209,7 +211,8 @@ GLuint Renderer::loadShaders(const std::string& vertex_file_path, const std::str
 	// Check Fragment Shader
 	glGetShaderiv(fragmentShaderID, GL_COMPILE_STATUS, &result);
 	glGetShaderiv(fragmentShaderID, GL_INFO_LOG_LENGTH, &infoLogLength);
-	if ( infoLogLength > 0 ){
+	
+    if ( infoLogLength > 0 ){
 		std::vector<char> fragmentShaderErrorMessage(infoLogLength+1);
 		glGetShaderInfoLog(fragmentShaderID, infoLogLength, NULL, &fragmentShaderErrorMessage[0]);
 		printf("%s\n", &fragmentShaderErrorMessage[0]);
@@ -225,12 +228,14 @@ GLuint Renderer::loadShaders(const std::string& vertex_file_path, const std::str
 	// Check the program
 	glGetProgramiv(programID, GL_LINK_STATUS, &result);
 	glGetProgramiv(programID, GL_INFO_LOG_LENGTH, &infoLogLength);
-	if ( infoLogLength > 0 ){
+	
+    if ( infoLogLength > 0 ){
 		std::vector<char> programErrorMessage(infoLogLength+1);
 		glGetProgramInfoLog(programID, infoLogLength, NULL, &programErrorMessage[0]);
 		printf("%s\n", &programErrorMessage[0]);
 	}
 
+    //Delete the shaders
 	glDeleteShader(vertexShaderID);
 	glDeleteShader(fragmentShaderID);
 
