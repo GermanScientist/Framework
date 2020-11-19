@@ -18,6 +18,7 @@ class Renderer
 		virtual ~Renderer();
 
 		void renderSprite(Sprite* sprite, float px, float py, float sx, float sy, float rot);
+        void renderObject();
 		GLFWwindow* window() { return _window; };
 
 		unsigned int width() { return _window_width; };
