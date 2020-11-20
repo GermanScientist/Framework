@@ -27,7 +27,7 @@ class Renderer
 		float updateDeltaTime();
 
 	private:
-		int init();
+		int initialize();
 
 		GLFWwindow* _window;
 		unsigned int _window_width;

@@ -12,7 +12,7 @@ Renderer::Renderer(unsigned int w, unsigned int h)
 	_window_width = w;
 	_window_height = h;
 
-	this->init();
+	this->initialize();
 }
 
 Renderer::~Renderer()
@@ -22,22 +22,24 @@ Renderer::~Renderer()
 }
 
 //Intialize renderer
-int Renderer::init()
+int Renderer::initialize()
 {
 	// Initialise GLFW library
 	if( !glfwInit() )
 	{
-		fprintf( stderr, "Failed to initialize GLFW\n" );
+		fprintf(stderr, "Failed to initialize GLFW library \n");
 		return -1;
 	}
 
+    //Set the window hints
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
 	glfwWindowHint(GLFW_SAMPLES, 4);
 
 	// Open a window and create its OpenGL context
 	_window = glfwCreateWindow( _window_width, _window_height, "Demo", NULL, NULL);
-	if( _window == NULL ){
+	
+    if(_window == NULL) {
 		fprintf( stderr, "Failed to open GLFW window.\n" );
 		glfwTerminate();
 		return -1;
@@ -47,7 +49,7 @@ int Renderer::init()
 
 	// Initialize GLEW
 	if (glewInit() != GLEW_OK) {
-		fprintf(stderr, "Failed to initialize GLEW\n");
+		fprintf(stderr, "Failed to initialize GLEW library \n");
 		return -1;
 	}
 
@@ -142,10 +144,10 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 	glDisableVertexAttribArray(vertexUVID);
 }
 
-//Render a sprite
+//Render an object
 void Renderer::renderObject()
 {
-    //Render object
+
 }
 
 //Load the shaders
@@ -218,7 +220,7 @@ GLuint Renderer::loadShaders(const std::string& vertex_file_path, const std::str
 	glGetShaderiv(fragmentShaderID, GL_COMPILE_STATUS, &result);
 	glGetShaderiv(fragmentShaderID, GL_INFO_LOG_LENGTH, &infoLogLength);
 	
-    if ( infoLogLength > 0 ){
+    if (infoLogLength > 0) {
 		std::vector<char> fragmentShaderErrorMessage(infoLogLength+1);
 		glGetShaderInfoLog(fragmentShaderID, infoLogLength, NULL, &fragmentShaderErrorMessage[0]);
 		printf("%s\n", &fragmentShaderErrorMessage[0]);
@@ -235,7 +237,7 @@ GLuint Renderer::loadShaders(const std::string& vertex_file_path, const std::str
 	glGetProgramiv(programID, GL_LINK_STATUS, &result);
 	glGetProgramiv(programID, GL_INFO_LOG_LENGTH, &infoLogLength);
 	
-    if ( infoLogLength > 0 ){
+    if (infoLogLength > 0){
 		std::vector<char> programErrorMessage(infoLogLength+1);
 		glGetProgramInfoLog(programID, infoLogLength, NULL, &programErrorMessage[0]);
 		printf("%s\n", &programErrorMessage[0]);
