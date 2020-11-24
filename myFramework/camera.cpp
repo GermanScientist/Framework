@@ -1,15 +1,18 @@
 #include <myFramework/camera.h>
 
+//Gets the view matrix
 glm::mat4 viewMatrix;
 glm::mat4 getViewMatrix(){
 	return viewMatrix;
 }
 
+//Gets the cursor
 glm::vec3 cursor = glm::vec3( 0, 0, 0 );
 glm::vec3 getCursor(){
 	return cursor;
 }
 
+//Control camera using keyboard input
 void computeMatricesFromInputs(GLFWwindow* window, float deltaTime)
 {
 	// Get mouse position
