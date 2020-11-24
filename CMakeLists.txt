@@ -71,11 +71,15 @@ add_library(myFramework # ar rcs libmyFramework.a
 	myFramework/sprite.cpp
 )
 
-# Demo
-add_executable(demo # g++ demo/demo.cpp -o demo
-	demo/demo.cpp
+# Main
+add_executable(main # g++ demo/main.cpp -o main
+	demo/main.cpp
+	demo/myScene.cpp
+	demo/myScene.h
+	demo/myTerrain.cpp
+	demo/myTerrain.h
 )
-target_link_libraries(demo # g++ -lmyFramework
+target_link_libraries(main # g++ -lmyFramework
 	myFramework
 	${ALL_GRAPHICS_LIBS}
 )
