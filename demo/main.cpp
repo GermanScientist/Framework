@@ -1,15 +1,10 @@
-// Include GLEW
-#include <GL/glew.h>
-
-// Include GLFW
-#include <GLFW/glfw3.h>
-
-#include <myFramework/renderer.h>
-#include <myFramework/camera.h>
-#include <myFramework/sprite.h>
+#include <myFramework/runner.h>
 
 int main( void )
 {
+	//The instance of the runner
+	Runner runner;
+
 	Renderer renderer(1280, 720);
 
 	Sprite* pencils = new Sprite("assets/pencils.tga");
