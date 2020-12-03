@@ -69,35 +69,11 @@ add_library(myFramework # ar rcs libmyFramework.a
 	myFramework/renderer.cpp
 	myFramework/sprite.h
 	myFramework/sprite.cpp
-	myFramework/runner.h
-	myFramework/runner.cpp
-	myFramework/marchingCubes.h
-	myFramework/marchingCubes.cpp
-	myFramework/material.h
-	myFramework/material.cpp
-	myFramework/mesh.h
-	myFramework/mesh.cpp
-	myFramework/model.h
-	myFramework/model.cpp
-	myFramework/scene.h
-	myFramework/scene.cpp
-	myFramework/texture.h
-	myFramework/texture.cpp
-	myFramework/entity.h
-	myFramework/entity.cpp
-	myFramework/terrain.h
-	myFramework/terrain.cpp
-	myFramework/noise.h
-	myFramework/noise.cpp
 )
 
 # Main
 add_executable(main # g++ demo/main.cpp -o main
 	demo/main.cpp
-	demo/myScene.cpp
-	demo/myScene.h
-	demo/myTerrain.cpp
-	demo/myTerrain.h
 )
 target_link_libraries(main # g++ -lmyFramework
 	myFramework

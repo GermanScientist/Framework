@@ -1,41 +1,55 @@
-#include <myFramework/runner.h>
+// Include GLEW
+#include <GL/glew.h>
 
-int main( void )
+// Include GLFW
+#include <GLFW/glfw3.h>
+
+#include <myFramework/renderer.h>
+#include <myFramework/camera.h>
+#include <myFramework/sprite.h>
+
+int main(void)
 {
-	//The instance of the runner
-	Runner runner;
+    Renderer renderer(1280, 720);
 
-	Renderer renderer(1280, 720);
+    Sprite* pencils = new Sprite("assets/pencils.tga");
+    Sprite* kingkong = new Sprite("assets/kingkong.tga");
+    Sprite* rgba = new Sprite("assets/rgba.tga");
 
-	Sprite* pencils = new Sprite("assets/pencils.tga");
+    do {
+        // Update deltaTime
+        float deltaTime = renderer.updateDeltaTime();
 
-	do {
-		// Update deltaTime
-		float deltaTime = renderer.updateDeltaTime();
+        // Compute the ViewMatrix from keyboard and mouse input (see: camera.h/cpp)
+        computeMatricesFromInputs(renderer.window(), deltaTime);
 
-		// Compute the ViewMatrix from keyboard and mouse input (see: camera.h/cpp)
-		computeMatricesFromInputs(renderer.window(), deltaTime);
+        // Clear the screen
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		// Clear the screen
-		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        // glm::vec3 cursor = getCursor(); // from Camera
+        // printf("(%f,%f)\n",cursor.x, cursor.y);
 
-		// glm::vec3 cursor = getCursor(); // from Camera
-		// printf("(%f,%f)\n",cursor.x, cursor.y);
+        // Render all Sprites (Sprite*, xpos, ypos, xscale, yscale, rotation)
+        static float rot_z = 0.0f;
+        renderer.renderSprite(pencils, 400, 300, 1.0f, 1.0f, 0.0f);
+        renderer.renderSprite(kingkong, 900, 400, 1.0f, 1.0f, 0.0f);
+        renderer.renderSprite(rgba, renderer.width() / 2, renderer.height() / 2, 3.0f, 3.0f, rot_z);
+        rot_z += 3.141592f / 2 * deltaTime;
 
-		//Render sprite
-		renderer.renderSprite(pencils, 400, 300, 1.0f, 1.0f, 0.0f);
+        // Swap buffers
+        glfwSwapBuffers(renderer.window());
+        glfwPollEvents();
 
-		// Swap buffers
-		glfwSwapBuffers(renderer.window());
-		glfwPollEvents();
+    } // Check if the ESC key was pressed or the window was closed
+    while (glfwGetKey(renderer.window(), GLFW_KEY_ESCAPE) != GLFW_PRESS &&
+        glfwWindowShouldClose(renderer.window()) == 0);
 
-	} // Check if the ESC key was pressed or the window was closed
-	while( glfwGetKey(renderer.window(), GLFW_KEY_ESCAPE ) != GLFW_PRESS && glfwWindowShouldClose(renderer.window()) == 0);
+    delete pencils;
+    delete kingkong;
+    delete rgba;
 
-	delete pencils;
+    // Close OpenGL window and terminate GLFW
+    glfwTerminate();
 
-	// Close OpenGL window and terminate GLFW
-	glfwTerminate();
-
-	return 0;
+    return 0;
 }
