@@ -144,10 +144,52 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 	glDisableVertexAttribArray(vertexUVID);
 }
 
-//Render an object
-void Renderer::renderObject()
+//Render a cube
+void Renderer::renderCube(Cube* _cube, float _posX, float _posY, float _scaleX, float _scaleY, float _rot)
 {
+    // get viewmatrix from Camera (Camera position and direction)
+    glm::mat4 viewMatrix = getViewMatrix();
 
+    // Build the Model matrix
+    glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(_posX, _posY, 0.0f));
+    glm::mat4 rotationMatrix = glm::eulerAngleYXZ(0.0f, 0.0f, _rot);
+    glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(_scaleX, _scaleY, 1.0f));
+
+    glm::mat4 modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
+
+    glm::mat4 MVP = _projectionMatrix * viewMatrix * modelMatrix;
+
+    // Send our transformation to the currently bound shader,
+    // in the "MVP" uniform
+    GLuint matrixID = glGetUniformLocation(_programID, "MVP");
+    glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
+
+    // Bind our texture in Texture Unit 0
+    glActiveTexture(GL_TEXTURE0);
+
+    glBindTexture(GL_TEXTURE_2D, _cube->texture());
+
+    // Set our "textureSampler" sampler to user Texture Unit 0
+    GLuint textureID = glGetUniformLocation(_programID, "textureSampler");
+    glUniform1i(textureID, 0);
+
+    // 1st attribute buffer : vertices
+    GLuint vertexPositionID = glGetAttribLocation(_programID, "vertexPosition");
+    glEnableVertexAttribArray(vertexPositionID);
+    glBindBuffer(GL_ARRAY_BUFFER, _cube->vertexbuffer());
+    glVertexAttribPointer(vertexPositionID, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+
+    // 2nd attribute buffer : UVs
+    GLuint vertexUVID = glGetAttribLocation(_programID, "vertexUV");
+    glEnableVertexAttribArray(vertexUVID);
+    glBindBuffer(GL_ARRAY_BUFFER, _cube->uvbuffer());
+    glVertexAttribPointer(vertexUVID, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
+
+    // Draw the triangles
+    glDrawArrays(GL_TRIANGLES, 0, 2 * 3); // 2*3 indices starting at 0 -> 2 triangles
+
+    glDisableVertexAttribArray(vertexPositionID);
+    glDisableVertexAttribArray(vertexUVID);
 }
 
 //Load the shaders

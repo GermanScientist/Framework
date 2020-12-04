@@ -10,6 +10,7 @@
 #include <glm/gtx/euler_angles.hpp>
 
 #include <myFramework/sprite.h>
+#include <myFramework/cube.h>
 
 class Renderer
 {
@@ -18,7 +19,7 @@ class Renderer
 		virtual ~Renderer();
 
 		void renderSprite(Sprite* sprite, float px, float py, float sx, float sy, float rot);
-        void renderObject();
+        void renderCube(Cube* _cube, float _posX, float _posY, float _scaleX, float _scaleY, float _rot);
 		GLFWwindow* window() { return _window; };
 
 		unsigned int width() { return _window_width; };
