@@ -7,6 +7,7 @@
 #include <myFramework/renderer.h>
 #include <myFramework/camera.h>
 #include <myFramework/sprite.h>
+#include <myFramework/cube.h>
 
 int main(void)
 {
@@ -15,6 +16,7 @@ int main(void)
     Sprite* pencils = new Sprite("assets/pencils.tga");
     Sprite* kingkong = new Sprite("assets/kingkong.tga");
     Sprite* rgba = new Sprite("assets/rgba.tga");
+    Cube* cube = new Cube();
 
     do {
         // Update deltaTime
@@ -34,6 +36,7 @@ int main(void)
         renderer.renderSprite(pencils, 400, 300, 1.0f, 1.0f, 0.0f);
         renderer.renderSprite(kingkong, 900, 400, 1.0f, 1.0f, 0.0f);
         renderer.renderSprite(rgba, renderer.width() / 2, renderer.height() / 2, 3.0f, 3.0f, rot_z);
+        renderer.renderCube(cube, 700, 900, 3.0f, 3.0f, 0.0f);
         rot_z += 3.141592f / 2 * deltaTime;
 
         // Swap buffers
@@ -47,6 +50,7 @@ int main(void)
     delete pencils;
     delete kingkong;
     delete rgba;
+    delete cube;
 
     // Close OpenGL window and terminate GLFW
     glfwTerminate();

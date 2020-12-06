@@ -8,7 +8,7 @@
 class Cube
 {
 	public:
-        Cube(const std::string& imagepath);
+        Cube();
 		virtual ~Cube();
 
 		GLuint texture() { return _texture; };

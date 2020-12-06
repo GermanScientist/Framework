@@ -164,32 +164,12 @@ void Renderer::renderCube(Cube* _cube, float _posX, float _posY, float _scaleX, 
     GLuint matrixID = glGetUniformLocation(_programID, "MVP");
     glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
 
-    // Bind our texture in Texture Unit 0
-    glActiveTexture(GL_TEXTURE0);
+	// Draw the triangle !
+	glDrawArrays(GL_TRIANGLES, 0, 12 * 3); // 12*3 indices starting at 0 -> 12 triangles
 
-    glBindTexture(GL_TEXTURE_2D, _cube->texture());
-
-    // Set our "textureSampler" sampler to user Texture Unit 0
-    GLuint textureID = glGetUniformLocation(_programID, "textureSampler");
-    glUniform1i(textureID, 0);
-
-    // 1st attribute buffer : vertices
-    GLuint vertexPositionID = glGetAttribLocation(_programID, "vertexPosition");
-    glEnableVertexAttribArray(vertexPositionID);
-    glBindBuffer(GL_ARRAY_BUFFER, _cube->vertexbuffer());
-    glVertexAttribPointer(vertexPositionID, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-
-    // 2nd attribute buffer : UVs
-    GLuint vertexUVID = glGetAttribLocation(_programID, "vertexUV");
-    glEnableVertexAttribArray(vertexUVID);
-    glBindBuffer(GL_ARRAY_BUFFER, _cube->uvbuffer());
-    glVertexAttribPointer(vertexUVID, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
-
-    // Draw the triangles
-    glDrawArrays(GL_TRIANGLES, 0, 2 * 3); // 2*3 indices starting at 0 -> 2 triangles
-
-    glDisableVertexAttribArray(vertexPositionID);
-    glDisableVertexAttribArray(vertexUVID);
+	// Swap buffers
+	glfwSwapBuffers(_window);
+	glfwPollEvents();
 }
 
 //Load the shaders
