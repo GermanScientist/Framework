@@ -36,7 +36,7 @@ int main(void)
         renderer.renderSprite(pencils, 400, 300, 1.0f, 1.0f, 0.0f);
         renderer.renderSprite(kingkong, 900, 400, 1.0f, 1.0f, 0.0f);
         renderer.renderSprite(rgba, renderer.width() / 2, renderer.height() / 2, 3.0f, 3.0f, rot_z);
-        renderer.renderCube(cube, 700, 900, 3.0f, 3.0f, 0.0f);
+        renderer.renderCube(cube, 700, 900, 0, 3.0f, 3.0f, 3.0f, 0.0f);
         rot_z += 3.141592f / 2 * deltaTime;
 
         // Swap buffers

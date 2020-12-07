@@ -19,7 +19,7 @@ class Renderer
 		virtual ~Renderer();
 
 		void renderSprite(Sprite* sprite, float px, float py, float sx, float sy, float rot);
-        void renderCube(Cube* _cube, float _posX, float _posY, float _scaleX, float _scaleY, float _rot);
+        void renderCube(Cube* _cube, float _posX, float _posY, float _posZ, float _scaleX, float _scaleY, float _scaleZ, float _rot);
 		GLFWwindow* window() { return _window; };
 
 		unsigned int width() { return _window_width; };

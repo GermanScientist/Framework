@@ -71,7 +71,8 @@ int Renderer::initialize()
 	// Create and compile our GLSL program from the shaders
 	_programID = this->loadShaders("shaders/sprite.vert", "shaders/sprite.frag");
 
-	_projectionMatrix = glm::ortho(0.0f, (float)_window_width, (float)_window_height, 0.0f, 0.1f, 100.0f);
+	//_projectionMatrix = glm::ortho(0.0f, (float)_window_width, (float)_window_height, 0.0f, 0.1f, 100.0f);
+	_projectionMatrix = glm::perspective(45.0f, (float)width() / (float)height(), 1.0f, 150.0f);
 
 	// Use our shader
 	glUseProgram(_programID);
@@ -145,31 +146,61 @@ void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float 
 }
 
 //Render a cube
-void Renderer::renderCube(Cube* _cube, float _posX, float _posY, float _scaleX, float _scaleY, float _rot)
+void Renderer::renderCube(Cube* _cube, float _posX, float _posY, float _posZ, float _scaleX, float _scaleY, float _scaleZ, float _rot)
 {
-    // get viewmatrix from Camera (Camera position and direction)
-    glm::mat4 viewMatrix = getViewMatrix();
+	// get viewmatrix from Camera (Camera position and direction)
+	glm::mat4 viewMatrix = getViewMatrix();
 
-    // Build the Model matrix
-    glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(_posX, _posY, 0.0f));
-    glm::mat4 rotationMatrix = glm::eulerAngleYXZ(0.0f, 0.0f, _rot);
-    glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(_scaleX, _scaleY, 1.0f));
+	// Build the Model matrix
+	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(_posX, _posY, _posZ));
+	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(0.0f, 0.0f, _rot);
+	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(_scaleX, _scaleY, _scaleZ));
 
-    glm::mat4 modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
+	glm::mat4 modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 
-    glm::mat4 MVP = _projectionMatrix * viewMatrix * modelMatrix;
+	glm::mat4 MVP = _projectionMatrix * viewMatrix * modelMatrix;
 
-    // Send our transformation to the currently bound shader,
-    // in the "MVP" uniform
-    GLuint matrixID = glGetUniformLocation(_programID, "MVP");
-    glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
+	// Send our transformation to the currently bound shader,
+	// in the "MVP" uniform
+	GLuint matrixID = glGetUniformLocation(_programID, "MVP");
+	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
+
+	// Bind our texture in Texture Unit 0
+	glActiveTexture(GL_TEXTURE0);
+
+	// Set our "textureSampler" sampler to user Texture Unit 0
+	GLuint textureID = glGetUniformLocation(_programID, "textureSampler");
+	glUniform1i(textureID, 0);
+
+	// 1rst attribute buffer : vertices
+	glEnableVertexAttribArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, _cube->vertexbuffer());
+	glVertexAttribPointer(
+		0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
+		3,                  // size
+		GL_FLOAT,           // type
+		GL_FALSE,           // normalized?
+		0,                  // stride
+		(void*)0            // array buffer offset
+	);
+
+	// 2nd attribute buffer : colors
+	glEnableVertexAttribArray(1);
+	glBindBuffer(GL_ARRAY_BUFFER, _cube->colorbuffer());
+	glVertexAttribPointer(
+		1,                                // attribute. No particular reason for 1, but must match the layout in the shader.
+		3,                                // size
+		GL_FLOAT,                         // type
+		GL_FALSE,                         // normalized?
+		0,                                // stride
+		(void*)0                          // array buffer offset
+	);
 
 	// Draw the triangle !
 	glDrawArrays(GL_TRIANGLES, 0, 12 * 3); // 12*3 indices starting at 0 -> 12 triangles
 
-	// Swap buffers
-	glfwSwapBuffers(_window);
-	glfwPollEvents();
+	glDisableVertexAttribArray(0);
+	glDisableVertexAttribArray(1);
 }
 
 //Load the shaders
