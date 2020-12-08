@@ -71,8 +71,8 @@ int Renderer::initialize()
 	// Create and compile our GLSL program from the shaders
 	_programID = this->loadShaders("shaders/sprite.vert", "shaders/sprite.frag");
 
-	//_projectionMatrix = glm::ortho(0.0f, (float)_window_width, (float)_window_height, 0.0f, 0.1f, 100.0f);
-	_projectionMatrix = glm::perspective(45.0f, (float)width() / (float)height(), 1.0f, 150.0f);
+	_projectionMatrix = glm::ortho(0.0f, (float)_window_width, (float)_window_height, 0.0f, 0.1f, 100.0f);
+	//_projectionMatrix = glm::perspective(45.0f, (float)width() / (float)height(), 1.0f, 150.0f);
 
 	// Use our shader
 	glUseProgram(_programID);

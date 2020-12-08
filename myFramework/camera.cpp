@@ -1,4 +1,5 @@
 #include <myFramework/camera.h>
+#include<iostream>
 
 //Gets the view matrix
 glm::mat4 viewMatrix;
@@ -23,6 +24,7 @@ void computeMatricesFromInputs(GLFWwindow* window, float deltaTime)
 	// Right and Up vector
 	glm::vec3 right = glm::vec3(1, 0, 0);
 	glm::vec3 up = glm::vec3(0, -1, 0);
+    glm::vec3 forward = glm::vec3(0, 0, 1);
 
 	static glm::vec3 position = glm::vec3( 0, 0, 10 ); // Initial position : on +Z
 	float speed = 300.0f; // units / second
@@ -43,7 +45,16 @@ void computeMatricesFromInputs(GLFWwindow* window, float deltaTime)
 	if (glfwGetKey( window, GLFW_KEY_LEFT ) == GLFW_PRESS){
 		position -= right * deltaTime * speed;
 	}
+    // Move forward
+    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
+        position -= forward * deltaTime * speed;
+    }
+    // Move backwards
+    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
+        position += forward * deltaTime * speed;
+    }
 
 	// View matrix
 	viewMatrix = glm::lookAt(position, position + glm::vec3(0, 0, -1), glm::vec3(0, 1, 0));
+    std::cout << position.z << "\n";
 }

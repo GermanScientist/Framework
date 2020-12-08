@@ -28,7 +28,7 @@ int main(void)
         // Clear the screen
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // glm::vec3 cursor = getCursor(); // from Camera
+        glm::vec3 cursor = getCursor(); // from Camera
         // printf("(%f,%f)\n",cursor.x, cursor.y);
 
         // Render all Sprites (Sprite*, xpos, ypos, xscale, yscale, rotation)
