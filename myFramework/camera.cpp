@@ -26,7 +26,8 @@ void computeMatricesFromInputs(GLFWwindow* window, float deltaTime)
 	glm::vec3 up = glm::vec3(0, -1, 0);
     glm::vec3 forward = glm::vec3(0, 0, 1);
 
-	static glm::vec3 position = glm::vec3( 0, 0, 10 ); // Initial position : on +Z
+	static glm::vec3 offset = glm::vec3( 0, 0, 0 );
+	static glm::vec3 position = glm::vec3( 0, 0, 800 ) + offset;
 	float speed = 300.0f; // units / second
 
 	// Move up
