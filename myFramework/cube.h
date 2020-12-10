@@ -11,15 +11,17 @@ class Cube
         Cube();
 		virtual ~Cube();
 
-		GLuint vertexbuffer() { return _vertexbuffer; };
-		GLuint colorbuffer() { return _colorbuffer; };
+		GLuint getVertexbuffer() { return vertexbuffer; };
+		GLuint getUvbuffer() { return uvbuffer; };
+		GLuint getTexture() { return texture; };
 
 		unsigned int width() { return _width; };
 		unsigned int height() { return _height; };
 
 	private:
-		GLuint _vertexbuffer;
-		GLuint _colorbuffer;
+		GLuint vertexbuffer;
+		GLuint uvbuffer;
+		GLuint texture;
 
 		unsigned int _width;
 		unsigned int _height;

@@ -170,11 +170,14 @@ void Renderer::renderCube(Cube* _cube, float _posX, float _posY, float _posZ, fl
 
 	// Set our "textureSampler" sampler to user Texture Unit 0
 	GLuint textureID = glGetUniformLocation(_programID, "textureSampler");
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, _cube->getTexture());
+
 	glUniform1i(textureID, 0);
 
 	// 1rst attribute buffer : vertices
 	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, _cube->vertexbuffer());
+	glBindBuffer(GL_ARRAY_BUFFER, _cube->getVertexbuffer());
 	glVertexAttribPointer(
 		0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
 		3,                  // size
@@ -186,7 +189,7 @@ void Renderer::renderCube(Cube* _cube, float _posX, float _posY, float _posZ, fl
 
 	// 2nd attribute buffer : colors
 	glEnableVertexAttribArray(1);
-	glBindBuffer(GL_ARRAY_BUFFER, _cube->colorbuffer());
+	glBindBuffer(GL_ARRAY_BUFFER, _cube->getUvbuffer());
 	glVertexAttribPointer(
 		1,                                // attribute. No particular reason for 1, but must match the layout in the shader.
 		3,                                // size
