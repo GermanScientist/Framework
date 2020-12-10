@@ -1,8 +1,8 @@
 #include <myFramework/texture.h>
 
-GLuint loadBMP_custom(const char * imagepath){
+GLuint loadCustomBMP(const char* _imagepath){
 
-	printf("Reading image %s\n", imagepath);
+	printf("Reading image %s\n", _imagepath);
 
 	// Data read from the header of the BMP file
 	unsigned char header[54];
@@ -13,9 +13,9 @@ GLuint loadBMP_custom(const char * imagepath){
 	unsigned char * data;
 
 	// Open the file
-	FILE * file = fopen(imagepath,"rb");
+	FILE * file = fopen(_imagepath,"rb");
 	if (!file){
-		printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", imagepath);
+		printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", _imagepath);
 		getchar();
 		return 0;
 	}
@@ -90,16 +90,16 @@ GLuint loadBMP_custom(const char * imagepath){
 #define FOURCC_DXT3 0x33545844 // Equivalent to "DXT3" in ASCII
 #define FOURCC_DXT5 0x35545844 // Equivalent to "DXT5" in ASCII
 
-GLuint loadDDS(const char * imagepath){
+GLuint loadDDS(const char* _imagepath){
 
 	unsigned char header[124];
 
 	FILE *fp; 
  
 	/* try to open the file */ 
-	fp = fopen(imagepath, "rb"); 
+	fp = fopen(_imagepath, "rb");
 	if (fp == NULL){
-		printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", imagepath); getchar(); 
+		printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", _imagepath); getchar();
 		return 0;
 	}
    
@@ -179,6 +179,4 @@ GLuint loadDDS(const char * imagepath){
 	free(buffer); 
 
 	return textureID;
-
-
 }

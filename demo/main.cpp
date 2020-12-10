@@ -23,7 +23,7 @@ int main(void)
         float deltaTime = renderer.updateDeltaTime();
 
         // Compute the ViewMatrix from keyboard and mouse input (see: camera.h/cpp)
-        computeMatricesFromInputs(renderer.window(), deltaTime);
+        computeMatricesFromInputs(renderer.getWindow(), deltaTime);
 
         // Clear the screen
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -33,19 +33,19 @@ int main(void)
 
         // Render all Sprites (Sprite*, xpos, ypos, xscale, yscale, rotation)
         static float rot_z = 0.0f;
-        renderer.renderSprite(pencils, 10, 12, 0.04f, 0.04f, 0.0f);
-        renderer.renderSprite(kingkong, -15, 5, 0.05f, 0.05f, 0.0f);
-        renderer.renderSprite(rgba, 0, -10, 0.04f, 0.04f, rot_z);
+        renderer.renderSprite(pencils, 10, 12, 0.0f, 0.04f, 0.04f, 1.0f, 0.0f);
+        renderer.renderSprite(kingkong, -15, 5, 0.0f, 0.05f, 0.05f, 1.0f, 0.0f);
+        renderer.renderSprite(rgba, 0, -10, 0.0f, 0.04f, 0.04f, 1.0f, rot_z);
         renderer.renderCube(cube, 0, 0, 0.0f, 3.0f, 3.0f, 3.0f, 0.0f);
         rot_z += 3.141592f / 2 * deltaTime;
 
         // Swap buffers
-        glfwSwapBuffers(renderer.window());
+        glfwSwapBuffers(renderer.getWindow());
         glfwPollEvents();
 
     } // Check if the ESC key was pressed or the window was closed
-    while (glfwGetKey(renderer.window(), GLFW_KEY_ESCAPE) != GLFW_PRESS &&
-        glfwWindowShouldClose(renderer.window()) == 0);
+    while (glfwGetKey(renderer.getWindow(), GLFW_KEY_ESCAPE) != GLFW_PRESS &&
+        glfwWindowShouldClose(renderer.getWindow()) == 0);
 
     delete pencils;
     delete kingkong;

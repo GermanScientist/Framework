@@ -7,10 +7,10 @@
 #include <myFramework/camera.h>
 #include <myFramework/renderer.h>
 
-Renderer::Renderer(unsigned int w, unsigned int h)
+Renderer::Renderer(unsigned int _width, unsigned int _height)
 {
-	_window_width = w;
-	_window_height = h;
+	windowWidth = _width;
+	windowHeight = _height;
 
 	this->initialize();
 }
@@ -18,7 +18,7 @@ Renderer::Renderer(unsigned int w, unsigned int h)
 Renderer::~Renderer()
 {
 	// Cleanup VBO and shader
-	glDeleteProgram(_programID);
+	glDeleteProgram(programID);
 }
 
 //Intialize renderer
@@ -37,15 +37,15 @@ int Renderer::initialize()
 	glfwWindowHint(GLFW_SAMPLES, 4);
 
 	// Open a window and create its OpenGL context
-	_window = glfwCreateWindow( _window_width, _window_height, "Demo", NULL, NULL);
+	window = glfwCreateWindow(windowWidth, windowHeight, "Demo", NULL, NULL);
 	
-    if(_window == NULL) {
+    if(window == NULL) {
 		fprintf( stderr, "Failed to open GLFW window.\n" );
 		glfwTerminate();
 		return -1;
 	}
 	
-    glfwMakeContextCurrent(_window);
+    glfwMakeContextCurrent(window);
 
 	// Initialize GLEW
 	if (glewInit() != GLEW_OK) {
@@ -54,7 +54,7 @@ int Renderer::initialize()
 	}
 
 	// Ensure we can capture the escape key being pressed below
-	glfwSetInputMode(_window, GLFW_STICKY_KEYS, GL_TRUE);
+	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
 	// Dark blue background
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
@@ -69,13 +69,13 @@ int Renderer::initialize()
 	//glEnable(GL_CULL_FACE);
 
 	// Create and compile our GLSL program from the shaders
-	_programID = this->loadShaders("shaders/sprite.vert", "shaders/sprite.frag");
+	programID = this->loadShaders("shaders/sprite.vert", "shaders/sprite.frag");
 
 	//_projectionMatrix = glm::ortho(0.0f, (float)_window_width, (float)_window_height, 0.0f, 0.1f, 100.0f);
-	_projectionMatrix = glm::perspective(45.0f, (float)width() / (float)height(), 0.1f, 10000.0f);
+	projectionMatrix = glm::perspective(45.0f, (float)getWidth() / (float)getHeight(), 0.1f, 10000.0f);
 
 	// Use our shader
-	glUseProgram(_programID);
+	glUseProgram(programID);
 
 	return 0;
 }
@@ -98,44 +98,44 @@ float Renderer::updateDeltaTime() {
 }
 
 //Render a sprite
-void Renderer::renderSprite(Sprite* sprite, float px, float py, float sx, float sy, float rot)
+void Renderer::renderSprite(Sprite* _sprite, float _posX, float _posY, float _posZ, float _scaleX, float _scaleY, float _scaleZ, float _rot)
 {
     // get viewmatrix from Camera (Camera position and direction)
 	glm::mat4 viewMatrix = getViewMatrix(); 
 
 	// Build the Model matrix
-	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(px, py, 0.0f));
-	glm::mat4 rotationMatrix    = glm::eulerAngleYXZ(0.0f, 0.0f, rot);
-	glm::mat4 scalingMatrix     = glm::scale(glm::mat4(1.0f), glm::vec3(sx, sy, 1.0f));
+	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(_posX, _posY, _posZ));
+	glm::mat4 rotationMatrix    = glm::eulerAngleYXZ(0.0f, 0.0f, _rot);
+	glm::mat4 scalingMatrix     = glm::scale(glm::mat4(1.0f), glm::vec3(_scaleX, _scaleY, _scaleZ));
 
 	glm::mat4 modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 
-	glm::mat4 MVP = _projectionMatrix * viewMatrix * modelMatrix;
+	glm::mat4 MVP = projectionMatrix * viewMatrix * modelMatrix;
 
 	// Send our transformation to the currently bound shader,
 	// in the "MVP" uniform
-	GLuint matrixID = glGetUniformLocation(_programID, "MVP");
+	GLuint matrixID = glGetUniformLocation(programID, "MVP");
 	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
 
 	// Bind our texture in Texture Unit 0
 	glActiveTexture(GL_TEXTURE0);
 	
-    glBindTexture(GL_TEXTURE_2D, sprite->texture());
+    glBindTexture(GL_TEXTURE_2D, _sprite->getTexture());
 	
     // Set our "textureSampler" sampler to user Texture Unit 0
-	GLuint textureID  = glGetUniformLocation(_programID, "textureSampler");
+	GLuint textureID  = glGetUniformLocation(programID, "textureSampler");
 	glUniform1i(textureID, 0);
 
 	// 1st attribute buffer : vertices
-	GLuint vertexPositionID = glGetAttribLocation(_programID, "vertexPosition");
+	GLuint vertexPositionID = glGetAttribLocation(programID, "vertexPosition");
 	glEnableVertexAttribArray(vertexPositionID);
-	glBindBuffer(GL_ARRAY_BUFFER, sprite->vertexbuffer());
+	glBindBuffer(GL_ARRAY_BUFFER, _sprite->getVertexbuffer());
 	glVertexAttribPointer(vertexPositionID, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 	// 2nd attribute buffer : UVs
-	GLuint vertexUVID = glGetAttribLocation(_programID, "vertexUV");
+	GLuint vertexUVID = glGetAttribLocation(programID, "vertexUV");
 	glEnableVertexAttribArray(vertexUVID);
-	glBindBuffer(GL_ARRAY_BUFFER, sprite->uvbuffer());
+	glBindBuffer(GL_ARRAY_BUFFER, _sprite->getUvbuffer());
 	glVertexAttribPointer(vertexUVID, 2, GL_FLOAT, GL_FALSE,  0, (void*)0);
 
 	// Draw the triangles
@@ -158,18 +158,18 @@ void Renderer::renderCube(Cube* _cube, float _posX, float _posY, float _posZ, fl
 
 	glm::mat4 modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 
-	glm::mat4 MVP = _projectionMatrix * viewMatrix * modelMatrix;
+	glm::mat4 MVP = projectionMatrix * viewMatrix * modelMatrix;
 
 	// Send our transformation to the currently bound shader,
 	// in the "MVP" uniform
-	GLuint matrixID = glGetUniformLocation(_programID, "MVP");
+	GLuint matrixID = glGetUniformLocation(programID, "MVP");
 	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
 
 	// Bind our texture in Texture Unit 0
 	glActiveTexture(GL_TEXTURE0);
 
 	// Set our "textureSampler" sampler to user Texture Unit 0
-	GLuint textureID = glGetUniformLocation(_programID, "textureSampler");
+	GLuint textureID = glGetUniformLocation(programID, "textureSampler");
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _cube->getTexture());
 

@@ -8,25 +8,25 @@
 class Sprite
 {
 	public:
-		Sprite(const std::string& imagepath);
+		Sprite(const std::string& _imagepath);
 		virtual ~Sprite();
 
-		GLuint texture() { return _texture; };
-		GLuint vertexbuffer() { return _vertexbuffer; };
-		GLuint uvbuffer() { return _uvbuffer; };
+		GLuint getTexture() { return texture; };
+		GLuint getVertexbuffer() { return vertexbuffer; };
+		GLuint getUvbuffer() { return uvbuffer; };
 
-		unsigned int width() { return _width; };
-		unsigned int height() { return _height; };
+		unsigned int getWidth() { return width; };
+		unsigned int getHeight() { return height; };
 
 	private:
-		GLuint loadTGA(const std::string& imagepath);
+		GLuint loadTGA(const std::string& _imagepath);
 
-		GLuint _texture;
-		GLuint _vertexbuffer;
-		GLuint _uvbuffer;
+		GLuint texture;
+		GLuint vertexbuffer;
+		GLuint uvbuffer;
 
-		unsigned int _width;
-		unsigned int _height;
+		unsigned int width;
+		unsigned int height;
 };
 
 #endif /* SPRITE_H */

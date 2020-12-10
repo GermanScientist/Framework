@@ -15,33 +15,33 @@
 class Renderer
 {
 	public:
-		Renderer(unsigned int w, unsigned int h);
+		Renderer(unsigned int _width, unsigned int _height);
 		virtual ~Renderer();
 
-		void renderSprite(Sprite* sprite, float px, float py, float sx, float sy, float rot);
+		void renderSprite(Sprite* _sprite, float _posX, float _posY, float _posZ, float _scaleX, float _scaleY, float _scaleZ, float _rot);
         void renderCube(Cube* _cube, float _posX, float _posY, float _posZ, float _scaleX, float _scaleY, float _scaleZ, float _rot);
-		GLFWwindow* window() { return _window; };
+		GLFWwindow* getWindow() { return window; };
 
-		unsigned int width() { return _window_width; };
-		unsigned int height() { return _window_height; };
+		unsigned int getWidth() { return windowWidth; };
+		unsigned int getHeight() { return windowHeight; };
 
 		float updateDeltaTime();
 
 	private:
 		int initialize();
 
-		GLFWwindow* _window;
-		unsigned int _window_width;
-		unsigned int _window_height;
+		GLFWwindow* window;
+		unsigned int windowWidth;
+		unsigned int windowHeight;
 
 		GLuint loadShaders(
 			const std::string& vertex_file_path,
 			const std::string& fragment_file_path
 		);
 
-		GLuint _programID;
+		GLuint programID;
 
-		glm::mat4 _projectionMatrix;
+		glm::mat4 projectionMatrix;
 };
 
 #endif /* RENDERER_H */

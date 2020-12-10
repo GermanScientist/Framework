@@ -15,16 +15,16 @@ class Cube
 		GLuint getUvbuffer() { return uvbuffer; };
 		GLuint getTexture() { return texture; };
 
-		unsigned int width() { return _width; };
-		unsigned int height() { return _height; };
+		unsigned int getWidth() { return width; };
+		unsigned int getHeight() { return height; };
 
 	private:
 		GLuint vertexbuffer;
 		GLuint uvbuffer;
 		GLuint texture;
 
-		unsigned int _width;
-		unsigned int _height;
+		unsigned int width;
+		unsigned int height;
 };
 
 #endif /* CUBE_H */

@@ -13,8 +13,8 @@
 Cube::Cube(const char* _imagepath)
 {
 	// these will be set correctly in loadTGA()
-	_width = 0;
-	_height = 0;
+	width = 0;
+	height = 0;
 
 	// Load the texture using any two methods
 	//GLuint Texture = loadBMP_custom("uv/uvtemplate.bmp");

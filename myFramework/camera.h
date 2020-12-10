@@ -7,7 +7,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp> // glm::lookAt()
 
-void computeMatricesFromInputs(GLFWwindow* window, float deltaTime);
+void computeMatricesFromInputs(GLFWwindow* _window, float _deltaTime);
 glm::mat4 getViewMatrix();
 glm::vec3 getCursor();
 

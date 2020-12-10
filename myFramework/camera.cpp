@@ -14,11 +14,11 @@ glm::vec3 getCursor(){
 }
 
 //Control camera using keyboard input
-void computeMatricesFromInputs(GLFWwindow* window, float deltaTime)
+void computeMatricesFromInputs(GLFWwindow* _window, float _deltaTime)
 {
 	// Get mouse position
 	double xpos, ypos;
-	glfwGetCursorPos(window, &xpos, &ypos);
+	glfwGetCursorPos(_window, &xpos, &ypos);
 	cursor = glm::vec3( xpos, ypos, 0 );
 
 	// Right and Up vector
@@ -31,28 +31,28 @@ void computeMatricesFromInputs(GLFWwindow* window, float deltaTime)
 	float speed = 300.0f; // units / second
 
 	// Move up
-	if (glfwGetKey( window, GLFW_KEY_UP ) == GLFW_PRESS){
-		position += up * deltaTime * speed;
+	if (glfwGetKey(_window, GLFW_KEY_UP) == GLFW_PRESS){
+		position += up * _deltaTime * speed;
 	}
 	// Move down
-	if (glfwGetKey( window, GLFW_KEY_DOWN ) == GLFW_PRESS){
-		position -= up * deltaTime * speed;
+	if (glfwGetKey(_window, GLFW_KEY_DOWN) == GLFW_PRESS){
+		position -= up * _deltaTime * speed;
 	}
 	// Strafe right
-	if (glfwGetKey( window, GLFW_KEY_RIGHT ) == GLFW_PRESS){
-		position += right * deltaTime * speed;
+	if (glfwGetKey(_window, GLFW_KEY_RIGHT) == GLFW_PRESS){
+		position += right * _deltaTime * speed;
 	}
 	// Strafe left
-	if (glfwGetKey( window, GLFW_KEY_LEFT ) == GLFW_PRESS){
-		position -= right * deltaTime * speed;
+	if (glfwGetKey(_window, GLFW_KEY_LEFT) == GLFW_PRESS){
+		position -= right * _deltaTime * speed;
 	}
     // Move forward
-    if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS) {
-        position -= forward * deltaTime * speed;
+    if (glfwGetKey(_window, GLFW_KEY_W) == GLFW_PRESS) {
+        position -= forward * _deltaTime * speed;
     }
     // Move backwards
-    if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS) {
-        position += forward * deltaTime * speed;
+    if (glfwGetKey(_window, GLFW_KEY_S) == GLFW_PRESS) {
+        position += forward * _deltaTime * speed;
     }
 
 	// View matrix
