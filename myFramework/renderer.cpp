@@ -1,9 +1,3 @@
-#include <cstdio>
-#include <cstdlib>
-#include <string>
-#include <vector>
-#include <fstream>
-
 #include <myFramework/camera.h>
 #include <myFramework/renderer.h>
 

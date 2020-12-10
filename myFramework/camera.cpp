@@ -1,5 +1,4 @@
 #include <myFramework/camera.h>
-#include<iostream>
 
 //Gets the view matrix
 glm::mat4 viewMatrix;

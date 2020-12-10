@@ -1,6 +1,14 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
+#include <iostream>
+#include <cstdio>
+
+#include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/euler_angles.hpp>
+
 #include <string>
 
 #include <GL/glew.h>

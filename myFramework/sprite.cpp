@@ -1,13 +1,4 @@
-#include <iostream>
-#include <cstdio>
-
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp>
-#define GLM_ENABLE_EXPERIMENTAL
-#include <glm/gtx/euler_angles.hpp>
-
 #include <myFramework/sprite.h>
-
 
 Sprite::Sprite(const std::string& _imagepath)
 {

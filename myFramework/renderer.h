@@ -9,6 +9,12 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/euler_angles.hpp>
 
+#include <cstdio>
+#include <cstdlib>
+#include <string>
+#include <vector>
+#include <fstream>
+
 #include <myFramework/sprite.h>
 #include <myFramework/cube.h>
 
