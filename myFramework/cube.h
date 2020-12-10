@@ -8,7 +8,7 @@
 class Cube
 {
 	public:
-        Cube();
+        Cube(const char* _imagepath);
 		virtual ~Cube();
 
 		GLuint getVertexbuffer() { return vertexbuffer; };

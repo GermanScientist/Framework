@@ -10,7 +10,7 @@
 #include <myFramework/texture.h>
 
 
-Cube::Cube()
+Cube::Cube(const char* _imagepath)
 {
 	// these will be set correctly in loadTGA()
 	_width = 0;
@@ -18,7 +18,7 @@ Cube::Cube()
 
 	// Load the texture using any two methods
 	//GLuint Texture = loadBMP_custom("uv/uvtemplate.bmp");
-	texture = loadDDS("uv/uvtemplate.DDS");
+	texture = loadDDS(_imagepath);
 
 	// Our vertices. Tree consecutive floats give a 3D vertex; Three consecutive vertices give a triangle.
 	// A cube has 6 faces with 2 triangles each, so this makes 6*2=12 triangles, and 12*3 vertices

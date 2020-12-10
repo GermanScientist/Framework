@@ -93,7 +93,3 @@ file(
 	COPY myFramework/shaders
 	DESTINATION ${CMAKE_BINARY_DIR}
 )
-file(
-	COPY myFramework/uv
-	DESTINATION ${CMAKE_BINARY_DIR}
-)

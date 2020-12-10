@@ -16,7 +16,7 @@ int main(void)
     Sprite* pencils = new Sprite("assets/pencils.tga");
     Sprite* kingkong = new Sprite("assets/kingkong.tga");
     Sprite* rgba = new Sprite("assets/rgba.tga");
-    Cube* cube = new Cube();
+    Cube* cube = new Cube("assets/uvtemplate.DDS");
 
     do {
         // Update deltaTime
