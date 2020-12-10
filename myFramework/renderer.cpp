@@ -66,7 +66,7 @@ int Renderer::initialize()
 	glDepthFunc(GL_LESS);
 
 	// Cull triangles which normal is not towards the camera
-	//glEnable(GL_CULL_FACE);
+	glEnable(GL_CULL_FACE);
 
 	// Create and compile our GLSL program from the shaders
 	programID = this->loadShaders("shaders/sprite.vert", "shaders/sprite.frag");
@@ -200,14 +200,14 @@ void Renderer::renderCube(Cube* _cube, float _posX, float _posY, float _posZ, fl
 	);
 
 	// Draw the triangle !
-	glDrawArrays(GL_TRIANGLES, 0, 12 * 3); // 12*3 indices starting at 0 -> 12 triangles
+	glDrawArrays(GL_TRIANGLES, 0, 12*3); // 12*3 indices starting at 0 -> 12 triangles
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
 }
 
 //Load the shaders
-GLuint Renderer::loadShaders(const std::string& vertex_file_path, const std::string& fragment_file_path)
+GLuint Renderer::loadShaders(const std::string& _vertex_file_path, const std::string& _fragment_file_path)
 {
 	// Create the shaders
 	GLuint vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
@@ -215,7 +215,7 @@ GLuint Renderer::loadShaders(const std::string& vertex_file_path, const std::str
 
 	// Read the Vertex Shader code from the file
 	std::string vertexShaderCode;
-	std::ifstream vertexShaderStream(vertex_file_path.c_str(), std::ios::in);
+	std::ifstream vertexShaderStream(_vertex_file_path.c_str(), std::ios::in);
 	
     //Checks whether the vertex shader stream is open
     if (vertexShaderStream.is_open()){
@@ -225,14 +225,14 @@ GLuint Renderer::loadShaders(const std::string& vertex_file_path, const std::str
 		}
 		vertexShaderStream.close();
 	} else {
-        printf("Can't to open %s.\n", vertex_file_path.c_str());
+        printf("Can't to open %s.\n", _vertex_file_path.c_str());
 		getchar();
 		return 0;
 	}
 
 	// Read the Fragment Shader code from the file
 	std::string fragmentShaderCode;
-	std::ifstream fragmentShaderStream(fragment_file_path.c_str(), std::ios::in);
+	std::ifstream fragmentShaderStream(_fragment_file_path.c_str(), std::ios::in);
 
     //Checks whether the vertex shader stream is open
 	if (fragmentShaderStream.is_open()){
@@ -242,7 +242,7 @@ GLuint Renderer::loadShaders(const std::string& vertex_file_path, const std::str
 		}
 		fragmentShaderStream.close();
 	} else {
-		printf("Can't to open %s.\n", fragment_file_path.c_str());
+		printf("Can't to open %s.\n", _fragment_file_path.c_str());
 		getchar();
 		return 0;
 	}
@@ -251,7 +251,7 @@ GLuint Renderer::loadShaders(const std::string& vertex_file_path, const std::str
 	int infoLogLength;
 
 	// Compile Vertex Shader
-	printf("Compiling shader : %s\n", vertex_file_path.c_str());
+	printf("Compiling shader : %s\n", _vertex_file_path.c_str());
 	char const * vertexSourcePointer = vertexShaderCode.c_str();
 	glShaderSource(vertexShaderID, 1, &vertexSourcePointer , NULL);
 	glCompileShader(vertexShaderID);
@@ -267,7 +267,7 @@ GLuint Renderer::loadShaders(const std::string& vertex_file_path, const std::str
 	}
 
 	// Compile Fragment Shader
-	printf("Compiling shader : %s\n", fragment_file_path.c_str());
+	printf("Compiling shader : %s\n", _fragment_file_path.c_str());
 	char const * fragmentSourcePointer = fragmentShaderCode.c_str();
 	glShaderSource(fragmentShaderID, 1, &fragmentSourcePointer , NULL);
 	glCompileShader(fragmentShaderID);

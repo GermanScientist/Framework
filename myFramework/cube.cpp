@@ -20,6 +20,9 @@ Cube::Cube(const char* _imagepath)
 	//GLuint Texture = loadBMP_custom("uv/uvtemplate.bmp");
 	texture = loadDDS(_imagepath);
 
+	glGenVertexArrays(1, &vertexArrayID);
+	glBindVertexArray(vertexArrayID);
+
 	// Our vertices. Tree consecutive floats give a 3D vertex; Three consecutive vertices give a triangle.
 	// A cube has 6 faces with 2 triangles each, so this makes 6*2=12 triangles, and 12*3 vertices
 	static const GLfloat g_vertex_buffer_data[] = {
@@ -114,4 +117,5 @@ Cube::~Cube()
 {
 	glDeleteBuffers(1, &vertexbuffer);
 	glDeleteBuffers(1, &uvbuffer);
+	glDeleteBuffers(1, &vertexArrayID);
 }

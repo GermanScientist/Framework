@@ -22,6 +22,7 @@ class Cube
 		GLuint vertexbuffer;
 		GLuint uvbuffer;
 		GLuint texture;
+		GLuint vertexArrayID;
 
 		unsigned int width;
 		unsigned int height;

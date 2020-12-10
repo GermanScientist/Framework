@@ -30,7 +30,6 @@ int main(void)
         // printf("(%f,%f)\n",cursor.x, cursor.y);
 
         // Render all Sprites (Sprite*, xpos, ypos, xscale, yscale, rotation)
-        static float rot_z = 0.0f;
         renderer.renderSprite(uvTemplate, 10, 0, 0.0f, 0.025f, 0.025f, 1.0f, 0.0f);
         renderer.renderCube(cube, -10, 0, 0.0f, 3.0f, 3.0f, 3.0f, 0.0f);
 
