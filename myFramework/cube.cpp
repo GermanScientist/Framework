@@ -1,16 +1,12 @@
 #include <myFramework/cube.h>
-#include <myFramework/texture.h>
-
 
 Cube::Cube(const char* _imagepath)
 {
+	material = new Material(_imagepath);
+
 	// these will be set correctly in loadTGA()
 	width = 0;
 	height = 0;
-
-	// Load the texture using any two methods
-	//GLuint Texture = loadBMP_custom("uv/uvtemplate.bmp");
-	texture = loadDDS(_imagepath);
 
 	glGenVertexArrays(1, &vertexArrayID);
 	glBindVertexArray(vertexArrayID);
@@ -110,4 +106,6 @@ Cube::~Cube()
 	glDeleteBuffers(1, &vertexbuffer);
 	glDeleteBuffers(1, &uvbuffer);
 	glDeleteBuffers(1, &vertexArrayID);
+
+	delete material;
 }

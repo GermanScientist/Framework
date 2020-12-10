@@ -165,7 +165,7 @@ void Renderer::renderCube(Cube* _cube, float _posX, float _posY, float _posZ, fl
 	// Set our "textureSampler" sampler to user Texture Unit 0
 	GLuint textureID = glGetUniformLocation(programID, "textureSampler");
 	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, _cube->getTexture());
+	glBindTexture(GL_TEXTURE_2D, _cube->getMaterial()->getTexture());
 
 	glUniform1i(textureID, 0);
 
