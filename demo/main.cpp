@@ -33,10 +33,10 @@ int main(void)
 
         // Render all Sprites (Sprite*, xpos, ypos, xscale, yscale, rotation)
         static float rot_z = 0.0f;
-        renderer.renderSprite(pencils, 400, 300, 1.0f, 1.0f, 0.0f);
-        renderer.renderSprite(kingkong, 900, 400, 1.0f, 1.0f, 0.0f);
-        renderer.renderSprite(rgba, renderer.width() / 2, renderer.height() / 2, 3.0f, 3.0f, rot_z);
-        renderer.renderCube(cube, 700, 400, 400.0f, 3.0f, 3.0f, 3.0f, 0.0f);
+        renderer.renderSprite(pencils, 10, 12, 0.04f, 0.04f, 0.0f);
+        renderer.renderSprite(kingkong, -15, 5, 0.05f, 0.05f, 0.0f);
+        renderer.renderSprite(rgba, 0, -10, 0.04f, 0.04f, rot_z);
+        renderer.renderCube(cube, 0, 0, 0.0f, 3.0f, 3.0f, 3.0f, 0.0f);
         rot_z += 3.141592f / 2 * deltaTime;
 
         // Swap buffers

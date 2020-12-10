@@ -26,7 +26,7 @@ void computeMatricesFromInputs(GLFWwindow* window, float deltaTime)
 	glm::vec3 up = glm::vec3(0, -1, 0);
     glm::vec3 forward = glm::vec3(0, 0, 1);
 
-	static glm::vec3 offset = glm::vec3( 600, 300, 800);
+	static glm::vec3 offset = glm::vec3( 0, 0, 32);
 	static glm::vec3 position = glm::vec3( 0, 0, 0 ) + offset;
 	float speed = 300.0f; // units / second
 
@@ -57,5 +57,5 @@ void computeMatricesFromInputs(GLFWwindow* window, float deltaTime)
 
 	// View matrix
 	viewMatrix = glm::lookAt(position, position + glm::vec3(0, 0, -1), glm::vec3(0, 1, 0));
-    std::cout << position.z << "\n";
+    std::cout << position.x << " + " << position.y << " + " << position.z << "\n";
 }

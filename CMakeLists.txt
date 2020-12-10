@@ -71,6 +71,8 @@ add_library(myFramework # ar rcs libmyFramework.a
 	myFramework/sprite.cpp
 	myFramework/cube.h
 	myFramework/cube.cpp
+	myFramework/texture.h
+	myFramework/texture.cpp
 )
 
 # Main
@@ -89,5 +91,9 @@ file(
 )
 file(
 	COPY myFramework/shaders
+	DESTINATION ${CMAKE_BINARY_DIR}
+)
+file(
+	COPY myFramework/uv
 	DESTINATION ${CMAKE_BINARY_DIR}
 )
