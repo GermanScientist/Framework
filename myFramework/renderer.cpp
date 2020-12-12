@@ -255,7 +255,7 @@ void Renderer::renderModel(Model* _model, float _posX, float _posY, float _posZ,
 	);
 
 	// Draw the triangle !
-	glDrawArrays(GL_TRIANGLES, 0, 12 * 3); // 12*3 indices starting at 0 -> 12 triangles
+	glDrawArrays(GL_TRIANGLES, 0, _model->getVertices().size());
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);

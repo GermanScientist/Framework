@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cstdio>
+#include <vector>
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -13,6 +14,7 @@
 
 #include <GL/glew.h>
 #include <myFramework/material.h>
+#include <myFramework/objloader.h>
 
 class Model
 {
@@ -22,6 +24,10 @@ class Model
 
 		GLuint getVertexbuffer() { return vertexbuffer; };
 		GLuint getUvbuffer() { return uvbuffer; };
+		
+		std::vector<glm::vec3> getVertices() { return vertices; };
+		std::vector<glm::vec2> getUvs() { return uvs; };
+		std::vector<glm::vec3> getNormals() { return normals; };
 
 		Material* getMaterial() { return material; };
 
@@ -32,6 +38,10 @@ class Model
 		GLuint vertexbuffer;
 		GLuint uvbuffer;
 		GLuint vertexArrayID;
+
+		std::vector<glm::vec3> vertices;
+		std::vector<glm::vec2> uvs;
+		std::vector<glm::vec3> normals;
 
 		Material* material;
 
