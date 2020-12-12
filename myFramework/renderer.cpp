@@ -200,6 +200,67 @@ void Renderer::renderCube(Cube* _cube, float _posX, float _posY, float _posZ, fl
 	glDisableVertexAttribArray(1);
 }
 
+//Render a model
+void Renderer::renderModel(Model* _model, float _posX, float _posY, float _posZ, float _scaleX, float _scaleY, float _scaleZ, float _rot)
+{
+	// get viewmatrix from Camera (Camera position and direction)
+	glm::mat4 viewMatrix = getViewMatrix();
+
+	// Build the Model matrix
+	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(_posX, _posY, _posZ));
+	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(0.0f, 0.0f, _rot);
+	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(_scaleX, _scaleY, _scaleZ));
+
+	glm::mat4 modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
+
+	glm::mat4 MVP = projectionMatrix * viewMatrix * modelMatrix;
+
+	// Send our transformation to the currently bound shader,
+	// in the "MVP" uniform
+	GLuint matrixID = glGetUniformLocation(programID, "MVP");
+	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
+
+	// Bind our texture in Texture Unit 0
+	glActiveTexture(GL_TEXTURE0);
+
+	// Set our "textureSampler" sampler to user Texture Unit 0
+	GLuint textureID = glGetUniformLocation(programID, "textureSampler");
+	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(GL_TEXTURE_2D, _model->getMaterial()->getTexture());
+
+	glUniform1i(textureID, 0);
+
+	// 1rst attribute buffer : vertices
+	glEnableVertexAttribArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, _model->getVertexbuffer());
+	glVertexAttribPointer(
+		0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
+		3,                  // size
+		GL_FLOAT,           // type
+		GL_FALSE,           // normalized?
+		0,                  // stride
+		(void*)0            // array buffer offset
+	);
+
+	// 2nd attribute buffer : UVs
+	glEnableVertexAttribArray(1);
+	glBindBuffer(GL_ARRAY_BUFFER, _model->getUvbuffer());
+	glVertexAttribPointer(
+		1,                                // attribute. No particular reason for 1, but must match the layout in the shader.
+		2,                                // size : U+V => 2
+		GL_FLOAT,                         // type
+		GL_FALSE,                         // normalized?
+		0,                                // stride
+		(void*)0                          // array buffer offset
+	);
+
+	// Draw the triangle !
+	glDrawArrays(GL_TRIANGLES, 0, 12 * 3); // 12*3 indices starting at 0 -> 12 triangles
+
+	glDisableVertexAttribArray(0);
+	glDisableVertexAttribArray(1);
+}
+
 //Load the shaders
 GLuint Renderer::loadShaders(const std::string& _vertex_file_path, const std::string& _fragment_file_path)
 {

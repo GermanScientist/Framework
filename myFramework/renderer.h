@@ -17,6 +17,7 @@
 
 #include <myFramework/sprite.h>
 #include <myFramework/cube.h>
+#include <myFramework/model.h>
 
 class Renderer
 {
@@ -26,6 +27,7 @@ class Renderer
 
 		void renderSprite(Sprite* _sprite, float _posX, float _posY, float _posZ, float _scaleX, float _scaleY, float _scaleZ, float _rot);
         void renderCube(Cube* _cube, float _posX, float _posY, float _posZ, float _scaleX, float _scaleY, float _scaleZ, float _rot);
+		void renderModel(Model* _model, float _posX, float _posY, float _posZ, float _scaleX, float _scaleY, float _scaleZ, float _rot);
 		GLFWwindow* getWindow() { return window; };
 
 		unsigned int getWidth() { return windowWidth; };

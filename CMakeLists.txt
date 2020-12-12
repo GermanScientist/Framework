@@ -75,6 +75,10 @@ add_library(myFramework # ar rcs libmyFramework.a
 	myFramework/texture.cpp
 	myFramework/material.h
 	myFramework/material.cpp
+	myFramework/objloader.h
+	myFramework/objloader.cpp
+	myFramework/model.h
+	myFramework/model.cpp
 )
 
 # Main

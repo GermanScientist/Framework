@@ -13,8 +13,9 @@ int main(void)
 {
     Renderer renderer(1280, 720);
 
-    Sprite* uvTemplate = new Sprite("assets/uvtemplate.tga");
-    Cube* cube = new Cube("assets/uvtemplate.DDS");
+    Sprite* uvTemplate = new Sprite("assets/cubetest/uvtemplate.tga");
+    Cube* cube = new Cube("assets/cubetest/uvtemplate.DDS");
+    Model* model = new Model("assets/cubetest/uvtemplate.DDS");
 
     do {
         // Update deltaTime
@@ -30,8 +31,9 @@ int main(void)
         // printf("(%f,%f)\n",cursor.x, cursor.y);
 
         // Render all Sprites (Sprite*, xpos, ypos, xscale, yscale, rotation)
-        renderer.renderSprite(uvTemplate, 10, 0, 0.0f, 0.025f, 0.025f, 1.0f, 0.0f);
-        renderer.renderCube(cube, -10, 0, 0.0f, 3.0f, 3.0f, 3.0f, 0.0f);
+        renderer.renderSprite(uvTemplate, 18, 0, 0.0f, 0.025f, 0.025f, 1.0f, 0.0f);
+        renderer.renderCube(cube, -18, 0, 0.0f, 3.0f, 3.0f, 3.0f, 180.0f);
+        renderer.renderModel(model, 0, 0, 0.0f, 3.0f, 3.0f, 3.0f, 0.0f);
 
         // Swap buffers
         glfwSwapBuffers(renderer.getWindow());
@@ -43,6 +45,7 @@ int main(void)
 
     delete uvTemplate;
     delete cube;
+    delete model;
 
     // Close OpenGL window and terminate GLFW
     glfwTerminate();
