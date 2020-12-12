@@ -14,6 +14,7 @@ int main(void)
     Renderer renderer(1280, 720);
 
     Sprite* uvTemplate = new Sprite("assets/cubetest/uvtemplate.tga");
+    Sprite* uvMap = new Sprite("assets/modeltest/uvmap.tga");
     Cube* cube = new Cube("assets/cubetest/uvtemplate.DDS");
     Model* model = new Model("assets/modeltest/uvmap.DDS");
 
@@ -31,9 +32,11 @@ int main(void)
         // printf("(%f,%f)\n",cursor.x, cursor.y);
 
         // Render all Sprites (Sprite*, xpos, ypos, xscale, yscale, rotation)
-        renderer.renderSprite(uvTemplate, 18, 0, 0.0f, 0.025f, 0.025f, 1.0f, 0.0f);
-        renderer.renderCube(cube, -18, 0, 0.0f, 3.0f, 3.0f, 3.0f, 180.0f);
-        renderer.renderModel(model, 0, 0, 0.0f, 3.0f, 3.0f, 3.0f, 0.0f);
+        renderer.renderSprite(uvTemplate, -12, -5, 0.0f, 0.025f, 0.025f, 1.0f, 0.0f);
+        renderer.renderSprite(uvMap, 12, -5, 0.0f, 0.025f, 0.025f, 1.0f, 0.0f);
+
+        renderer.renderCube(cube, -12, 10, 0.0f, 3.0f, 3.0f, 3.0f, 180.0f);
+        renderer.renderModel(model, 12, 10, 0.0f, 3.0f, 3.0f, 3.0f, 0.0f);
 
         // Swap buffers
         glfwSwapBuffers(renderer.getWindow());
@@ -44,6 +47,7 @@ int main(void)
         glfwWindowShouldClose(renderer.getWindow()) == 0);
 
     delete uvTemplate;
+    delete uvMap;
     delete cube;
     delete model;
 
