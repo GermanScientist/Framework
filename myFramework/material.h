@@ -15,6 +15,13 @@ class Material
 		virtual ~Material();
 
 		GLuint getTexture() { return texture; };
+		/*Textureloader* getTextureloader() { return textureloader; };*/
+
+		// Load a .BMP file using our custom loader
+		void loadCustomBMP() { texture = textureloader->loadCustomBMP(); };
+
+		// Load a .DDS file using GLFW's own loader
+		void loadDDS() { texture = textureloader->loadDDS(); };
 
 	private:
 		GLuint texture;

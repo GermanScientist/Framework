@@ -3,6 +3,7 @@
 Cube::Cube(const char* _imagepath)
 {
 	material = new Material(_imagepath);
+	material->loadDDS();
 
 	// these will be set correctly in loadTGA()
 	width = 0;
