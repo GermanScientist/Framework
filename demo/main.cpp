@@ -15,9 +15,11 @@ int main(void)
 
     Sprite* uvTemplate = new Sprite("assets/cubetest/uvtemplate.tga");
     Sprite* cubeMap = new Sprite("assets/modeltest/cube.tga");
+    Sprite* ballMap = new Sprite("assets/modeltest/ball.tga");
     
     Cube* cube = new Cube("assets/cubetest/uvtemplate.DDS");
-    Model* model = new Model("assets/modeltest/cube.obj", "assets/modeltest/cube.DDS");
+    Model* cubeModel = new Model("assets/modeltest/cube.obj", "assets/modeltest/cube.DDS");
+    Model* ballModel = new Model("assets/modeltest/ball.obj", "assets/modeltest/ball.DDS");
 
     do {
         // Update deltaTime
@@ -33,11 +35,13 @@ int main(void)
         // printf("(%f,%f)\n",cursor.x, cursor.y);
 
         // Render all Sprites (Sprite*, xpos, ypos, xscale, yscale, rotation)
-        renderer.renderSprite(uvTemplate, -12, -5, 0.0f, 0.025f, 0.025f, 1.0f, 0.0f);
-        renderer.renderSprite(cubeMap, 12, -5, 0.0f, 0.050f, 0.050f, 1.0f, 0.0f);
+        renderer.renderSprite(uvTemplate, -20, -5, 0.0f, 0.025f, 0.025f, 1.0f, 0.0f);
+        renderer.renderSprite(cubeMap, 0, -5, 0.0f, 0.050f, 0.050f, 1.0f, 0.0f);
+        renderer.renderSprite(ballMap, 18, -5, 0.0f, 0.015f, 0.015f, 1.0f, 0.0f);
 
-        renderer.renderCube(cube, -12, 10, 0.0f, 3.0f, 3.0f, 3.0f, 180.0f);
-        renderer.renderModel(model, 12, 10, 0.0f, 3.0f, 3.0f, 3.0f, 0.0f);
+        renderer.renderCube(cube, -20, 10, 0.0f, 3.0f, 3.0f, 3.0f, 180.0f);
+        renderer.renderModel(cubeModel, 0, 10, 0.0f, 3.0f, 3.0f, 3.0f, 0.0f);
+        renderer.renderModel(ballModel, 18, 10, 0.0f, 3.0f, 3.0f, 3.0f, 0.0f);
 
         // Swap buffers
         glfwSwapBuffers(renderer.getWindow());
@@ -50,7 +54,8 @@ int main(void)
     delete uvTemplate;
     delete cubeMap;
     delete cube;
-    delete model;
+    delete cubeModel;
+    delete ballModel;
 
     // Close OpenGL window and terminate GLFW
     glfwTerminate();
