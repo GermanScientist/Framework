@@ -1,6 +1,6 @@
 #include <myFramework/model.h>
 
-Model::Model(const char* _imagepath)
+Model::Model(const char* _path, const char* _imagepath)
 {
 	material = new Material();
 	material->loadDDS(_imagepath);
@@ -13,7 +13,7 @@ Model::Model(const char* _imagepath)
 	glBindVertexArray(vertexArrayID);
 
 	// Read our .obj file
-	bool res = loadOBJ("assets/modeltest/cube.obj", vertices, uvs, normals);
+	bool res = loadOBJ(_path, vertices, uvs, normals);
 
 	glGenBuffers(1, &vertexbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);

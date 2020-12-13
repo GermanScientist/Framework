@@ -16,7 +16,7 @@ int main(void)
     Sprite* uvTemplate = new Sprite("assets/cubetest/uvtemplate.tga");
     Sprite* uvMap = new Sprite("assets/modeltest/uvmap.tga");
     Cube* cube = new Cube("assets/cubetest/uvtemplate.DDS");
-    Model* model = new Model("assets/modeltest/uvmap.DDS");
+    Model* model = new Model("assets/modeltest/cube.obj", "assets/modeltest/uvmap.DDS");
 
     do {
         // Update deltaTime

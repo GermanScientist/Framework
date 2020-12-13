@@ -19,7 +19,7 @@
 class Model
 {
 	public:
-		Model(const char* _imagepath);
+		Model(const char* _path, const char* _imagepath);
 		virtual ~Model();
 
 		GLuint getVertexbuffer() { return vertexbuffer; };
