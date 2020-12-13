@@ -36,16 +36,16 @@ int main(void)
         glm::vec3 cursor = getCursor(); // from Camera
         // printf("(%f,%f)\n",cursor.x, cursor.y);
 
-        // Render all Sprites (Sprite*, xpos, ypos, xscale, yscale, rotation)
+        // Render all models/sprites (Type*, xpos, ypos, zpos, xscale, yscale, zscale, xrot, yrot, zrot)
         renderer.renderSprite(uvTemplate, -20, -5, 0.0f, 0.025f, 0.025f, 1.0f, 0.0f);
         renderer.renderSprite(cubeMap, 0, -5, 0.0f, 0.050f, 0.050f, 1.0f, 0.0f);
         renderer.renderSprite(ballMap, 18, -5, 0.0f, 0.015f, 0.015f, 1.0f, 0.0f);
         renderer.renderSprite(houseMap, 35, -5, 0.0f, 0.010f, 0.010f, 1.0f, 0.0f);
 
-        renderer.renderCube(cube, -20, 10, 0.0f, 3.0f, 3.0f, 3.0f, 180.0f);
-        renderer.renderModel(cubeModel, 0, 10, 0.0f, 3.0f, 3.0f, 3.0f, 0.0f);
-        renderer.renderModel(ballModel, 18, 10, 0.0f, 3.0f, 3.0f, 3.0f, 0.0f);
-        renderer.renderModel(houseModel, 35, 5, 0.0f, 2.0f, 2.0f, 2.0f, 0.0f);
+        renderer.renderCube(cube, -20, 10, 0.0f, 3.0f, 3.0f, 3.0f, 0.0f, 0.0f, 0.0f);
+        renderer.renderModel(cubeModel, 0, 10, 0.0f, 3.0f, 3.0f, 3.0f, 0.0f, 0.0f, 0.0f);
+        renderer.renderModel(ballModel, 18, 10, 0.0f, 3.0f, 3.0f, 3.0f, 0.0f, 0.0f, 0.0f);
+        renderer.renderModel(houseModel, 35, 15, 0.0f, 2.0f, 2.0f, 2.0f, 0.0f, 0.0f, 22.0f);
 
         // Swap buffers
         glfwSwapBuffers(renderer.getWindow());

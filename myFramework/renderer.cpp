@@ -140,14 +140,14 @@ void Renderer::renderSprite(Sprite* _sprite, float _posX, float _posY, float _po
 }
 
 //Render a cube
-void Renderer::renderCube(Cube* _cube, float _posX, float _posY, float _posZ, float _scaleX, float _scaleY, float _scaleZ, float _rot)
+void Renderer::renderCube(Cube* _cube, float _posX, float _posY, float _posZ, float _scaleX, float _scaleY, float _scaleZ, float _rotX, float _rotY, float _rotZ)
 {
 	// get viewmatrix from Camera (Camera position and direction)
 	glm::mat4 viewMatrix = getViewMatrix();
 
 	// Build the Model matrix
 	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(_posX, _posY, _posZ));
-	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(0.0f, 0.0f, _rot);
+	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(_rotX, _rotY, _rotZ);
 	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(_scaleX, _scaleY, _scaleZ));
 
 	glm::mat4 modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
@@ -201,14 +201,14 @@ void Renderer::renderCube(Cube* _cube, float _posX, float _posY, float _posZ, fl
 }
 
 //Render a model
-void Renderer::renderModel(Model* _model, float _posX, float _posY, float _posZ, float _scaleX, float _scaleY, float _scaleZ, float _rot)
+void Renderer::renderModel(Model* _model, float _posX, float _posY, float _posZ, float _scaleX, float _scaleY, float _scaleZ, float _rotX, float _rotY, float _rotZ)
 {
 	// get viewmatrix from Camera (Camera position and direction)
 	glm::mat4 viewMatrix = getViewMatrix();
 
 	// Build the Model matrix
 	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(_posX, _posY, _posZ));
-	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(0.0f, 0.0f, _rot);
+	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(_rotX, _rotY, _rotZ);
 	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(_scaleX, _scaleY, _scaleZ));
 
 	glm::mat4 modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
