@@ -11,17 +11,17 @@
 class Material
 {
 	public:
-		Material(const char* _imagepath);
+		Material();
 		virtual ~Material();
 
 		GLuint getTexture() { return texture; };
 		/*Textureloader* getTextureloader() { return textureloader; };*/
 
 		// Load a .BMP file using our custom loader
-		void loadCustomBMP() { texture = textureloader->loadCustomBMP(); };
+		void loadCustomBMP(const char* _imagepath) { texture = textureloader->loadCustomBMP(_imagepath); };
 
 		// Load a .DDS file using GLFW's own loader
-		void loadDDS() { texture = textureloader->loadDDS(); };
+		void loadDDS(const char* _imagepath) { texture = textureloader->loadDDS(_imagepath); };
 
 	private:
 		GLuint texture;

@@ -11,17 +11,15 @@
 
 class Textureloader {
     public:
-        Textureloader(const char* _imagepath);
+        Textureloader();
         virtual ~Textureloader();
 
         // Load a .BMP file using our custom loader
-        GLuint loadCustomBMP();
+        GLuint loadCustomBMP(const char* _imagepath);
 
         // Load a .DDS file using GLFW's own loader
-        GLuint loadDDS();
+        GLuint loadDDS(const char* _imagepath);
     private:
-        const char* imagepath;
+
 };
-
-
 #endif
