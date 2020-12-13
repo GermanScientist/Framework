@@ -1,8 +1,21 @@
 #include <myFramework/textureloader.h>
 
-GLuint loadCustomBMP(const char* _imagepath){
+//The constructor
+Textureloader::Textureloader(const char* _imagepath)
+{
+	imagepath = _imagepath;
+}
 
-	printf("Reading image %s\n", _imagepath);
+//The destructor
+Textureloader::~Textureloader()
+{
+	
+}
+
+//Load MBP file
+GLuint Textureloader::loadCustomBMP(){
+
+	printf("Reading image %s\n", imagepath);
 
 	// Data read from the header of the BMP file
 	unsigned char header[54];
@@ -13,9 +26,9 @@ GLuint loadCustomBMP(const char* _imagepath){
 	unsigned char * data;
 
 	// Open the file
-	FILE * file = fopen(_imagepath,"rb");
+	FILE * file = fopen(imagepath,"rb");
 	if (!file){
-		printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", _imagepath);
+		printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", imagepath);
 		getchar();
 		return 0;
 	}
@@ -90,16 +103,17 @@ GLuint loadCustomBMP(const char* _imagepath){
 #define FOURCC_DXT3 0x33545844 // Equivalent to "DXT3" in ASCII
 #define FOURCC_DXT5 0x35545844 // Equivalent to "DXT5" in ASCII
 
-GLuint loadDDS(const char* _imagepath){
+//Load DDS file
+GLuint Textureloader::loadDDS(){
 
 	unsigned char header[124];
 
 	FILE *fp; 
  
 	/* try to open the file */ 
-	fp = fopen(_imagepath, "rb");
+	fp = fopen(imagepath, "rb");
 	if (fp == NULL){
-		printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", _imagepath); getchar();
+		printf("%s could not be opened. Are you in the right directory ? Don't forget to read the FAQ !\n", imagepath); getchar();
 		return 0;
 	}
    

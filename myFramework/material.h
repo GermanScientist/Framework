@@ -18,6 +18,7 @@ class Material
 
 	private:
 		GLuint texture;
+		Textureloader* textureloader;
 };
 
 #endif /* MATERIAL_H */

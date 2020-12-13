@@ -1,5 +1,5 @@
-#ifndef TEXTURE_H
-#define TEXTURE_H
+#ifndef TEXTURELOADER_H
+#define TEXTURELOADER_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -9,10 +9,19 @@
 
 #include <GLFW/glfw3.h>
 
-// Load a .BMP file using our custom loader
-GLuint loadCustomBMP(const char* _imagepath);
+class Textureloader {
+    public:
+        Textureloader(const char* _imagepath);
+        virtual ~Textureloader();
 
-// Load a .DDS file using GLFW's own loader
-GLuint loadDDS(const char* _imagepath);
+        // Load a .BMP file using our custom loader
+        GLuint loadCustomBMP();
+
+        // Load a .DDS file using GLFW's own loader
+        GLuint loadDDS();
+    private:
+        const char* imagepath;
+};
+
 
 #endif
