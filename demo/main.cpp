@@ -16,10 +16,12 @@ int main(void)
     Sprite* uvTemplate = new Sprite("assets/cubetest/uvtemplate.tga");
     Sprite* cubeMap = new Sprite("assets/modeltest/cube.tga");
     Sprite* ballMap = new Sprite("assets/modeltest/ball.tga");
+    Sprite* houseMap = new Sprite("assets/modeltest/house.tga");
     
     Cube* cube = new Cube("assets/cubetest/uvtemplate.DDS");
     Model* cubeModel = new Model("assets/modeltest/cube.obj", "assets/modeltest/cube.DDS");
     Model* ballModel = new Model("assets/modeltest/ball.obj", "assets/modeltest/ball.DDS");
+    Model* houseModel = new Model("assets/modeltest/house.obj", "assets/modeltest/house.DDS");
 
     do {
         // Update deltaTime
@@ -38,10 +40,12 @@ int main(void)
         renderer.renderSprite(uvTemplate, -20, -5, 0.0f, 0.025f, 0.025f, 1.0f, 0.0f);
         renderer.renderSprite(cubeMap, 0, -5, 0.0f, 0.050f, 0.050f, 1.0f, 0.0f);
         renderer.renderSprite(ballMap, 18, -5, 0.0f, 0.015f, 0.015f, 1.0f, 0.0f);
+        renderer.renderSprite(houseMap, 35, -5, 0.0f, 0.010f, 0.010f, 1.0f, 0.0f);
 
         renderer.renderCube(cube, -20, 10, 0.0f, 3.0f, 3.0f, 3.0f, 180.0f);
         renderer.renderModel(cubeModel, 0, 10, 0.0f, 3.0f, 3.0f, 3.0f, 0.0f);
         renderer.renderModel(ballModel, 18, 10, 0.0f, 3.0f, 3.0f, 3.0f, 0.0f);
+        renderer.renderModel(houseModel, 35, 5, 0.0f, 2.0f, 2.0f, 2.0f, 0.0f);
 
         // Swap buffers
         glfwSwapBuffers(renderer.getWindow());
@@ -56,6 +60,7 @@ int main(void)
     delete cube;
     delete cubeModel;
     delete ballModel;
+    delete houseModel;
 
     // Close OpenGL window and terminate GLFW
     glfwTerminate();
