@@ -1,25 +1,29 @@
 #ifndef TEXTURELOADER_H
 #define TEXTURELOADER_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+#include <iostream>
+#include <cstdio>
 
 #include <GL/glew.h>
-
-#include <GLFW/glfw3.h>
 
 class Textureloader {
     public:
         Textureloader();
         virtual ~Textureloader();
 
-        // Load a .BMP file using our custom loader
+        //Load a .BMP file
         GLuint loadCustomBMP(const char* _imagepath);
 
-        // Load a .DDS file using GLFW's own loader
+        //Load a DDS file
         GLuint loadDDS(const char* _imagepath);
-    private:
 
+        //Load a TGA file
+        GLuint loadTGA(const std::string& _imagepath);
+
+        unsigned int getWidth() { return width; };
+        unsigned int getHeight() { return height; };
+    private:
+        unsigned int width;
+        unsigned int height;
 };
 #endif

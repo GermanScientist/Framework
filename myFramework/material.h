@@ -15,13 +15,17 @@ class Material
 		virtual ~Material();
 
 		GLuint getTexture() { return texture; };
-		/*Textureloader* getTextureloader() { return textureloader; };*/
+		GLuint getWidth() { return textureloader->getWidth(); };
+		GLuint getHeight() { return textureloader->getHeight(); };
 
 		// Load a .BMP file using our custom loader
 		void loadCustomBMP(const char* _imagepath) { texture = textureloader->loadCustomBMP(_imagepath); };
 
 		// Load a .DDS file using GLFW's own loader
 		void loadDDS(const char* _imagepath) { texture = textureloader->loadDDS(_imagepath); };
+
+		// Load a .DDS file using GLFW's own loader
+		void loadTGA(const std::string& _imagepath) { texture = textureloader->loadTGA(_imagepath); };
 
 	private:
 		GLuint texture;

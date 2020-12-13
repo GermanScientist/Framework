@@ -114,7 +114,7 @@ void Renderer::renderSprite(Sprite* _sprite, float _posX, float _posY, float _po
 	// Bind our texture in Texture Unit 0
 	glActiveTexture(GL_TEXTURE0);
 	
-    glBindTexture(GL_TEXTURE_2D, _sprite->getTexture());
+    glBindTexture(GL_TEXTURE_2D, _sprite->getMaterial()->getTexture());
 	
     // Set our "textureSampler" sampler to user Texture Unit 0
 	GLuint textureID  = glGetUniformLocation(programID, "textureSampler");

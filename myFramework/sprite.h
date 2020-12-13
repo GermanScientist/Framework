@@ -12,6 +12,7 @@
 #include <string>
 
 #include <GL/glew.h>
+#include <myFramework/material.h>
 
 class Sprite
 {
@@ -19,22 +20,16 @@ class Sprite
 		Sprite(const std::string& _imagepath);
 		virtual ~Sprite();
 
-		GLuint getTexture() { return texture; };
 		GLuint getVertexbuffer() { return vertexbuffer; };
 		GLuint getUvbuffer() { return uvbuffer; };
-
-		unsigned int getWidth() { return width; };
-		unsigned int getHeight() { return height; };
+		
+		Material* getMaterial() { return material; };
 
 	private:
-		GLuint loadTGA(const std::string& _imagepath);
+		Material* material;
 
-		GLuint texture;
 		GLuint vertexbuffer;
 		GLuint uvbuffer;
-
-		unsigned int width;
-		unsigned int height;
 };
 
 #endif /* SPRITE_H */
