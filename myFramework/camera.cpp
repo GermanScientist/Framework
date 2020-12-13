@@ -56,5 +56,5 @@ void computeMatricesFromInputs(GLFWwindow* _window, float _deltaTime)
 
 	// View matrix
 	viewMatrix = glm::lookAt(position, position + glm::vec3(0, 0, 1), glm::vec3(0, -1, 0));
-    std::cout << position.x << " + " << position.y << " + " << position.z << "\n";
+    //std::cout << position.x << " + " << position.y << " + " << position.z << "\n";
 }

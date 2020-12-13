@@ -14,9 +14,10 @@ int main(void)
     Renderer renderer(1280, 720);
 
     Sprite* uvTemplate = new Sprite("assets/cubetest/uvtemplate.tga");
-    Sprite* uvMap = new Sprite("assets/modeltest/uvmap.tga");
+    Sprite* cubeMap = new Sprite("assets/modeltest/cube.tga");
+    
     Cube* cube = new Cube("assets/cubetest/uvtemplate.DDS");
-    Model* model = new Model("assets/modeltest/cube.obj", "assets/modeltest/uvmap.DDS");
+    Model* model = new Model("assets/modeltest/cube.obj", "assets/modeltest/cube.DDS");
 
     do {
         // Update deltaTime
@@ -33,7 +34,7 @@ int main(void)
 
         // Render all Sprites (Sprite*, xpos, ypos, xscale, yscale, rotation)
         renderer.renderSprite(uvTemplate, -12, -5, 0.0f, 0.025f, 0.025f, 1.0f, 0.0f);
-        renderer.renderSprite(uvMap, 12, -5, 0.0f, 0.025f, 0.025f, 1.0f, 0.0f);
+        renderer.renderSprite(cubeMap, 12, -5, 0.0f, 0.050f, 0.050f, 1.0f, 0.0f);
 
         renderer.renderCube(cube, -12, 10, 0.0f, 3.0f, 3.0f, 3.0f, 180.0f);
         renderer.renderModel(model, 12, 10, 0.0f, 3.0f, 3.0f, 3.0f, 0.0f);
@@ -47,7 +48,7 @@ int main(void)
         glfwWindowShouldClose(renderer.getWindow()) == 0);
 
     delete uvTemplate;
-    delete uvMap;
+    delete cubeMap;
     delete cube;
     delete model;
 
