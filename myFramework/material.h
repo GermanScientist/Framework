@@ -6,7 +6,7 @@
 
 #include <GL/glew.h>
 
-#include <myFramework/texture.h>
+#include <myFramework/textureloader.h>
 
 class Material
 {

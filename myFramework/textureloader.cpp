@@ -1,4 +1,4 @@
-#include <myFramework/texture.h>
+#include <myFramework/textureloader.h>
 
 GLuint loadCustomBMP(const char* _imagepath){
 
