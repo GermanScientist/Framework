@@ -47,11 +47,11 @@ void computeMatricesFromInputs(GLFWwindow* _window, float _deltaTime)
 	}
     // Move forward
     if (glfwGetKey(_window, GLFW_KEY_W) == GLFW_PRESS) {
-        position -= forward * _deltaTime * speed;
+        position += forward * _deltaTime * speed;
     }
     // Move backwards
     if (glfwGetKey(_window, GLFW_KEY_S) == GLFW_PRESS) {
-        position += forward * _deltaTime * speed;
+        position -= forward * _deltaTime * speed;
     }
 
 	// View matrix
