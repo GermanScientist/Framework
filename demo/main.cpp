@@ -39,15 +39,15 @@ int main(void)
         static float rot_X = 0.0f;
 
         // Render all models/sprites (Type*, xpos, ypos, zpos, xscale, yscale, zscale, xrot, yrot, zrot)
-        renderer.renderSprite(uvTemplate, -20, -5, 0.0f, 0.025f, 0.025f, 1.0f, 0.0f);
-        renderer.renderSprite(cubeMap, 0, -5, 0.0f, 0.050f, 0.050f, 1.0f, 0.0f);
-        renderer.renderSprite(ballMap, 18, -5, 0.0f, 0.015f, 0.015f, 1.0f, 0.0f);
-        renderer.renderSprite(houseMap, 40, -5, 0.0f, 0.010f, 0.010f, 1.0f, 0.0f);
+        renderer.renderSprite(uvTemplate, -32, -5, 0.0f, 0.025f, 0.025f, 1.0f, 0.0f);
+        renderer.renderSprite(cubeMap, -8, -5, 0.0f, 0.050f, 0.050f, 1.0f, 0.0f);
+        renderer.renderSprite(ballMap, 6, -5, 0.0f, 0.015f, 0.015f, 1.0f, 0.0f);
+        renderer.renderSprite(houseMap, 28, -5, 0.0f, 0.010f, 0.010f, 1.0f, 0.0f);
 
-        renderer.renderCube(cube, -20, 10, 0.0f, 3.0f, 3.0f, 3.0f, rot_X, 0.0f, 22.0f);
-        renderer.renderModel(cubeModel, 0, 10, 0.0f, 3.0f, 3.0f, 3.0f, rot_X, 0.0f, 22.0f);
-        renderer.renderModel(ballModel, 18, 10, 0.0f, 3.0f, 3.0f, 3.0f, rot_X, 0.0f, 22.0f);
-        renderer.renderModel(houseModel, 40, 15, 0.0f, 2.0f, 2.0f, 2.0f, rot_X, 0.0f, 22.0f);
+        renderer.renderCube(cube, -32, 10, 0.0f, 3.0f, 3.0f, 3.0f, rot_X, 0.0f, 22.0f);
+        renderer.renderModel(cubeModel, -8, 10, 0.0f, 3.0f, 3.0f, 3.0f, rot_X, 0.0f, 22.0f);
+        renderer.renderModel(ballModel, 6, 10, 0.0f, 3.0f, 3.0f, 3.0f, rot_X, 0.0f, 22.0f);
+        renderer.renderModel(houseModel, 28, 15, 0.0f, 2.0f, 2.0f, 2.0f, rot_X, 0.0f, 22.0f);
 
         rot_X += 3.141592 / 5 * deltaTime;
 
