@@ -4,6 +4,7 @@ Model::Model(const char* _path, const char* _imagepath)
 {
 	material = new Material();
 	material->loadDDS(_imagepath);
+	material->load3DShaders();
 
 	// these will be set correctly in loadTGA()
 	width = 0;

@@ -41,10 +41,6 @@ class Renderer
 		GLFWwindow* window;
 		unsigned int windowWidth;
 		unsigned int windowHeight;
-
-		GLuint loadShaders(const std::string& _vertex_file_path, const std::string& _fragment_file_path);
-
-		GLuint programID;
 };
 
 #endif /* RENDERER_H */

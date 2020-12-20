@@ -1,8 +1,11 @@
 #ifndef MATERIAL_H
 #define MATERIAL_H
 
-#include <iostream>
 #include <cstdio>
+#include <cstdlib>
+#include <string>
+#include <vector>
+#include <fstream>
 
 #include <GL/glew.h>
 
@@ -18,18 +21,30 @@ class Material
 		GLuint getWidth() { return textureloader->getWidth(); };
 		GLuint getHeight() { return textureloader->getHeight(); };
 
-		// Load a .BMP file using our custom loader
+		//Load a .BMP file using our custom loader
 		void loadCustomBMP(const char* _imagepath) { texture = textureloader->loadCustomBMP(_imagepath); };
 
-		// Load a .DDS file using GLFW's own loader
+		//Load a .DDS file using GLFW's own loader
 		void loadDDS(const char* _imagepath) { texture = textureloader->loadDDS(_imagepath); };
 
-		// Load a .DDS file using GLFW's own loader
+		//Load a .DDS file using GLFW's own loader
 		void loadTGA(const std::string& _imagepath) { texture = textureloader->loadTGA(_imagepath); };
+
+		//Load 2D shaders
+		void Material::load2DShaders();
+
+		//Load 3D shaders
+		void Material::load3DShaders();
+
+		GLuint Material::getProgramID() { return programID; };
 
 	private:
 		GLuint texture;
 		Textureloader* textureloader;
+
+		GLuint loadShaders(const std::string& _vertex_file_path, const std::string& _fragment_file_path);
+
+		GLuint programID;
 };
 
 #endif /* MATERIAL_H */

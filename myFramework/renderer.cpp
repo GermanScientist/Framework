@@ -11,8 +11,7 @@ Renderer::Renderer(unsigned int _width, unsigned int _height)
 
 Renderer::~Renderer()
 {
-	// Cleanup VBO and shader
-	glDeleteProgram(programID);
+	
 }
 
 //Intialize renderer
@@ -62,12 +61,6 @@ int Renderer::initialize()
 	// Cull triangles which normal is not towards the camera
 	glEnable(GL_CULL_FACE);
 
-	// Create and compile our GLSL program from the shaders
-	programID = this->loadShaders("shaders/2D/sprite.vert", "shaders/2D/sprite.frag");
-
-	// Use our shader
-	glUseProgram(programID);
-
 	return 0;
 }
 
@@ -106,7 +99,7 @@ void Renderer::renderSprite(Sprite* _sprite, float _posX, float _posY, float _po
 
 	// Send our transformation to the currently bound shader,
 	// in the "MVP" uniform
-	GLuint matrixID = glGetUniformLocation(programID, "MVP");
+	GLuint matrixID = glGetUniformLocation(_sprite->getMaterial()->getProgramID(), "MVP");
 	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
 
 	// Bind our texture in Texture Unit 0
@@ -115,17 +108,17 @@ void Renderer::renderSprite(Sprite* _sprite, float _posX, float _posY, float _po
     glBindTexture(GL_TEXTURE_2D, _sprite->getMaterial()->getTexture());
 	
     // Set our "textureSampler" sampler to user Texture Unit 0
-	GLuint textureID  = glGetUniformLocation(programID, "textureSampler");
+	GLuint textureID  = glGetUniformLocation(_sprite->getMaterial()->getProgramID(), "textureSampler");
 	glUniform1i(textureID, 0);
 
 	// 1st attribute buffer : vertices
-	GLuint vertexPositionID = glGetAttribLocation(programID, "vertexPosition");
+	GLuint vertexPositionID = glGetAttribLocation(_sprite->getMaterial()->getProgramID(), "vertexPosition");
 	glEnableVertexAttribArray(vertexPositionID);
 	glBindBuffer(GL_ARRAY_BUFFER, _sprite->getVertexbuffer());
 	glVertexAttribPointer(vertexPositionID, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 	// 2nd attribute buffer : UVs
-	GLuint vertexUVID = glGetAttribLocation(programID, "vertexUV");
+	GLuint vertexUVID = glGetAttribLocation(_sprite->getMaterial()->getProgramID(), "vertexUV");
 	glEnableVertexAttribArray(vertexUVID);
 	glBindBuffer(GL_ARRAY_BUFFER, _sprite->getUvbuffer());
 	glVertexAttribPointer(vertexUVID, 2, GL_FLOAT, GL_FALSE,  0, (void*)0);
@@ -155,14 +148,14 @@ void Renderer::renderCube(Cube* _cube, float _posX, float _posY, float _posZ, fl
 
 	// Send our transformation to the currently bound shader,
 	// in the "MVP" uniform
-	GLuint matrixID = glGetUniformLocation(programID, "MVP");
+	GLuint matrixID = glGetUniformLocation(_cube->getMaterial()->getProgramID(), "MVP");
 	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
 
 	// Bind our texture in Texture Unit 0
 	glActiveTexture(GL_TEXTURE0);
 
 	// Set our "textureSampler" sampler to user Texture Unit 0
-	GLuint textureID = glGetUniformLocation(programID, "textureSampler");
+	GLuint textureID = glGetUniformLocation(_cube->getMaterial()->getProgramID(), "textureSampler");
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _cube->getMaterial()->getTexture());
 
@@ -171,26 +164,12 @@ void Renderer::renderCube(Cube* _cube, float _posX, float _posY, float _posZ, fl
 	// 1rst attribute buffer : vertices
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, _cube->getVertexbuffer());
-	glVertexAttribPointer(
-		0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
-		3,                  // size
-		GL_FLOAT,           // type
-		GL_FALSE,           // normalized?
-		0,                  // stride
-		(void*)0            // array buffer offset
-	);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 	// 2nd attribute buffer : UVs
 	glEnableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, _cube->getUvbuffer());
-	glVertexAttribPointer(
-		1,                                // attribute. No particular reason for 1, but must match the layout in the shader.
-		2,                                // size : U+V => 2
-		GL_FLOAT,                         // type
-		GL_FALSE,                         // normalized?
-		0,                                // stride
-		(void*)0                          // array buffer offset
-	);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 	// Draw the triangle !
 	glDrawArrays(GL_TRIANGLES, 0, 12*3); // 12*3 indices starting at 0 -> 12 triangles
@@ -217,14 +196,14 @@ void Renderer::renderModel(Model* _model, float _posX, float _posY, float _posZ,
 
 	// Send our transformation to the currently bound shader,
 	// in the "MVP" uniform
-	GLuint matrixID = glGetUniformLocation(programID, "MVP");
+	GLuint matrixID = glGetUniformLocation(_model->getMaterial()->getProgramID(), "MVP");
 	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
 
 	// Bind our texture in Texture Unit 0
 	glActiveTexture(GL_TEXTURE0);
 
 	// Set our "textureSampler" sampler to user Texture Unit 0
-	GLuint textureID = glGetUniformLocation(programID, "textureSampler");
+	GLuint textureID = glGetUniformLocation(_model->getMaterial()->getProgramID(), "textureSampler");
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _model->getMaterial()->getTexture());
 
@@ -233,130 +212,16 @@ void Renderer::renderModel(Model* _model, float _posX, float _posY, float _posZ,
 	// 1rst attribute buffer : vertices
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, _model->getVertexbuffer());
-	glVertexAttribPointer(
-		0,                  // attribute. No particular reason for 0, but must match the layout in the shader.
-		3,                  // size
-		GL_FLOAT,           // type
-		GL_FALSE,           // normalized?
-		0,                  // stride
-		(void*)0            // array buffer offset
-	);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 	// 2nd attribute buffer : UVs
 	glEnableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, _model->getUvbuffer());
-	glVertexAttribPointer(
-		1,                                // attribute. No particular reason for 1, but must match the layout in the shader.
-		2,                                // size : U+V => 2
-		GL_FLOAT,                         // type
-		GL_FALSE,                         // normalized?
-		0,                                // stride
-		(void*)0                          // array buffer offset
-	);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 	// Draw the triangle !
 	glDrawArrays(GL_TRIANGLES, 0, _model->getVertices().size());
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
-}
-
-//Load the shaders
-GLuint Renderer::loadShaders(const std::string& _vertex_file_path, const std::string& _fragment_file_path)
-{
-	// Create the shaders
-	GLuint vertexShaderID = glCreateShader(GL_VERTEX_SHADER);
-	GLuint fragmentShaderID = glCreateShader(GL_FRAGMENT_SHADER);
-
-	// Read the Vertex Shader code from the file
-	std::string vertexShaderCode;
-	std::ifstream vertexShaderStream(_vertex_file_path.c_str(), std::ios::in);
-	
-    //Checks whether the vertex shader stream is open
-    if (vertexShaderStream.is_open()){
-        std::string line = "";
-		while (getline(vertexShaderStream, line)) {
-			vertexShaderCode += "\n" + line;
-		}
-		vertexShaderStream.close();
-	} else {
-        printf("Can't to open %s.\n", _vertex_file_path.c_str());
-		getchar();
-		return 0;
-	}
-
-	// Read the Fragment Shader code from the file
-	std::string fragmentShaderCode;
-	std::ifstream fragmentShaderStream(_fragment_file_path.c_str(), std::ios::in);
-
-    //Checks whether the vertex shader stream is open
-	if (fragmentShaderStream.is_open()){
-		std::string line = "";
-		while (getline(fragmentShaderStream, line)) {
-			fragmentShaderCode += "\n" + line;
-		}
-		fragmentShaderStream.close();
-	} else {
-		printf("Can't to open %s.\n", _fragment_file_path.c_str());
-		getchar();
-		return 0;
-	}
-
-	GLint result = GL_FALSE;
-	int infoLogLength;
-
-	// Compile Vertex Shader
-	printf("Compiling shader : %s\n", _vertex_file_path.c_str());
-	char const * vertexSourcePointer = vertexShaderCode.c_str();
-	glShaderSource(vertexShaderID, 1, &vertexSourcePointer , NULL);
-	glCompileShader(vertexShaderID);
-
-	// Check Vertex Shader
-	glGetShaderiv(vertexShaderID, GL_COMPILE_STATUS, &result);
-	glGetShaderiv(vertexShaderID, GL_INFO_LOG_LENGTH, &infoLogLength);
-	
-    if ( infoLogLength > 0 ){
-		std::vector<char> vertexShaderErrorMessage(infoLogLength+1);
-		glGetShaderInfoLog(vertexShaderID, infoLogLength, NULL, &vertexShaderErrorMessage[0]);
-		printf("%s\n", &vertexShaderErrorMessage[0]);
-	}
-
-	// Compile Fragment Shader
-	printf("Compiling shader : %s\n", _fragment_file_path.c_str());
-	char const * fragmentSourcePointer = fragmentShaderCode.c_str();
-	glShaderSource(fragmentShaderID, 1, &fragmentSourcePointer , NULL);
-	glCompileShader(fragmentShaderID);
-
-	// Check Fragment Shader
-	glGetShaderiv(fragmentShaderID, GL_COMPILE_STATUS, &result);
-	glGetShaderiv(fragmentShaderID, GL_INFO_LOG_LENGTH, &infoLogLength);
-	
-    if (infoLogLength > 0) {
-		std::vector<char> fragmentShaderErrorMessage(infoLogLength+1);
-		glGetShaderInfoLog(fragmentShaderID, infoLogLength, NULL, &fragmentShaderErrorMessage[0]);
-		printf("%s\n", &fragmentShaderErrorMessage[0]);
-	}
-
-	// Link the program
-	printf("Linking program\n");
-	GLuint programID = glCreateProgram();
-	glAttachShader(programID, vertexShaderID);
-	glAttachShader(programID, fragmentShaderID);
-	glLinkProgram(programID);
-
-	// Check the program
-	glGetProgramiv(programID, GL_LINK_STATUS, &result);
-	glGetProgramiv(programID, GL_INFO_LOG_LENGTH, &infoLogLength);
-	
-    if (infoLogLength > 0){
-		std::vector<char> programErrorMessage(infoLogLength+1);
-		glGetProgramInfoLog(programID, infoLogLength, NULL, &programErrorMessage[0]);
-		printf("%s\n", &programErrorMessage[0]);
-	}
-
-    //Delete the shaders
-	glDeleteShader(vertexShaderID);
-	glDeleteShader(fragmentShaderID);
-
-	return programID;
 }
