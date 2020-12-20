@@ -28,13 +28,10 @@ int main(void)
         float deltaTime = renderer.updateDeltaTime();
 
         // Compute the ViewMatrix from keyboard and mouse input (see: camera.h/cpp)
-        computeMatricesFromInputs(renderer.getWindow(), deltaTime);
+        computeMatricesFromInputs(renderer.getWindow(), renderer.getWidth(), renderer.getHeight(), deltaTime);
 
         // Clear the screen
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        glm::vec3 cursor = getCursor(); // from Camera
-        // printf("(%f,%f)\n",cursor.x, cursor.y);
         
         static float rot_X = 0.0f;
 

@@ -65,9 +65,6 @@ int Renderer::initialize()
 	// Create and compile our GLSL program from the shaders
 	programID = this->loadShaders("shaders/sprite.vert", "shaders/sprite.frag");
 
-	//_projectionMatrix = glm::ortho(0.0f, (float)_window_width, (float)_window_height, 0.0f, 0.1f, 100.0f);
-	projectionMatrix = glm::perspective(45.0f, (float)getWidth() / (float)getHeight(), 0.1f, 10000.0f);
-
 	// Use our shader
 	glUseProgram(programID);
 
@@ -96,6 +93,7 @@ void Renderer::renderSprite(Sprite* _sprite, float _posX, float _posY, float _po
 {
     // get viewmatrix from Camera (Camera position and direction)
 	glm::mat4 viewMatrix = getViewMatrix(); 
+	glm::mat4 projectionMatrix = getProjectionMatrix();
 
 	// Build the Model matrix
 	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(_posX, _posY, _posZ));
@@ -144,6 +142,7 @@ void Renderer::renderCube(Cube* _cube, float _posX, float _posY, float _posZ, fl
 {
 	// get viewmatrix from Camera (Camera position and direction)
 	glm::mat4 viewMatrix = getViewMatrix();
+	glm::mat4 projectionMatrix = getProjectionMatrix();
 
 	// Build the Model matrix
 	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(_posX, _posY, _posZ));
@@ -205,6 +204,7 @@ void Renderer::renderModel(Model* _model, float _posX, float _posY, float _posZ,
 {
 	// get viewmatrix from Camera (Camera position and direction)
 	glm::mat4 viewMatrix = getViewMatrix();
+	glm::mat4 projectionMatrix = getProjectionMatrix();
 
 	// Build the Model matrix
 	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(_posX, _posY, _posZ));

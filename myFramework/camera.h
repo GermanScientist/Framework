@@ -9,8 +9,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp> // glm::lookAt()
 
-void computeMatricesFromInputs(GLFWwindow* _window, float _deltaTime);
+void computeMatricesFromInputs(GLFWwindow* _window, unsigned int _width, unsigned int _height, float _deltaTime);
 glm::mat4 getViewMatrix();
-glm::vec3 getCursor();
+glm::mat4 getProjectionMatrix();
 
 #endif
