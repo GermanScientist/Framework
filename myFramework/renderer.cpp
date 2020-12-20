@@ -63,7 +63,7 @@ int Renderer::initialize()
 	glEnable(GL_CULL_FACE);
 
 	// Create and compile our GLSL program from the shaders
-	programID = this->loadShaders("shaders/sprite.vert", "shaders/sprite.frag");
+	programID = this->loadShaders("shaders/2D/sprite.vert", "shaders/2D/sprite.frag");
 
 	// Use our shader
 	glUseProgram(programID);
