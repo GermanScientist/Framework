@@ -16,14 +16,12 @@ glm::mat4 getProjectionMatrix() {
 glm::vec3 offset = glm::vec3(0, 0, -45);
 glm::vec3 position = glm::vec3(0, 0, 0) + offset;
 
-//PI
-float pi = 3.1415f;
-
 // Initial horizontal angle : toward -Z
-float horizontalAngle = pi;
+float initialHorizontalAngle = 2.733f;
+float horizontalAngle = initialHorizontalAngle;
 
 // Initial vertical angle : none
-float verticalAngle = 0.0f;
+float verticalAngle = 1.485f;
 
 // Initial Field of View
 float initialFoV = 60.0f;
@@ -49,7 +47,7 @@ void computeMatricesFromInputs(GLFWwindow* _window, unsigned int _width, unsigne
 	glm::vec3 direction(cos(verticalAngle) * sin(-horizontalAngle), sin(verticalAngle), cos(verticalAngle) * cos(-horizontalAngle));
 
 	// Right vector
-	glm::vec3 right = glm::vec3(sin(-horizontalAngle - pi / 2.0f), 0, cos(-horizontalAngle - pi / 2.0f));
+	glm::vec3 right = glm::vec3(sin(-horizontalAngle - initialHorizontalAngle / 2.0f), 0, cos(-horizontalAngle - initialHorizontalAngle / 2.0f));
 
 	// Up vector
 	glm::vec3 up = glm::cross(right, direction);
@@ -83,5 +81,5 @@ void computeMatricesFromInputs(GLFWwindow* _window, unsigned int _width, unsigne
 	//View matrix
 	//Camera matrix
 	viewMatrix = glm::lookAt(position, position + direction, up);
-    std::cout << position.x << " + " << position.y << " + " << position.z << " + " << horizontalAngle << "\n";
+    std::cout << position.x << " + " << position.y << " + " << position.z << " + " << horizontalAngle << " + " << verticalAngle << "\n";
 }
