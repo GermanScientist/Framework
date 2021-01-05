@@ -23,7 +23,7 @@ void Material::load2DShaders() {
 }
 
 void Material::load3DShaders() {
-	programID = this->loadShaders("shaders/2D/sprite.vert", "shaders/2D/sprite.frag");;
+	programID = this->loadShaders("shaders/3D/StandardShading.vertexshader", "shaders/3D/StandardShading.fragmentshader");;
 
 	//Use our shader
 	glUseProgram(programID);

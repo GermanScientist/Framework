@@ -81,5 +81,5 @@ void computeMatricesFromInputs(GLFWwindow* _window, unsigned int _width, unsigne
 	//View matrix
 	//Camera matrix
 	viewMatrix = glm::lookAt(position, position + direction, up);
-    std::cout << position.x << " + " << position.y << " + " << position.z << " + " << horizontalAngle << " + " << verticalAngle << "\n";
+    //std::cout << position.x << " + " << position.y << " + " << position.z << " + " << horizontalAngle << " + " << verticalAngle << "\n";
 }

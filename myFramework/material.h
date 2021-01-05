@@ -31,12 +31,12 @@ class Material
 		void loadTGA(const std::string& _imagepath) { texture = textureloader->loadTGA(_imagepath); };
 
 		//Load 2D shaders
-		void Material::load2DShaders();
+		void load2DShaders();
 
 		//Load 3D shaders
-		void Material::load3DShaders();
+		void load3DShaders();
 
-		GLuint Material::getProgramID() { return programID; };
+		GLuint getProgramID() { return programID; };
 
 	private:
 		GLuint texture;

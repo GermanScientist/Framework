@@ -13,15 +13,15 @@ int main(void)
 {
     Renderer renderer(1280, 720);
 
-    Sprite* uvTemplate = new Sprite("assets/cubetest/uvtemplate.tga");
-    Sprite* cubeMap = new Sprite("assets/modeltest/cube.tga");
-    Sprite* ballMap = new Sprite("assets/modeltest/ball.tga");
-    Sprite* houseMap = new Sprite("assets/modeltest/house.tga");
-    
     Cube* cube = new Cube("assets/cubetest/uvtemplate.DDS");
     Model* cubeModel = new Model("assets/modeltest/cube.obj", "assets/modeltest/cube.DDS");
     Model* ballModel = new Model("assets/modeltest/ball.obj", "assets/modeltest/ball.DDS");
     Model* houseModel = new Model("assets/modeltest/house.obj", "assets/modeltest/house.DDS");
+
+    Sprite* uvTemplate = new Sprite("assets/cubetest/uvtemplate.tga");
+    Sprite* cubeMap = new Sprite("assets/modeltest/cube.tga");
+    Sprite* ballMap = new Sprite("assets/modeltest/ball.tga");
+    Sprite* houseMap = new Sprite("assets/modeltest/house.tga");
 
     do {
         // Update deltaTime
