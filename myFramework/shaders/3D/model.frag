@@ -7,9 +7,6 @@ varying vec3 Normal_cameraspace;
 varying vec3 EyeDirection_cameraspace;
 varying vec3 LightDirection_cameraspace;
 
-// Ouput data
-uniform vec3 color;
-
 // Values that stay constant for the whole mesh.
 uniform sampler2D myTextureSampler;
 uniform mat4 MV;
@@ -51,7 +48,7 @@ void main(){
 	//  - Looking elsewhere -> < 1
 	float cosAlpha = clamp( dot( E,R ), 0,1 );
 	
-	color = 
+	gl_Fragcolor.rgb = 
 		// Ambient : simulates indirect lighting
 		MaterialAmbientColor +
 		// Diffuse : "color" of the object
