@@ -24,6 +24,7 @@ class Model
 
 		GLuint getVertexbuffer() { return vertexbuffer; };
 		GLuint getUvbuffer() { return uvbuffer; };
+		GLuint getNormalbuffer() { return normalbuffer; };
 		
 		std::vector<glm::vec3> getVertices() { return vertices; };
 		std::vector<glm::vec2> getUvs() { return uvs; };
@@ -37,6 +38,7 @@ class Model
 	private:
 		GLuint vertexbuffer;
 		GLuint uvbuffer;
+		GLuint normalbuffer;
 		GLuint vertexArrayID;
 
 		std::vector<glm::vec3> vertices;

@@ -209,15 +209,20 @@ void Renderer::renderModel(Model* _model, float _posX, float _posY, float _posZ,
 
 	glUniform1i(textureID, 0);
 
-	// 1rst attribute buffer : vertices
+	//1st attribute buffer : vertices
 	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, _model->getVertexbuffer());
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
-	// 2nd attribute buffer : UVs
+	//2nd attribute buffer : UVs
 	glEnableVertexAttribArray(1);
 	glBindBuffer(GL_ARRAY_BUFFER, _model->getUvbuffer());
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
+
+	//3nd attribute buffer : UVs
+	glEnableVertexAttribArray(2);
+	glBindBuffer(GL_ARRAY_BUFFER, _model->getNormalbuffer());
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 	// Draw the triangle !
 	glDrawArrays(GL_TRIANGLES, 0, _model->getVertices().size());
