@@ -219,7 +219,7 @@ void Renderer::renderModel(Model* _model, float _posX, float _posY, float _posZ,
 	glBindBuffer(GL_ARRAY_BUFFER, _model->getUvbuffer());
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
-	//3nd attribute buffer : UVs
+	//3nd attribute buffer : Normals
 	glEnableVertexAttribArray(2);
 	glBindBuffer(GL_ARRAY_BUFFER, _model->getNormalbuffer());
 	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
@@ -229,4 +229,5 @@ void Renderer::renderModel(Model* _model, float _posX, float _posY, float _posZ,
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
+	glDisableVertexAttribArray(2);
 }
