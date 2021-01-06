@@ -58,6 +58,9 @@ int main(void)
 
     delete uvTemplate;
     delete cubeMap;
+    delete ballMap;
+    delete houseMap;
+    
     delete cube;
     delete cubeModel;
     delete ballModel;
