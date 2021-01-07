@@ -1,13 +1,13 @@
 #version 120
 
-// Interpolated values from the vertex shaders
+//Interpolated values from the vertex shaders
 varying vec2 UV;
 varying vec3 Position_worldspace;
 varying vec3 Normal_cameraspace;
 varying vec3 EyeDirection_cameraspace;
 varying vec3 LightDirection_cameraspace;
 
-// Values that stay constant for the whole mesh.
+//Values that stay constant for the whole mesh.
 uniform sampler2D myTextureSampler;
 uniform mat4 MV;
 uniform vec3 LightPosition_worldspace;
@@ -52,6 +52,11 @@ void main(){
 	//Ambient: simulates indirect lighting
 	//Diffuse: "color" of the object
 	//Specular: reflective highlight, like a mirror
-	gl_FragColor.rgb = MaterialAmbientColor + MaterialDiffuseColor * LightColor * LightPower * cosTheta / (distance*distance) + MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha,5) / (distance*distance);
+	
+	//Adds lighting / 3D shading to object, but currently causes all 3D objects to become invisible
+	/*gl_FragColor.rgb = MaterialAmbientColor + MaterialDiffuseColor * LightColor * LightPower * cosTheta / (distance*distance) + MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha,5) / (distance*distance);*/
+
+	//No lighting or 3D shading, but 3D objects are visible again
+	gl_FragColor.rgb = MaterialDiffuseColor;
 
 }
