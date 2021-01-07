@@ -29,4 +29,14 @@ void Runner::run(Scene* _scene) {
     // Swap buffers
     glfwSwapBuffers(renderer->getWindow());
     glfwPollEvents();
+
+    if (glfwWindowShouldClose(renderer->getWindow()) == 1 || glfwGetKey(renderer->getWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+        _scene->exit();
+    }
+
+    //This doesn't seem to be needed
+    /*
+    //Close OpenGL window and terminate GLFW
+    //glfwTerminate();
+    */
 }

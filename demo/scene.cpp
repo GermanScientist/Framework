@@ -2,6 +2,8 @@
 
 Scene::Scene(Renderer* _renderer)
 {
+    isRunning = true;
+
     renderer = _renderer;
 
     cube = new Cube("assets/cubetest/uvtemplate.DDS");

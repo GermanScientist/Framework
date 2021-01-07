@@ -20,6 +20,11 @@ public:
 	virtual ~Scene();
 	void update(float _deltaTime);
 
+    void run() { isRunning = true; };
+    void exit() { isRunning = false; };
+
+    bool getIsRunning() { return isRunning; };
+
 private:
     Renderer* renderer;
 
@@ -32,6 +37,8 @@ private:
     Sprite* cubeMap;
     Sprite* ballMap;
     Sprite* houseMap;
+
+    bool isRunning;
 };
 
 #endif /* SCENE_H */

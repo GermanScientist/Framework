@@ -15,16 +15,11 @@ int main(void)
 
     Scene* scene = new Scene(runner.getRenderer());
 
-    //When the application is running
-    do {
+    while (scene->getIsRunning()) {
         runner.run(scene);
+    }
 
-    } //Close the application when the window is closed (ESC or closing the window)
-    while (glfwGetKey(runner.getRenderer()->getWindow(), GLFW_KEY_ESCAPE) != GLFW_PRESS &&
-        glfwWindowShouldClose(runner.getRenderer()->getWindow()) == 0);
-
-    // Close OpenGL window and terminate GLFW
-    glfwTerminate();
+    delete scene;
 
     return 0;
 }
