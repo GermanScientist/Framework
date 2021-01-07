@@ -52,6 +52,10 @@ void main(){
 	//Ambient: simulates indirect lighting
 	//Diffuse: "color" of the object
 	//Specular: reflective highlight, like a mirror
-	gl_FragColor.rgb = MaterialAmbientColor + MaterialDiffuseColor * LightColor * LightPower * cosTheta / (distance*distance) + MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha,5) / (distance*distance);
-
+	
+	//This causes all 3D objects to become invisible
+	/* gl_FragColor.rgb = MaterialAmbientColor + MaterialDiffuseColor * LightColor * LightPower * cosTheta / (distance*distance) + MaterialSpecularColor * LightColor * LightPower * pow(cosAlpha,5) / (distance*distance); */
+	
+	//All 3D objects are visible, but without 3D shading
+	gl_FragColor.rgb = MaterialDiffuseColor;
 }
