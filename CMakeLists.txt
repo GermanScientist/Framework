@@ -79,6 +79,8 @@ add_library(myFramework # ar rcs libmyFramework.a
 	myFramework/objloader.cpp
 	myFramework/model.h
 	myFramework/model.cpp
+	myFramework/runner.h
+	myFramework/runner.cpp
 )
 
 # Main
