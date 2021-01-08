@@ -30,7 +30,7 @@ float speed = 50.0f;
 float mouseSpeed = 0.0035f;
 
 //Control camera using keyboard input
-void computeMatricesFromInputs(GLFWwindow* _window, unsigned int _width, unsigned int _height, float _deltaTime)
+void computeMatricesFromInputs(GLFWwindow* _window, unsigned int _width, unsigned int _height)
 {
 	//Get mouse position
 	double xpos, ypos;
@@ -55,22 +55,22 @@ void computeMatricesFromInputs(GLFWwindow* _window, unsigned int _width, unsigne
 
 	//Move forward
 	if (glfwGetKey(_window, GLFW_KEY_W) == GLFW_PRESS) {
-		position += direction * _deltaTime * speed;
+		position += direction * Time::getDeltaTime() * speed;
 	}
 
 	//Move backward
 	if (glfwGetKey(_window, GLFW_KEY_S) == GLFW_PRESS) {
-		position -= direction * _deltaTime * speed;
+		position -= direction * Time::getDeltaTime() * speed;
 	}
 
 	//Strafe right
 	if (glfwGetKey(_window, GLFW_KEY_D) == GLFW_PRESS) {
-		position += right * _deltaTime * speed;
+		position += right * Time::getDeltaTime() * speed;
 	}
 
 	//Strafe left
 	if (glfwGetKey(_window, GLFW_KEY_A) == GLFW_PRESS) {
-		position -= right * _deltaTime * speed;
+		position -= right * Time::getDeltaTime() * speed;
 	}
 
 	float FoV = initialFoV;

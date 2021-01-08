@@ -11,7 +11,6 @@
 
 #include <myFramework/renderer.h>
 #include <myFramework/camera.h>
-#include <myFramework/time.h>
 
 #include "demo/scene.h"
 
@@ -26,8 +25,6 @@ class Runner
 
 	private:
 		Renderer* renderer;
-
-		double deltaTime;
 };
 
 #endif /* RUNNER_H */
