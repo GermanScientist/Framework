@@ -16,7 +16,7 @@ Runner::~Runner()
 void Runner::run(Scene* _scene) {
     
     //Update deltaTime
-    deltaTime = renderer->updateDeltaTime();
+    deltaTime = Time::getDeltaTime();
 
     //Compute the ViewMatrix from keyboard and mouse input (see: camera.h/cpp)
     computeMatricesFromInputs(renderer->getWindow(), renderer->getWidth(), renderer->getHeight(), deltaTime);
@@ -25,7 +25,7 @@ void Runner::run(Scene* _scene) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     //Update the scene
-    _scene->update(deltaTime);
+    _scene->update();
 
     // Swap buffers
     glfwSwapBuffers(renderer->getWindow());

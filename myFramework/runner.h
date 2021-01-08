@@ -11,6 +11,7 @@
 
 #include <myFramework/renderer.h>
 #include <myFramework/camera.h>
+#include <myFramework/time.h>
 
 #include "demo/scene.h"
 

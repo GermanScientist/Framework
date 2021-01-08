@@ -12,13 +12,14 @@
 #include <myFramework/renderer.h>
 #include <myFramework/sprite.h>
 #include <myFramework/cube.h>
+#include <myFramework/time.h>
 
 class Scene
 {
 public:
 	Scene(Renderer* _renderer);
 	virtual ~Scene();
-	void update(float _deltaTime);
+	void update();
 
     void run() { isRunning = true; };
     void exit() { isRunning = false; };

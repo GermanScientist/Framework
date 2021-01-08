@@ -33,8 +33,6 @@ class Renderer
 		unsigned int getWidth() { return windowWidth; };
 		unsigned int getHeight() { return windowHeight; };
 
-		float updateDeltaTime();
-
 	private:
 		int initialize();
 
