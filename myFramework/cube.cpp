@@ -1,7 +1,9 @@
 #include <myFramework/cube.h>
 
+//Constructor
 Cube::Cube(const char* _imagepath)
 {
+	//Create material
 	material = new Material();
 	material->loadDDS(_imagepath);
 	material->load3DShaders();
@@ -10,6 +12,7 @@ Cube::Cube(const char* _imagepath)
 	width = 0;
 	height = 0;
 
+	//Generate and bind vertex arrays
 	glGenVertexArrays(1, &vertexArrayID);
 	glBindVertexArray(vertexArrayID);
 
@@ -94,6 +97,7 @@ Cube::Cube(const char* _imagepath)
 		0.667979f, 1.0f - 0.335851f
 	};
 
+	//Generate buffers
 	glGenBuffers(1, &vertexbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
@@ -103,6 +107,7 @@ Cube::Cube(const char* _imagepath)
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_uv_buffer_data), g_uv_buffer_data, GL_STATIC_DRAW);
 }
 
+//Destructor
 Cube::~Cube()
 {
 	glDeleteBuffers(1, &vertexbuffer);

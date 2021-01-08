@@ -1,7 +1,9 @@
 #include "scene.h"
 
+//Constructor
 Scene::Scene(Renderer* _renderer)
 {
+    //Assign properties
     isRunning = true;
 
     renderer = _renderer;
@@ -17,6 +19,7 @@ Scene::Scene(Renderer* _renderer)
     houseMap = new Sprite("assets/modeltest/house.tga");
 }
 
+//Destructor
 Scene::~Scene()
 {
     delete uvTemplate;
@@ -30,6 +33,7 @@ Scene::~Scene()
     delete houseModel;
 }
 
+//Update function
 void Scene::update(float _deltaTime) {
 
     //X rotation
@@ -46,5 +50,6 @@ void Scene::update(float _deltaTime) {
     renderer->renderModel(ballModel, 6, 10, 0.0f, 3.0f, 3.0f, 3.0f, rot_X, 0.0f, 22.0f);
     renderer->renderModel(houseModel, 28, 15, 0.0f, 2.0f, 2.0f, 2.0f, rot_X, 0.0f, 22.0f);
 
+    //Update X rotation
     rot_X += 3.141592 / 5 * _deltaTime;
 }

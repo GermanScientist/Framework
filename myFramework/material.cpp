@@ -1,11 +1,13 @@
 #include <myFramework/material.h>
 
+//Constructor
 Material::Material()
 {
 	// Load the texture using the texture loader
 	textureloader = new Textureloader();
 }
 
+//Destructor
 Material::~Material()
 {
 	//Deletes texture loader
@@ -15,6 +17,7 @@ Material::~Material()
 	glDeleteProgram(programID);
 }
 
+//Load 2D shaders
 void Material::load2DShaders() {
 	programID = this->loadShaders("shaders/2D/sprite.vert", "shaders/2D/sprite.frag");;
 	
@@ -22,6 +25,7 @@ void Material::load2DShaders() {
 	glUseProgram(programID);
 }
 
+//Load 3D shoaders
 void Material::load3DShaders() {
 	programID = this->loadShaders("shaders/3D/model.vert", "shaders/3D/model.frag");;
 
@@ -30,7 +34,7 @@ void Material::load3DShaders() {
 }
 
 
-//Load the shaders
+//Load shaders from file location
 GLuint Material::loadShaders(const std::string& _vertex_file_path, const std::string& _fragment_file_path)
 {
 	// Create the shaders

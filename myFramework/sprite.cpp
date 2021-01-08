@@ -1,7 +1,9 @@
 #include <myFramework/sprite.h>
 
+//Constructor
 Sprite::Sprite(const std::string& _imagepath)
 {
+	//Create a material
 	material = new Material();
 	material->loadTGA(_imagepath);
 	material->load2DShaders();
@@ -29,6 +31,7 @@ Sprite::Sprite(const std::string& _imagepath)
 		1.0f, 1.0f
 	};
 
+	//Generate buffers
 	glGenBuffers(1, &vertexbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
@@ -38,6 +41,7 @@ Sprite::Sprite(const std::string& _imagepath)
 	glBufferData(GL_ARRAY_BUFFER, sizeof(g_uv_buffer_data), g_uv_buffer_data, GL_STATIC_DRAW);
 }
 
+//Destructor
 Sprite::~Sprite()
 {
 	glDeleteBuffers(1, &vertexbuffer);
