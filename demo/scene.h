@@ -19,7 +19,7 @@ class Scene
 public:
 	Scene(Renderer* _renderer);
 	virtual ~Scene();
-	void update();
+	void update(float _deltaTime);
 
     void run() { isRunning = true; };
     void exit() { isRunning = false; };

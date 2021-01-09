@@ -23,6 +23,8 @@ class Runner
 		void run(Scene* _scene);
 		Renderer* getRenderer() { return renderer; }
 
+		float getDeltaTime();
+
 	private:
 		Renderer* renderer;
 };

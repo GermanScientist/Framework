@@ -34,7 +34,7 @@ Scene::~Scene()
 }
 
 //Update function
-void Scene::update() {
+void Scene::update(float _deltaTime) {
 
     //X rotation
     static float rot_X = 0.0f;
@@ -51,5 +51,5 @@ void Scene::update() {
     renderer->renderModel(houseModel, 28, 15, 0.0f, 2.0f, 2.0f, 2.0f, rot_X, 0.0f, 22.0f);
 
     //Update X rotation
-    rot_X += 3.141592 / 5 * Time::getDeltaTime();
+    rot_X += 3.141592 / 5 * _deltaTime;
 }
