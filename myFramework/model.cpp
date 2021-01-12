@@ -12,10 +12,6 @@ Model::Model(const char* _path, const char* _imagepath)
 	width = 0;
 	height = 0;
 
-	//Generate and bind vertex arrays
-	glGenVertexArrays(1, &vertexArrayID);
-	glBindVertexArray(vertexArrayID);
-
 	// Read our .obj file
 	bool res = loadOBJ(_path, vertices, uvs, normals);
 
@@ -39,7 +35,6 @@ Model::~Model()
 	glDeleteBuffers(1, &vertexbuffer);
 	glDeleteBuffers(1, &uvbuffer);
 	glDeleteBuffers(1, &normalbuffer);
-	glDeleteBuffers(1, &vertexArrayID);
 
 	delete material;
 }
