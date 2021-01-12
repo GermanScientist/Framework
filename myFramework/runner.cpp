@@ -13,7 +13,7 @@ Runner::~Runner()
 }
 
 //Run the scene
-void Runner::run(Scene* _scene) {
+void Runner::run(MyScene* _scene) {
     
     //Compute the ViewMatrix from keyboard and mouse input (see: camera.h/cpp)
     computeMatricesFromInputs(renderer->getWindow(), renderer->getWidth(), renderer->getHeight(), getDeltaTime());

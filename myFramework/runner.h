@@ -12,7 +12,7 @@
 #include <myFramework/renderer.h>
 #include <myFramework/camera.h>
 
-#include "demo/scene.h"
+#include "demo/myScene.h"
 
 class Runner
 {
@@ -20,7 +20,7 @@ class Runner
 		Runner();
 		virtual ~Runner();
 
-		void run(Scene* _scene);
+		void run(MyScene* _scene);
 		Renderer* getRenderer() { return renderer; }
 
 		float getDeltaTime();

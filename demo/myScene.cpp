@@ -1,11 +1,8 @@
-#include "scene.h"
+#include "myScene.h"
 
 //Constructor
-Scene::Scene(Renderer* _renderer)
+MyScene::MyScene(Renderer* _renderer)
 {
-    //Assign properties
-    isRunning = true;
-
     renderer = _renderer;
 
     cube = new Cube("assets/cubetest/uvtemplate.DDS");
@@ -20,7 +17,7 @@ Scene::Scene(Renderer* _renderer)
 }
 
 //Destructor
-Scene::~Scene()
+MyScene::~MyScene()
 {
     delete uvTemplate;
     delete cubeMap;
@@ -34,7 +31,7 @@ Scene::~Scene()
 }
 
 //Update function
-void Scene::update(float _deltaTime) {
+void MyScene::update(float _deltaTime) {
 
     //X rotation
     static float rot_X = 0.0f;

@@ -83,13 +83,15 @@ add_library(myFramework # ar rcs libmyFramework.a
 	myFramework/runner.cpp
 	myFramework/time.h
 	myFramework/time.cpp
+	myFramework/scene.cpp
+	myFramework/scene.h
 )
 
 # Main
 add_executable(main # g++ demo/main.cpp -o main
 	demo/main.cpp
-	demo/scene.cpp
-	demo/scene.h
+	demo/myScene.cpp
+	demo/myScene.h
 )
 target_link_libraries(main # g++ -lmyFramework
 	myFramework

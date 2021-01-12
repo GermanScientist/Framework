@@ -7,7 +7,7 @@
 #include <myFramework/camera.h>
 #include <myFramework/runner.h>
 
-#include "scene.h"
+#include "myScene.h"
 
 //Main function
 int main(void)
@@ -16,7 +16,7 @@ int main(void)
     Runner runner;
 
     //Initiate the scene
-    Scene* scene = new Scene(runner.getRenderer());
+    MyScene* scene = new MyScene(runner.getRenderer());
 
     //Run the scene
     while (scene->getIsRunning()) {

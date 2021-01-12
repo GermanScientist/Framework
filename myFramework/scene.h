@@ -9,15 +9,10 @@
 
 #include <GL/glew.h>
 
-#include <myFramework/renderer.h>
-#include <myFramework/sprite.h>
-#include <myFramework/cube.h>
-#include <myFramework/time.h>
-
 class Scene
 {
 public:
-	Scene(Renderer* _renderer);
+	Scene();
 	virtual ~Scene();
 	void update(float _deltaTime);
 
@@ -27,17 +22,6 @@ public:
     bool getIsRunning() { return isRunning; };
 
 private:
-    Renderer* renderer;
-
-    Cube* cube;
-    Model* cubeModel;
-    Model* ballModel;
-    Model* houseModel;
-
-    Sprite* uvTemplate;
-    Sprite* cubeMap;
-    Sprite* ballMap;
-    Sprite* houseMap;
 
     bool isRunning;
 };
