@@ -182,39 +182,53 @@ void Renderer::renderModel(Model* _model, float _posX, float _posY, float _posZ,
 
 	glm::mat4 MVP = projectionMatrix * viewMatrix * modelMatrix;
 
-	//Send our transformation to the currently bound shader, in the "MVP" uniform
+	//Get a handle for our "MVP" uniform
 	GLuint matrixID = glGetUniformLocation(_model->getMaterial()->getProgramID(), "MVP");
+	GLuint viewMatrixID = glGetUniformLocation(_model->getMaterial()->getProgramID(), "V");
+	GLuint modelMatrixID = glGetUniformLocation(_model->getMaterial()->getProgramID(), "M");
+
+	//Get a handle for our buffers
+	GLuint vertexPosition_modelspaceID = glGetAttribLocation(_model->getMaterial()->getProgramID(), "vertexPosition_modelspace");
+	GLuint vertexUVID = glGetAttribLocation(_model->getMaterial()->getProgramID(), "vertexUV");
+	GLuint vertexNormal_modelspaceID = glGetAttribLocation(_model->getMaterial()->getProgramID(), "vertexNormal_modelspace");
+
+	//Send our transformation to the currently bound shader, in the "MVP" uniform
 	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
+	glUniformMatrix4fv(modelMatrixID, 1, GL_FALSE, &modelMatrix[0][0]);
+	glUniformMatrix4fv(viewMatrixID, 1, GL_FALSE, &viewMatrix[0][0]);
+
+	glm::vec3 lightPos = glm::vec3(4, 4, 4);
+	glUniform3f(_model->getMaterial()->getLightID(), lightPos.x, lightPos.y, lightPos.z);
 
 	//Bind our texture in Texture Unit 0
 	glActiveTexture(GL_TEXTURE0);
 
 	//Set our "textureSampler" sampler to user Texture Unit 0
-	GLuint textureID = glGetUniformLocation(_model->getMaterial()->getProgramID(), "textureSampler");
+	GLuint textureID = glGetUniformLocation(_model->getMaterial()->getProgramID(), "myTextureSampler");
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _model->getMaterial()->getTexture());
 
 	glUniform1i(textureID, 0);
 
 	//1st attribute buffer : vertices
-	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(vertexPosition_modelspaceID);
 	glBindBuffer(GL_ARRAY_BUFFER, _model->getVertexbuffer());
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	glVertexAttribPointer(vertexPosition_modelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 	//2nd attribute buffer : UVs
-	glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(vertexUVID);
 	glBindBuffer(GL_ARRAY_BUFFER, _model->getUvbuffer());
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	glVertexAttribPointer(vertexUVID, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 	//3nd attribute buffer : Normals
-	glEnableVertexAttribArray(2);
+	glEnableVertexAttribArray(vertexNormal_modelspaceID);
 	glBindBuffer(GL_ARRAY_BUFFER, _model->getNormalbuffer());
-	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	glVertexAttribPointer(vertexNormal_modelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 	// Draw the triangle !
 	glDrawArrays(GL_TRIANGLES, 0, _model->getVertices().size());
 
-	glDisableVertexAttribArray(0);
-	glDisableVertexAttribArray(1);
-	glDisableVertexAttribArray(2);
+	glDisableVertexAttribArray(vertexPosition_modelspaceID);
+	glDisableVertexAttribArray(vertexUVID);
+	glDisableVertexAttribArray(vertexNormal_modelspaceID);
 }

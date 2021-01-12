@@ -37,6 +37,7 @@ class Material
 		void load3DShaders();
 
 		GLuint getProgramID() { return programID; };
+		GLuint getLightID() { return LightID; };
 
 	private:
 		GLuint texture;
@@ -45,6 +46,7 @@ class Material
 		GLuint loadShaders(const std::string& _vertex_file_path, const std::string& _fragment_file_path);
 
 		GLuint programID;
+		GLuint LightID;
 };
 
 #endif /* MATERIAL_H */

@@ -31,6 +31,9 @@ void Material::load3DShaders() {
 
 	//Use our shader
 	glUseProgram(programID);
+
+	//Get a handle for our "LightPosition" uniform
+	LightID = glGetUniformLocation(programID, "LightPosition_worldspace");
 }
 
 
