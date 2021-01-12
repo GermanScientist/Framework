@@ -53,6 +53,9 @@ int Renderer::initialize()
 	//Ensure we can capture the escape key being pressed below
 	glfwSetInputMode(window, GLFW_STICKY_KEYS, GL_TRUE);
 
+	//Hide the mouse
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
 	//Dark blue background
 	glClearColor(0.0f, 0.0f, 0.4f, 0.0f);
 
