@@ -83,7 +83,6 @@ void MyScene::update(float _deltaTime) {
     //Render all models
     renderer->renderCube(cube);
     cube->rotation.x = rot_X;
-    std::cout << cube->rotation.x << "\n";
 
     renderer->renderModel(cubeModel);
     cubeModel->rotation.x = rot_X;
