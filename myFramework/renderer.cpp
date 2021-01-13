@@ -71,6 +71,47 @@ int Renderer::initialize()
 	return 0;
 }
 
+//Render the scene
+void Renderer::renderScene(Scene* _scene) {
+
+	//Clear the screen
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	
+	//Get all the sprites in the scene
+	std::vector<Sprite*> sprites = _scene->getSprites();
+
+	//Go through the list of sprites
+	for each (Sprite* sprite in sprites)
+	{
+		//And render them
+		renderSprite(sprite);
+	}
+
+	//Get all the cubes in the scene
+	std::vector<Cube*> cubes = _scene->getCubes();
+
+	//Go through the list of cubes
+	for each (Cube* cube in cubes)
+	{
+		//And render them
+		renderCube(cube);
+	}
+
+	//Get all the models in the scene
+	std::vector<Model*> models = _scene->getModels();
+
+	//Go through the list of models
+	for each (Model* model in models)
+	{
+		//And render them
+		renderModel(model);
+	}
+
+	// Swap buffers
+	glfwSwapBuffers(window);
+	glfwPollEvents();
+}
+
 //Render a sprite
 void Renderer::renderSprite(Sprite* _sprite)
 {

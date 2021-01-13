@@ -9,7 +9,6 @@
 
 #include <GL/glew.h>
 
-#include <myFramework/renderer.h>
 #include <myFramework/sprite.h>
 #include <myFramework/cube.h>
 #include <myFramework/time.h>
@@ -18,13 +17,11 @@
 class MyScene : public Scene
 {
 public:
-    MyScene(Renderer* _renderer);
+    MyScene();
 	virtual ~MyScene();
 	void update(float _deltaTime);
 
 private:
-    Renderer* renderer;
-
     Cube* cube;
     Model* cubeModel;
     Model* ballModel;

@@ -16,7 +16,7 @@ int main(void)
     Runner runner;
 
     //Initiate the scene
-    MyScene* scene = new MyScene(runner.getRenderer());
+    MyScene* scene = new MyScene();
 
     //Run the scene
     while (scene->getIsRunning()) {

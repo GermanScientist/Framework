@@ -9,7 +9,7 @@ Runner::Runner()
 //Destructor
 Runner::~Runner()
 {
-
+    delete renderer;
 }
 
 //Run the scene
@@ -18,15 +18,11 @@ void Runner::run(MyScene* _scene) {
     //Compute the ViewMatrix from keyboard and mouse input (see: camera.h/cpp)
     computeMatricesFromInputs(renderer->getWindow(), renderer->getWidth(), renderer->getHeight(), getDeltaTime());
 
-    //Clear the screen
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
     //Update the scene
     _scene->update(getDeltaTime());
 
-    // Swap buffers
-    glfwSwapBuffers(renderer->getWindow());
-    glfwPollEvents();
+    //Render the scene
+    renderer->renderScene(_scene);
 
     if (glfwWindowShouldClose(renderer->getWindow()) == 1 || glfwGetKey(renderer->getWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS) {
         _scene->exit();

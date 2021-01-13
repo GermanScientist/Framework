@@ -13,6 +13,7 @@
 #include <myFramework/camera.h>
 
 #include "demo/myScene.h"
+#include "myFramework/scene.h"
 
 class Runner
 {

@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <iostream>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -53,7 +54,6 @@ class Entity
 
 		unsigned int width;
 		unsigned int height;
-
 };
 
 #endif /* ENTITY_H */

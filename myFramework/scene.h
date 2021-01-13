@@ -8,22 +8,35 @@
 #include <fstream>
 
 #include <GL/glew.h>
+#include <myFramework/entity.h>
+#include <myFramework/sprite.h>
+#include <myFramework/cube.h>
+#include <myFramework/model.h>
 
 class Scene
 {
-public:
-	Scene();
-	virtual ~Scene();
-	void update(float _deltaTime);
+    public:
+	    Scene();
+	    virtual ~Scene();
+	    void update(float _deltaTime);
 
-    void run() { isRunning = true; };
-    void exit() { isRunning = false; };
+        void run() { isRunning = true; };
+        void exit() { isRunning = false; };
 
-    bool getIsRunning() { return isRunning; };
+        bool getIsRunning() { return isRunning; };
 
-private:
+        std::vector<Sprite*> getSprites() { return sprites; };
+        std::vector<Cube*> getCubes() { return cubes; };
+        std::vector<Model*> getModels() { return models; };
 
-    bool isRunning;
+    private:
+
+        bool isRunning;
+
+    protected:
+        std::vector<Sprite*> sprites;
+        std::vector<Cube*> cubes;
+        std::vector<Model*> models;
 };
 
 #endif /* SCENE_H */
