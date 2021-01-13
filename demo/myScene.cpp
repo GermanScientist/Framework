@@ -7,6 +7,10 @@ MyScene::MyScene(Renderer* _renderer)
 
     //Create models
     cube = new Cube("assets/cubetest/uvtemplate.DDS");
+    cube->setPosition(-32.0f, 10.0f, 0.0f);
+    cube->setScale(3.0f, 3.0f, 3.0f);
+    cube->setRotation(0.0f, 0.0f, 22.0f);
+
     cubeModel = new Model("assets/modeltest/cube.obj", "assets/modeltest/cube.DDS");
     ballModel = new Model("assets/modeltest/ball.obj", "assets/modeltest/ball.DDS");
     houseModel = new Model("assets/modeltest/house.obj", "assets/modeltest/house.DDS");
@@ -63,7 +67,9 @@ void MyScene::update(float _deltaTime) {
     renderer->renderSprite(houseMap);
     
     //Render all models
-    renderer->renderCube(cube, -32, 10, 0.0f, 3.0f, 3.0f, 3.0f, rot_X, 0.0f, 22.0f);
+    renderer->renderCube(cube);
+    cube->rotation.x = rot_X;
+
     renderer->renderModel(cubeModel, -8, 10, 0.0f, 3.0f, 3.0f, 3.0f, rot_X, 0.0f, 22.0f);
     renderer->renderModel(ballModel, 6, 10, 0.0f, 3.0f, 3.0f, 3.0f, rot_X, 0.0f, 22.0f);
     renderer->renderModel(houseModel, 28, 15, 0.0f, 2.0f, 2.0f, 2.0f, rot_X, 0.0f, 22.0f);

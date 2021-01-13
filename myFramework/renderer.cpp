@@ -120,16 +120,16 @@ void Renderer::renderSprite(Sprite* _sprite)
 }
 
 //Render a cube
-void Renderer::renderCube(Cube* _cube, float _posX, float _posY, float _posZ, float _scaleX, float _scaleY, float _scaleZ, float _rotX, float _rotY, float _rotZ)
+void Renderer::renderCube(Cube* _cube)
 {
 	//Get viewmatrix from Camera (Camera position and direction)
 	glm::mat4 viewMatrix = getViewMatrix();
 	glm::mat4 projectionMatrix = getProjectionMatrix();
 
 	//Build the Model matrix
-	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(_posX, _posY, _posZ));
-	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(_rotX, _rotY, _rotZ);
-	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(_scaleX, _scaleY, _scaleZ));
+	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(_cube->position.x, _cube->position.y, _cube->position.z));
+	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(_cube->rotation.x, _cube->rotation.y, _cube->rotation.z);
+	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(_cube->scale.x, _cube->scale.y, _cube->scale.z));
 
 	glm::mat4 modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 

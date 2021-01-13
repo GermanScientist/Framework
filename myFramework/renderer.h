@@ -26,7 +26,7 @@ class Renderer
 		virtual ~Renderer();
 
 		void renderSprite(Sprite* _sprite);
-        void renderCube(Cube* _cube, float _posX, float _posY, float _posZ, float _scaleX, float _scaleY, float _scaleZ, float _rotX, float _rotY, float _rotZ);
+        void renderCube(Cube* _cube);
 		void renderModel(Model* _model, float _posX, float _posY, float _posZ, float _scaleX, float _scaleY, float _scaleZ, float _rotX, float _rotY, float _rotZ);
 		GLFWwindow* getWindow() { return window; };
 

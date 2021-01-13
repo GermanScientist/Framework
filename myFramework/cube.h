@@ -28,6 +28,28 @@ class Cube
 		unsigned int getWidth() { return width; };
 		unsigned int getHeight() { return height; };
 
+		glm::vec3 position;
+		glm::vec3 scale;
+		glm::vec3 rotation;
+
+		void setPosition(float _x, float _y, float _z) {
+			position.x = _x;
+			position.y = _y;
+			position.z = _z;
+		}
+
+		void setScale(float _x, float _y, float _z) {
+			scale.x = _x;
+			scale.y = _y;
+			scale.z = _z;
+		}
+
+		void setRotation(float _x, float _y, float _z) {
+			rotation.x = _x;
+			rotation.y = _y;
+			rotation.z = _z;
+		}
+
 	private:
 		GLuint vertexbuffer;
 		GLuint uvbuffer;

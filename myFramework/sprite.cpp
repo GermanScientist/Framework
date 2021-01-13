@@ -3,6 +3,7 @@
 //Constructor
 Sprite::Sprite(const std::string& _imagepath)
 {
+	//Assign properties
 	position.x = 0.0f;
 	position.y = 0.0f;
 	position.z = 0.0f;
