@@ -12,8 +12,19 @@ MyScene::MyScene(Renderer* _renderer)
     cube->setRotation(0.0f, 0.0f, 22.0f);
 
     cubeModel = new Model("assets/modeltest/cube.obj", "assets/modeltest/cube.DDS");
+    cubeModel->setPosition(-8.0f, 10.0f, 0.0f);
+    cubeModel->setScale(3.0f, 3.0f, 3.0f);
+    cubeModel->setRotation(0.0f, 0.0f, 22.0f);
+
     ballModel = new Model("assets/modeltest/ball.obj", "assets/modeltest/ball.DDS");
+    ballModel->setPosition(6.0f, 10.0f, 0.0f);
+    ballModel->setScale(3.0f, 3.0f, 3.0f);
+    ballModel->setRotation(0.0f, 0.0f, 22.0f);
+
     houseModel = new Model("assets/modeltest/house.obj", "assets/modeltest/house.DDS");
+    houseModel->setPosition(28.0f, 15.0f, 0.0f);
+    houseModel->setScale(2.0f, 2.0f, 2.0f);
+    houseModel->setRotation(0.0f, 0.0f, 22.0f);
 
     //Create uvTemplate
     uvTemplate = new Sprite("assets/cubetest/uvtemplate.tga");
@@ -38,6 +49,9 @@ MyScene::MyScene(Renderer* _renderer)
     houseMap->setPosition(28.0f, -5.0f, 0.0f);
     houseMap->setScale(0.01f, 0.01f, 1.0f);
     houseMap->setRotation(0.0f, 0.0f, 0.0f);
+
+    //Properties
+    rotationSpeed = 25;
 }
 
 //Destructor
@@ -69,11 +83,17 @@ void MyScene::update(float _deltaTime) {
     //Render all models
     renderer->renderCube(cube);
     cube->rotation.x = rot_X;
+    std::cout << cube->rotation.x << "\n";
 
-    renderer->renderModel(cubeModel, -8, 10, 0.0f, 3.0f, 3.0f, 3.0f, rot_X, 0.0f, 22.0f);
-    renderer->renderModel(ballModel, 6, 10, 0.0f, 3.0f, 3.0f, 3.0f, rot_X, 0.0f, 22.0f);
-    renderer->renderModel(houseModel, 28, 15, 0.0f, 2.0f, 2.0f, 2.0f, rot_X, 0.0f, 22.0f);
+    renderer->renderModel(cubeModel);
+    cubeModel->rotation.x = rot_X;
+
+    renderer->renderModel(ballModel);
+    ballModel->rotation.x = rot_X;
+
+    renderer->renderModel(houseModel);
+    houseModel->rotation.x = rot_X;
 
     //Update X rotation
-    rot_X += 3.141592 / 5 * _deltaTime;
+    rot_X += 3.141592 * rotationSpeed * _deltaTime;
 }

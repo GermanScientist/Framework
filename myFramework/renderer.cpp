@@ -167,16 +167,16 @@ void Renderer::renderCube(Cube* _cube)
 }
 
 //Render a model
-void Renderer::renderModel(Model* _model, float _posX, float _posY, float _posZ, float _scaleX, float _scaleY, float _scaleZ, float _rotX, float _rotY, float _rotZ)
+void Renderer::renderModel(Model* _model)
 {
 	//Get viewmatrix from Camera (Camera position and direction)
 	glm::mat4 viewMatrix = getViewMatrix();
 	glm::mat4 projectionMatrix = getProjectionMatrix();
 
 	//Build the Model matrix
-	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(_posX, _posY, _posZ));
-	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(_rotX, _rotY, _rotZ);
-	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(_scaleX, _scaleY, _scaleZ));
+	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(_model->position.x, _model->position.y, _model->position.z));
+	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(_model->rotation.x, _model->rotation.y, _model->rotation.z);
+	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(_model->scale.x, _model->scale.y, _model->scale.z));
 
 	glm::mat4 modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 

@@ -34,6 +34,8 @@ private:
     Sprite* cubeMap;
     Sprite* ballMap;
     Sprite* houseMap;
+
+    float rotationSpeed;
 };
 
 #endif /* MYSCENE_H */

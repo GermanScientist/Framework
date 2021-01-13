@@ -3,6 +3,19 @@
 //Constructor
 Model::Model(const char* _path, const char* _imagepath)
 {
+	//Assign properties
+	position.x = 0.0f;
+	position.y = 0.0f;
+	position.z = 0.0f;
+
+	scale.x = 1.0f;
+	scale.y = 1.0f;
+	scale.z = 1.0f;
+
+	rotation.x = 0.0f;
+	rotation.y = 0.0f;
+	rotation.z = 0.0f;
+
 	//Create material
 	material = new Material();
 	material->loadDDS(_imagepath);
