@@ -12,7 +12,6 @@
 #include <string>
 
 #include <GL/glew.h>
-#include <myFramework/material.h>
 #include <myFramework/objloader.h>
 #include <myFramework/Entity.h>
 
@@ -30,11 +29,6 @@ class Model : public Entity
 		std::vector<glm::vec2> getUvs() { return uvs; };
 		std::vector<glm::vec3> getNormals() { return normals; };
 
-		Material* getMaterial() { return material; };
-
-		unsigned int getWidth() { return width; };
-		unsigned int getHeight() { return height; };
-
 	private:
 		GLuint vertexbuffer;
 		GLuint uvbuffer;
@@ -43,11 +37,6 @@ class Model : public Entity
 		std::vector<glm::vec3> vertices;
 		std::vector<glm::vec2> uvs;
 		std::vector<glm::vec3> normals;
-
-		Material* material;
-
-		unsigned int width;
-		unsigned int height;
 };
 
 #endif /* MODEL_H */

@@ -8,10 +8,6 @@ Model::Model(const char* _path, const char* _imagepath)
 	material->loadDDS(_imagepath);
 	material->load3DShaders();
 
-	// these will be set correctly in loadTGA()
-	width = 0;
-	height = 0;
-
 	// Read our .obj file
 	bool res = loadOBJ(_path, vertices, uvs, normals);
 

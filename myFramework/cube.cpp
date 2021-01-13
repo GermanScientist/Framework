@@ -8,10 +8,6 @@ Cube::Cube(const char* _imagepath)
 	material->loadDDS(_imagepath);
 	material->load3DShaders();
 
-	// these will be set correctly in loadTGA()
-	width = 0;
-	height = 0;
-
 	//Generate and bind vertex arrays
 	glGenVertexArrays(1, &vertexArrayID);
 	glBindVertexArray(vertexArrayID);

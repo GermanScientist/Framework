@@ -11,7 +11,6 @@
 #include <string>
 
 #include <GL/glew.h>
-#include <myFramework/material.h>
 #include <myFramework/Entity.h>
 
 class Sprite : public Entity
@@ -22,11 +21,8 @@ class Sprite : public Entity
 
 		GLuint getVertexbuffer() { return vertexbuffer; };
 		GLuint getUvbuffer() { return uvbuffer; };
-		
-		Material* getMaterial() { return material; };
 
 	private:
-		Material* material;
 
 		GLuint vertexbuffer;
 		GLuint uvbuffer;

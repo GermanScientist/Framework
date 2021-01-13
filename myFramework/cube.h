@@ -11,7 +11,6 @@
 #include <string>
 
 #include <GL/glew.h>
-#include <myFramework/material.h>
 #include <myFramework/Entity.h>
 
 class Cube : public Entity
@@ -23,20 +22,10 @@ class Cube : public Entity
 		GLuint getVertexbuffer() { return vertexbuffer; };
 		GLuint getUvbuffer() { return uvbuffer; };
 
-		Material* getMaterial() { return material; };
-
-		unsigned int getWidth() { return width; };
-		unsigned int getHeight() { return height; };
-
 	private:
 		GLuint vertexbuffer;
 		GLuint uvbuffer;
 		GLuint vertexArrayID;
-
-		Material* material;
-
-		unsigned int width;
-		unsigned int height;
 };
 
 #endif /* CUBE_H */

@@ -11,6 +11,8 @@
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 
+#include <myFramework/material.h>
+
 class Entity
 {
 	public:
@@ -39,7 +41,19 @@ class Entity
 			rotation.z = _z;
 		}
 
+		Material* getMaterial() { return material; };
+
+		unsigned int getWidth() { return width; };
+		unsigned int getHeight() { return height; };
+
 	private:
+		
+	protected:
+		Material* material;
+
+		unsigned int width;
+		unsigned int height;
+
 };
 
 #endif /* ENTITY_H */

@@ -3,6 +3,10 @@
 //Constructor
 Entity::Entity()
 {
+	//These will be set correctly while loading the textures
+	width = 0;
+	height = 0;
+
 	//Assign properties
 	position.x = 0.0f;
 	position.y = 0.0f;
@@ -20,5 +24,4 @@ Entity::Entity()
 //Destructor
 Entity::~Entity()
 {
-
 }
