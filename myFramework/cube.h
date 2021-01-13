@@ -13,8 +13,9 @@
 
 #include <GL/glew.h>
 #include <myFramework/material.h>
+#include <myFramework/Entity.h>
 
-class Cube
+class Cube : public Entity
 {
 	public:
         Cube(const char* _imagepath);

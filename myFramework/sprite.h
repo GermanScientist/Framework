@@ -13,8 +13,9 @@
 
 #include <GL/glew.h>
 #include <myFramework/material.h>
+#include <myFramework/Entity.h>
 
-class Sprite
+class Sprite : public Entity
 {
 	public:
 		Sprite(const std::string& _imagepath);

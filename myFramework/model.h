@@ -15,8 +15,9 @@
 #include <GL/glew.h>
 #include <myFramework/material.h>
 #include <myFramework/objloader.h>
+#include <myFramework/Entity.h>
 
-class Model
+class Model : public Entity
 {
 	public:
 		Model(const char* _path, const char* _imagepath);
