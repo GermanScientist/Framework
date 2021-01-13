@@ -51,7 +51,7 @@ MyScene::MyScene(Renderer* _renderer)
     houseMap->setRotation(0.0f, 0.0f, 0.0f);
 
     //Properties
-    rotationSpeed = 25;
+    rotationSpeed = 300;
 }
 
 //Destructor
@@ -70,10 +70,7 @@ MyScene::~MyScene()
 
 //Update function
 void MyScene::update(float _deltaTime) {
-
-    //X rotation
-    static float rot_X = 0.0f;
-
+    
     //Render all sprites
     renderer->renderSprite(uvTemplate);
     renderer->renderSprite(cubeMap);
@@ -82,17 +79,14 @@ void MyScene::update(float _deltaTime) {
     
     //Render all models
     renderer->renderCube(cube);
-    cube->rotation.x = rot_X;
+    cube->rotation.x += rotationSpeed * _deltaTime;
 
     renderer->renderModel(cubeModel);
-    cubeModel->rotation.x = rot_X;
+    cubeModel->rotation.x += rotationSpeed * _deltaTime;
 
     renderer->renderModel(ballModel);
-    ballModel->rotation.x = rot_X;
+    ballModel->rotation.x += rotationSpeed * _deltaTime;
 
     renderer->renderModel(houseModel);
-    houseModel->rotation.x = rot_X;
-
-    //Update X rotation
-    rot_X += 3.141592 * rotationSpeed * _deltaTime;
+    houseModel->rotation.x += rotationSpeed * _deltaTime;
 }
