@@ -11,6 +11,10 @@ MyScene::MyScene(Renderer* _renderer)
     houseModel = new Model("assets/modeltest/house.obj", "assets/modeltest/house.DDS");
 
     uvTemplate = new Sprite("assets/cubetest/uvtemplate.tga");
+    uvTemplate->setPosition(-32.0f, -5.0f, 0.0f);
+    uvTemplate->setScale(0.025f, 0.025f, 1.0f);
+    uvTemplate->setRotation(0.0f, 0.0f, 0.0f);
+
     cubeMap = new Sprite("assets/modeltest/cube.tga");
     ballMap = new Sprite("assets/modeltest/ball.tga");
     houseMap = new Sprite("assets/modeltest/house.tga");
@@ -37,10 +41,12 @@ void MyScene::update(float _deltaTime) {
     static float rot_X = 0.0f;
 
     // Render all models/sprites (Type*, xpos, ypos, zpos, xscale, yscale, zscale, xrot, yrot, zrot)
-    renderer->renderSprite(uvTemplate, -32, -5, 0.0f, 0.025f, 0.025f, 1.0f, 0.0f);
+    renderer->renderSprite(uvTemplate);
+    /*
     renderer->renderSprite(cubeMap, -8, -5, 0.0f, 0.050f, 0.050f, 1.0f, 0.0f);
     renderer->renderSprite(ballMap, 6, -5, 0.0f, 0.015f, 0.015f, 1.0f, 0.0f);
     renderer->renderSprite(houseMap, 28, -5, 0.0f, 0.010f, 0.010f, 1.0f, 0.0f);
+    */
 
     renderer->renderCube(cube, -32, 10, 0.0f, 3.0f, 3.0f, 3.0f, rot_X, 0.0f, 22.0f);
     renderer->renderModel(cubeModel, -8, 10, 0.0f, 3.0f, 3.0f, 3.0f, rot_X, 0.0f, 22.0f);
