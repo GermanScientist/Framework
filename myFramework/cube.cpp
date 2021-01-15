@@ -6,7 +6,7 @@ Cube::Cube(const char* _imagepath)
 	//Create material
 	material = new Material();
 	material->loadDDS(_imagepath);
-	material->load3DShaders();
+	material->getShader()->load3DShaders();
 
 	mesh = new Mesh();
 	mesh->generateBuffers("Cube");

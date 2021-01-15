@@ -10,12 +10,15 @@
 #include <GL/glew.h>
 
 #include <myFramework/textureloader.h>
+#include <myFramework/shader.h>
 
 class Material
 {
 	public:
 		Material();
 		virtual ~Material();
+
+		Shader* getShader() { return shader; };
 
 		GLuint getTexture() { return texture; };
 		GLuint getWidth() { return textureloader->getWidth(); };
@@ -30,23 +33,11 @@ class Material
 		//Load a .DDS file using GLFW's own loader
 		void loadTGA(const std::string& _imagepath) { texture = textureloader->loadTGA(_imagepath); };
 
-		//Load 2D shaders
-		void load2DShaders();
-
-		//Load 3D shaders
-		void load3DShaders();
-
-		GLuint getProgramID() { return programID; };
-		GLuint getLightID() { return LightID; };
-
 	private:
 		GLuint texture;
 		Textureloader* textureloader;
 
-		GLuint loadShaders(const std::string& _vertex_file_path, const std::string& _fragment_file_path);
-
-		GLuint programID;
-		GLuint LightID;
+		Shader* shader;
 };
 
 #endif /* MATERIAL_H */

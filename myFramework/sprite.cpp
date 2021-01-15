@@ -6,7 +6,7 @@ Sprite::Sprite(const std::string& _imagepath)
 	//Create a material
 	material = new Material();
 	material->loadTGA(_imagepath);
-	material->load2DShaders();
+	material->getShader()->load2DShaders();
 
 	// Our vertices. Tree consecutive floats give a 3D vertex; Three consecutive vertices give a triangle.
 	// A sprite has 1 face (quad) with 2 triangles each, so this makes 1*2=2 triangles, and 2*3 vertices

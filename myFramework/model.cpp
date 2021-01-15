@@ -6,7 +6,7 @@ Model::Model(const char* _path, const char* _imagepath)
 	//Create material
 	material = new Material();
 	material->loadDDS(_imagepath);
-	material->load3DShaders();
+	material->getShader()->load3DShaders();
 
 	//Create the mesh
 	mesh = new Mesh();
