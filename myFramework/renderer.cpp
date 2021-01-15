@@ -267,7 +267,7 @@ void Renderer::renderModel(Model* _model)
 	glVertexAttribPointer(vertexNormal_modelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 	// Draw the triangle !
-	glDrawArrays(GL_TRIANGLES, 0, _model->getVertices().size());
+	glDrawArrays(GL_TRIANGLES, 0, _model->getMesh()->getVertices().size());
 
 	glDisableVertexAttribArray(vertexPosition_modelspaceID);
 	glDisableVertexAttribArray(vertexUVID);
