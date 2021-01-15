@@ -12,6 +12,7 @@
 
 #include <GL/glew.h>
 #include <myFramework/entity.h>
+#include <myFramework/mesh.h>
 
 class Cube : public Entity
 {
@@ -19,13 +20,10 @@ class Cube : public Entity
         Cube(const char* _imagepath);
 		virtual ~Cube();
 
-		GLuint getVertexbuffer() { return vertexbuffer; };
-		GLuint getUvbuffer() { return uvbuffer; };
+		Mesh* getMesh() { return mesh; };
 
 	private:
-		GLuint vertexbuffer;
-		GLuint uvbuffer;
-		GLuint vertexArrayID;
+		Mesh* mesh;
 };
 
 #endif /* CUBE_H */

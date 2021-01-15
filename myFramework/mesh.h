@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <iostream>
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -20,7 +21,7 @@ class Mesh
 		virtual ~Mesh();
 
 		void loadObject(const char* _path);
-		void generateBuffers();
+		void generateBuffers(std::string _type);
 
 		GLuint getVertexbuffer() { return vertexbuffer; };
 		GLuint getUvbuffer() { return uvbuffer; };
@@ -35,9 +36,13 @@ class Mesh
 		GLuint uvbuffer;
 		GLuint normalbuffer;
 
+		GLuint vertexArrayID;
+
 		std::vector<glm::vec3> vertices;
 		std::vector<glm::vec2> uvs;
 		std::vector<glm::vec3> normals;
+
+		void createCubeData();
 };
 
 #endif /* MESH_H */

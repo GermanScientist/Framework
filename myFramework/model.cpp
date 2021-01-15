@@ -11,7 +11,7 @@ Model::Model(const char* _path, const char* _imagepath)
 	//Create the mesh
 	mesh = new Mesh();
 	mesh->loadObject(_path);
-	mesh->generateBuffers();
+	mesh->generateBuffers("OBJ");
 }
 
 //Destructor
