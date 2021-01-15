@@ -11,7 +11,7 @@
 #include <string>
 
 #include <GL/glew.h>
-#include <myFramework/Entity.h>
+#include <myFramework/entity.h>
 
 class Cube : public Entity
 {

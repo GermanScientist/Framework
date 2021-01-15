@@ -12,8 +12,10 @@
 #include <string>
 
 #include <GL/glew.h>
+
 #include <myFramework/objloader.h>
-#include <myFramework/Entity.h>
+#include <myFramework/entity.h>
+#include <myFramework/mesh.h>
 
 class Model : public Entity
 {
@@ -21,22 +23,18 @@ class Model : public Entity
 		Model(const char* _path, const char* _imagepath);
 		virtual ~Model();
 
-		GLuint getVertexbuffer() { return vertexbuffer; };
-		GLuint getUvbuffer() { return uvbuffer; };
-		GLuint getNormalbuffer() { return normalbuffer; };
-		
+		Mesh* getMesh() { return mesh; };
+
 		std::vector<glm::vec3> getVertices() { return vertices; };
 		std::vector<glm::vec2> getUvs() { return uvs; };
 		std::vector<glm::vec3> getNormals() { return normals; };
 
 	private:
-		GLuint vertexbuffer;
-		GLuint uvbuffer;
-		GLuint normalbuffer;
-
 		std::vector<glm::vec3> vertices;
 		std::vector<glm::vec2> uvs;
 		std::vector<glm::vec3> normals;
+
+		Mesh* mesh;
 };
 
 #endif /* MODEL_H */

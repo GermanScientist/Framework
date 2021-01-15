@@ -253,17 +253,17 @@ void Renderer::renderModel(Model* _model)
 
 	//1st attribute buffer : vertices
 	glEnableVertexAttribArray(vertexPosition_modelspaceID);
-	glBindBuffer(GL_ARRAY_BUFFER, _model->getVertexbuffer());
+	glBindBuffer(GL_ARRAY_BUFFER, _model->getMesh()->getVertexbuffer());
 	glVertexAttribPointer(vertexPosition_modelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 	//2nd attribute buffer : UVs
 	glEnableVertexAttribArray(vertexUVID);
-	glBindBuffer(GL_ARRAY_BUFFER, _model->getUvbuffer());
+	glBindBuffer(GL_ARRAY_BUFFER, _model->getMesh()->getUvbuffer());
 	glVertexAttribPointer(vertexUVID, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 	//3nd attribute buffer : Normals
 	glEnableVertexAttribArray(vertexNormal_modelspaceID);
-	glBindBuffer(GL_ARRAY_BUFFER, _model->getNormalbuffer());
+	glBindBuffer(GL_ARRAY_BUFFER, _model->getMesh()->getNormalbuffer());
 	glVertexAttribPointer(vertexNormal_modelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 	// Draw the triangle !
