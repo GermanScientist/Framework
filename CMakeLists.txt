@@ -89,6 +89,8 @@ add_library(myFramework # ar rcs libmyFramework.a
 	myFramework/entity.h
 	myFramework/mesh.cpp
 	myFramework/mesh.h
+	myFramework/shader.cpp
+	myFramework/shader.h
 )
 
 # Main
