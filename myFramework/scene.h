@@ -8,6 +8,7 @@
 #include <fstream>
 
 #include <GL/glew.h>
+#include <algorithm>
 #include <myFramework/entity.h>
 #include <myFramework/sprite.h>
 #include <myFramework/cube.h>
@@ -28,6 +29,7 @@ class Scene
         std::vector<Entity*> getEntities() { return entities; };
 
         void addEntity(Entity* _entity);
+        void removeEntity(Entity* _entity);
 
     private:
 

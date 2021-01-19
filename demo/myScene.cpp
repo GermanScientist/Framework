@@ -76,6 +76,15 @@ MyScene::~MyScene()
     delete cubeModel;
     delete ballModel;
     delete houseModel;
+
+    removeEntity(cube);
+    removeEntity(cubeModel);
+    removeEntity(ballModel);
+    removeEntity(houseModel);
+    removeEntity(uvTemplate);
+    removeEntity(cubeMap);
+    removeEntity(ballMap);
+    removeEntity(houseMap);
 }
 
 //Update function
