@@ -19,6 +19,8 @@ Entity::Entity()
 	rotation.x = 0.0f;
 	rotation.y = 0.0f;
 	rotation.z = 0.0f;
+
+	type = "";
 }
 
 //Destructor

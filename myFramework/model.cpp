@@ -3,6 +3,9 @@
 //Constructor
 Model::Model(const char* _path, const char* _imagepath)
 {
+	//Get the type of the entity
+	type = "Model";
+
 	//Create material
 	material = new Material();
 	material->loadDDS(_imagepath);

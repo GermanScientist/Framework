@@ -25,18 +25,16 @@ class Scene
 
         bool getIsRunning() { return isRunning; };
 
-        std::vector<Sprite*> getSprites() { return sprites; };
-        std::vector<Cube*> getCubes() { return cubes; };
-        std::vector<Model*> getModels() { return models; };
+        std::vector<Entity*> getEntities() { return entities; };
+
+        void addEntity(Entity* _entity);
 
     private:
 
         bool isRunning;
 
     protected:
-        std::vector<Sprite*> sprites;
-        std::vector<Cube*> cubes;
-        std::vector<Model*> models;
+        std::vector<Entity*> entities;
 };
 
 #endif /* SCENE_H */

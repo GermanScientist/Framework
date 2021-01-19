@@ -16,3 +16,8 @@ Scene::~Scene()
 void Scene::update(float _deltaTime) {
 
 }
+
+void Scene::addEntity(Entity* _entity)
+{
+    entities.push_back(_entity);
+}

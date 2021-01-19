@@ -46,6 +46,8 @@ class Entity
 
 		unsigned int getWidth() { return width; };
 		unsigned int getHeight() { return height; };
+		
+		std::string getType() { return type; };
 
 	private:
 		
@@ -54,6 +56,8 @@ class Entity
 
 		unsigned int width;
 		unsigned int height;
+
+		std::string type;
 };
 
 #endif /* ENTITY_H */
