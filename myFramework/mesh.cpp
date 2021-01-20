@@ -3,7 +3,11 @@
 //Constructor
 Mesh::Mesh()
 {
+	vertexbuffer = -1;
+	uvbuffer = -1;
+	normalbuffer = -1;
 
+	vertexArrayID = -1;
 }
 
 //Destructor

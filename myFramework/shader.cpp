@@ -3,7 +3,21 @@
 //Constructor
 Shader::Shader()
 {
+	programID = -1;
 
+	matrixID = -1;
+	viewMatrixID = -1;
+	modelMatrixID = -1;
+
+	vertexPositionID = -1;
+	vertexPositionModelspaceID = -1;
+	vertexUVID = -1;
+	vertexNormalModelspaceID = -1;
+
+	textureID = -1;
+	vertexUVID = -1;
+
+	lightID = -1;
 }
 
 //Destructor

@@ -3,6 +3,8 @@
 //Constructor
 Material::Material()
 {
+	texture = -1;
+
 	//Load shaders
 	shader = new Shader();
 
