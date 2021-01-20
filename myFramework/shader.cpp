@@ -19,6 +19,13 @@ void Shader::load2DShaders() {
 
 	//Use our shader
 	glUseProgram(programID);
+	
+	//Get a handle for our shader uniforms
+	matrixID = glGetUniformLocation(programID, "MVP");
+	textureID = glGetUniformLocation(programID, "textureSampler");
+
+	vertexPositionID = glGetAttribLocation(programID, "vertexPosition");
+	vertexUVID = glGetAttribLocation(programID, "vertexUV");
 }
 
 //Load 3D shoaders
@@ -28,8 +35,19 @@ void Shader::load3DShaders() {
 	//Use our shader
 	glUseProgram(programID);
 
-	//Get a handle for our "LightPosition" uniform
-	LightID = glGetUniformLocation(programID, "LightPosition_worldspace");
+	//Get a handle for our shader uniforms
+	matrixID = glGetUniformLocation(programID, "MVP");
+	viewMatrixID = glGetUniformLocation(programID, "V");
+	modelMatrixID = glGetUniformLocation(programID, "M");
+
+	vertexPositionModelspaceID = glGetAttribLocation(programID, "vertexPosition_modelspace");
+	vertexUVID = glGetAttribLocation(programID, "vertexUV");
+	vertexNormalModelspaceID = glGetAttribLocation(programID, "vertexNormal_modelspace");
+
+	textureID = glGetUniformLocation(programID, "myTextureSampler");
+	vertexUVID = glGetAttribLocation(programID, "vertexUV");
+
+	lightID = glGetUniformLocation(programID, "LightPosition_worldspace");
 }
 
 //Load shaders from file location

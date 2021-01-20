@@ -29,9 +29,9 @@ int Renderer::initialize()
 	}
 
     //Set the window hints
+	glfwWindowHint(GLFW_SAMPLES, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
-	glfwWindowHint(GLFW_SAMPLES, 4);
 
 	// Open a window and create its OpenGL context
 	window = glfwCreateWindow(windowWidth, windowHeight, "Demo", NULL, NULL);
@@ -116,7 +116,7 @@ void Renderer::renderSprite(Sprite* _sprite)
 	glm::mat4 MVP = projectionMatrix * viewMatrix * modelMatrix;
 
 	//Send our transformation to the currently bound shader, in the "MVP" uniform
-	GLuint matrixID = glGetUniformLocation(_sprite->getMaterial()->getShader()->getProgramID(), "MVP");
+	GLuint matrixID = _sprite->getMaterial()->getShader()->getMatrixID();
 	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
 
 	//Bind our texture in Texture Unit 0
@@ -125,17 +125,17 @@ void Renderer::renderSprite(Sprite* _sprite)
     glBindTexture(GL_TEXTURE_2D, _sprite->getMaterial()->getTexture());
 	
     //Set our "textureSampler" sampler to user Texture Unit 0
-	GLuint textureID  = glGetUniformLocation(_sprite->getMaterial()->getShader()->getProgramID(), "textureSampler");
+	GLuint textureID = _sprite->getMaterial()->getShader()->getTextureID();
 	glUniform1i(textureID, 0);
 
 	//1st attribute buffer : vertices
-	GLuint vertexPositionID = glGetAttribLocation(_sprite->getMaterial()->getShader()->getProgramID(), "vertexPosition");
+	GLuint vertexPositionID = _sprite->getMaterial()->getShader()->getVertexPositionID();
 	glEnableVertexAttribArray(vertexPositionID);
 	glBindBuffer(GL_ARRAY_BUFFER, _sprite->getVertexbuffer());
 	glVertexAttribPointer(vertexPositionID, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 	//2nd attribute buffer : UVs
-	GLuint vertexUVID = glGetAttribLocation(_sprite->getMaterial()->getShader()->getProgramID(), "vertexUV");
+	GLuint vertexUVID = _sprite->getMaterial()->getShader()->getVertexUVID();
 	glEnableVertexAttribArray(vertexUVID);
 	glBindBuffer(GL_ARRAY_BUFFER, _sprite->getUvbuffer());
 	glVertexAttribPointer(vertexUVID, 2, GL_FLOAT, GL_FALSE,  0, (void*)0);
@@ -164,14 +164,14 @@ void Renderer::renderCube(Cube* _cube)
 	glm::mat4 MVP = projectionMatrix * viewMatrix * modelMatrix;
 
 	//Send our transformation to the currently bound shader, in the "MVP" uniform
-	GLuint matrixID = glGetUniformLocation(_cube->getMaterial()->getShader()->getProgramID(), "MVP");
+	GLuint matrixID = _cube->getMaterial()->getShader()->getMatrixID();
 	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
 
 	//Bind our texture in Texture Unit 0
 	glActiveTexture(GL_TEXTURE0);
 
 	//Set our "textureSampler" sampler to user Texture Unit 0
-	GLuint textureID = glGetUniformLocation(_cube->getMaterial()->getShader()->getProgramID(), "textureSampler");
+	GLuint textureID = _cube->getMaterial()->getShader()->getTextureID();
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _cube->getMaterial()->getTexture());
 
@@ -211,14 +211,14 @@ void Renderer::renderModel(Model* _model)
 	glm::mat4 MVP = projectionMatrix * viewMatrix * modelMatrix;
 
 	//Get a handle for our "MVP" uniform
-	GLuint matrixID = glGetUniformLocation(_model->getMaterial()->getShader()->getProgramID(), "MVP");
-	GLuint viewMatrixID = glGetUniformLocation(_model->getMaterial()->getShader()->getProgramID(), "V");
-	GLuint modelMatrixID = glGetUniformLocation(_model->getMaterial()->getShader()->getProgramID(), "M");
+	GLuint matrixID = _model->getMaterial()->getShader()->getMatrixID();
+	GLuint viewMatrixID = _model->getMaterial()->getShader()->getViewMatrixID();
+	GLuint modelMatrixID = _model->getMaterial()->getShader()->getModelMatrixID();
 
 	//Get a handle for our buffers
-	GLuint vertexPosition_modelspaceID = glGetAttribLocation(_model->getMaterial()->getShader()->getProgramID(), "vertexPosition_modelspace");
-	GLuint vertexUVID = glGetAttribLocation(_model->getMaterial()->getShader()->getProgramID(), "vertexUV");
-	GLuint vertexNormal_modelspaceID = glGetAttribLocation(_model->getMaterial()->getShader()->getProgramID(), "vertexNormal_modelspace");
+	GLuint vertexPositionModelspaceID = _model->getMaterial()->getShader()->getVertexPositionModelspaceID();
+	GLuint vertexUVID = _model->getMaterial()->getShader()->getVertexUVID();
+	GLuint vertexNormalModelspaceID = _model->getMaterial()->getShader()->getVertexNormalModelspaceID();
 
 	//Send our transformation to the currently bound shader, in the "MVP" uniform
 	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
@@ -232,16 +232,16 @@ void Renderer::renderModel(Model* _model)
 	glActiveTexture(GL_TEXTURE0);
 
 	//Set our "textureSampler" sampler to user Texture Unit 0
-	GLuint textureID = glGetUniformLocation(_model->getMaterial()->getShader()->getProgramID(), "myTextureSampler");
+	GLuint textureID = _model->getMaterial()->getShader()->getTextureID();
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _model->getMaterial()->getTexture());
 
 	glUniform1i(textureID, 0);
 
 	//1st attribute buffer : vertices
-	glEnableVertexAttribArray(vertexPosition_modelspaceID);
+	glEnableVertexAttribArray(vertexPositionModelspaceID);
 	glBindBuffer(GL_ARRAY_BUFFER, _model->getMesh()->getVertexbuffer());
-	glVertexAttribPointer(vertexPosition_modelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	glVertexAttribPointer(vertexPositionModelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 	//2nd attribute buffer : UVs
 	glEnableVertexAttribArray(vertexUVID);
@@ -249,14 +249,14 @@ void Renderer::renderModel(Model* _model)
 	glVertexAttribPointer(vertexUVID, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 	//3nd attribute buffer : Normals
-	glEnableVertexAttribArray(vertexNormal_modelspaceID);
+	glEnableVertexAttribArray(vertexNormalModelspaceID);
 	glBindBuffer(GL_ARRAY_BUFFER, _model->getMesh()->getNormalbuffer());
-	glVertexAttribPointer(vertexNormal_modelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	glVertexAttribPointer(vertexNormalModelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 	// Draw the triangle !
 	glDrawArrays(GL_TRIANGLES, 0, _model->getMesh()->getVertices().size());
 
-	glDisableVertexAttribArray(vertexPosition_modelspaceID);
+	glDisableVertexAttribArray(vertexPositionModelspaceID);
 	glDisableVertexAttribArray(vertexUVID);
-	glDisableVertexAttribArray(vertexNormal_modelspaceID);
+	glDisableVertexAttribArray(vertexNormalModelspaceID);
 }
