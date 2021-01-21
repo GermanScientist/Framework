@@ -4,6 +4,7 @@
 #include <iostream>
 #include <cstdio>
 
+#include <string>
 #include <GL/glew.h>
 
 class Textureloader {
