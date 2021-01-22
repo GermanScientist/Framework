@@ -3,6 +3,8 @@
 //Constructor
 MyScene::MyScene()
 {
+    vector = new Vector3(-32, 10, 0);
+
     //Create cubes
     cube = new Cube("assets/cubetest/uvtemplate.DDS");
     cube->setPosition(-32.0f, 10.0f, 0.0f);
@@ -72,6 +74,8 @@ MyScene::~MyScene()
     delete cubeModel;
     delete ballModel;
     delete houseModel;
+
+    delete vector;
 
     removeEntity(cube);
     removeEntity(cubeModel);

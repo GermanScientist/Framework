@@ -91,7 +91,6 @@ add_library(myFramework # ar rcs libmyFramework.a
 	myFramework/mesh.h
 	myFramework/shader.cpp
 	myFramework/shader.h
-	myFramework/vector.cpp
 	myFramework/vector.h
 )
 

@@ -13,6 +13,7 @@
 #include <myFramework/cube.h>
 #include <myFramework/time.h>
 #include <myFramework/scene.h>
+#include <myFramework/vector.h>
 
 class MyScene : public Scene
 {
@@ -22,6 +23,8 @@ public:
 	void update(float _deltaTime);
 
 private:
+    Vector3* vector;
+
     Cube* cube;
     Model* cubeModel;
     Model* ballModel;
