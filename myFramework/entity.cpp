@@ -8,17 +8,9 @@ Entity::Entity()
 	height = 0;
 
 	//Assign properties
-	position.x = 0.0f;
-	position.y = 0.0f;
-	position.z = 0.0f;
-
-	scale.x = 1.0f;
-	scale.y = 1.0f;
-	scale.z = 1.0f;
-
-	rotation.x = 0.0f;
-	rotation.y = 0.0f;
-	rotation.z = 0.0f;
+	position = new Vector3(0, 0, 0);
+	scale = new Vector3(1, 1, 1);
+	rotation = new Vector3(0, 0, 0);
 
 	type = "";
 }
@@ -26,4 +18,7 @@ Entity::Entity()
 //Destructor
 Entity::~Entity()
 {
+	delete position;
+	delete scale;
+	delete rotation;
 }

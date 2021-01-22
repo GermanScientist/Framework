@@ -107,9 +107,9 @@ void Renderer::renderSprite(Sprite* _sprite)
 	glm::mat4 projectionMatrix = getProjectionMatrix();
 
 	//Build the Model matrix
-	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(_sprite->position.x, _sprite->position.y, _sprite->position.z));
-	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(_sprite->rotation.x, _sprite->rotation.y, _sprite->rotation.z);
-	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(_sprite->scale.x, _sprite->scale.y, _sprite->scale.z));
+	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(_sprite->position->x, _sprite->position->y, _sprite->position->z));
+	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(_sprite->rotation->x, _sprite->rotation->y, _sprite->rotation->z);
+	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(_sprite->scale->x, _sprite->scale->y, _sprite->scale->z));
 
 	glm::mat4 modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 
@@ -155,9 +155,9 @@ void Renderer::renderCube(Cube* _cube)
 	glm::mat4 projectionMatrix = getProjectionMatrix();
 
 	//Build the Model matrix
-	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(_cube->position.x, _cube->position.y, _cube->position.z));
-	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(_cube->rotation.x, _cube->rotation.y, _cube->rotation.z);
-	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(_cube->scale.x, _cube->scale.y, _cube->scale.z));
+	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(_cube->position->x, _cube->position->y, _cube->position->z));
+	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(_cube->rotation->x, _cube->rotation->y, _cube->rotation->z);
+	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(_cube->scale->x, _cube->scale->y, _cube->scale->z));
 
 	glm::mat4 modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 
@@ -202,9 +202,9 @@ void Renderer::renderModel(Model* _model)
 	glm::mat4 projectionMatrix = getProjectionMatrix();
 
 	//Build the Model matrix
-	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(_model->position.x, _model->position.y, _model->position.z));
-	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(_model->rotation.x, _model->rotation.y, _model->rotation.z);
-	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(_model->scale.x, _model->scale.y, _model->scale.z));
+	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(_model->position->x, _model->position->y, _model->position->z));
+	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(_model->rotation->x, _model->rotation->y, _model->rotation->z);
+	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(_model->scale->x, _model->scale->y, _model->scale->z));
 
 	glm::mat4 modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 
