@@ -19,6 +19,14 @@ class Vector_t
 		T y;
 		T z;
 
+		//Get directions
+		static Vector_t<T> getDown();
+		static Vector_t<T> getUp();
+		static Vector_t<T> getLeft();
+		static Vector_t<T> getRight();
+		static Vector_t<T> getForward();
+		static Vector_t<T> getBackward();
+
 		//Add another Vector to this Vector
 		Vector_t<T>& operator+=(const Vector_t<T>& _other);
 		Vector_t<T> operator+(const Vector_t<T>& _other) const;
@@ -108,6 +116,44 @@ template <class T>
 Vector_t<T>::~Vector_t()
 {
 
+}
+
+
+
+template<class T>
+Vector_t<T> Vector_t<T>::getDown()
+{
+	return Vector_t<T>(0, 1, 0);
+}
+
+template<class T>
+Vector_t<T> Vector_t<T>::getUp()
+{
+	return Vector_t<T>(0, -1, 0);
+}
+
+template<class T>
+Vector_t<T> Vector_t<T>::getLeft()
+{
+	return Vector_t<T>(-1, 0, 0);
+}
+
+template<class T>
+Vector_t<T> Vector_t<T>::getRight()
+{
+	return Vector_t<T>(1, 0, 0);
+}
+
+template<class T>
+Vector_t<T> Vector_t<T>::getForward()
+{
+	return Vector_t<T>(0, 0, -1);
+}
+
+template<class T>
+Vector_t<T> Vector_t<T>::getBackward()
+{
+	return Vector_t<T>(0, 0, 1);
 }
 
 //Add another Vector to this Vector

@@ -21,9 +21,9 @@ class Entity
 		Entity();
 		virtual ~Entity();
 
-		Vector* position;
-		Vector* scale;
-		Vector* rotation;
+		Vector position;
+		Vector scale;
+		Vector rotation;
 
 		Material* getMaterial() { return material; };
 
