@@ -27,6 +27,20 @@ class Vector_t
 		static Vector_t<T> getForward();
 		static Vector_t<T> getBackward();
 
+		//Set vector values
+		Vector_t<T> setVector(T _x, T _y, T _z);
+		
+		//Copy vector
+		Vector_t<T> copyVector();
+
+		//Get difference
+		float getDistance(Vector_t<T> _other);
+		static float getDistance(Vector_t<T> _a, Vector_t<T> _b);
+
+		//Get dot product
+		T getDot(Vector_t<T> _other);
+		static T getDot(Vector_t<T> _a, Vector_t<T> _b);
+
 		//Add another Vector to this Vector
 		Vector_t<T>& operator+=(const Vector_t<T>& _other);
 		Vector_t<T> operator+(const Vector_t<T>& _other) const;
@@ -119,41 +133,104 @@ Vector_t<T>::~Vector_t()
 }
 
 
-
+//Get down direction
 template<class T>
 Vector_t<T> Vector_t<T>::getDown()
 {
 	return Vector_t<T>(0, 1, 0);
 }
 
+//Get up direction
 template<class T>
 Vector_t<T> Vector_t<T>::getUp()
 {
 	return Vector_t<T>(0, -1, 0);
 }
 
+//Get left direction
 template<class T>
 Vector_t<T> Vector_t<T>::getLeft()
 {
 	return Vector_t<T>(-1, 0, 0);
 }
 
+//Get right direction
 template<class T>
 Vector_t<T> Vector_t<T>::getRight()
 {
 	return Vector_t<T>(1, 0, 0);
 }
 
+//Get forward direction
 template<class T>
 Vector_t<T> Vector_t<T>::getForward()
 {
 	return Vector_t<T>(0, 0, -1);
 }
 
+//Get backward direction
 template<class T>
 Vector_t<T> Vector_t<T>::getBackward()
 {
 	return Vector_t<T>(0, 0, 1);
+}
+
+//Set vector values
+template<class T>
+Vector_t<T> Vector_t<T>::setVector(T _x, T _y, T _z)
+{
+	this->x = _x;
+	this->y = _y;
+	this->z = _z;
+
+	return *this;
+}
+
+//Copy vector
+template<class T>
+Vector_t<T> Vector_t<T>::copyVector()
+{
+	return Vector_t<T>(this->x, this->y, this->z);
+}
+
+template<class T>
+float Vector_t<T>::getDistance(Vector_t<T> _other)
+{
+	float distX = this->x - _other.x;
+	float distY = this->y - _other.y;
+	float distZ = this->z - _other.z;
+
+	return sqrt((distX * distX) + (distY * distY) + (distZ * distZ));
+}
+
+template<class T>
+float Vector_t<T>::getDistance(Vector_t<T> _a, Vector_t<T> _b)
+{
+	float distX = _a.x - _b.x;
+	float distY = _a.y - _b.y;
+	float distZ = _a.z - _b.z;
+
+	return sqrt((distX * distX) + (distY * distY) + (distZ * distZ));
+}
+
+template<class T>
+T Vector_t<T>::getDot(Vector_t<T> _other)
+{
+	T a = (this->x * _other.x);
+	T b = (this->y * _other.y);
+	T c = (this->z * _other.z);
+
+	return a + b + c;
+}
+
+template<class T>
+T Vector_t<T>::getDot(Vector_t<T> _a, Vector_t<T> _b)
+{
+	T a = (_a.x * _b.x);
+	T b = (_a.y * _b.y);
+	T c = (_a.z * _b.z);
+
+	return a + b + c;
 }
 
 //Add another Vector to this Vector
