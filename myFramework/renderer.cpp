@@ -81,7 +81,7 @@ void Renderer::renderScene(Scene* _scene) {
 	std::vector<Entity*> entities = _scene->getEntities();
 
 	//Go through the list of sprites
-	for each (Entity* entity in entities)
+	for (Entity* entity : entities)
 	{
 		//And render the corresponding entity
 		if (entity->getType() == "Sprite")
