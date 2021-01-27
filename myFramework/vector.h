@@ -34,12 +34,40 @@ class Vector_t
 		Vector_t<T> copyVector();
 
 		//Get difference
-		float getDistance(Vector_t<T> _other);
-		static float getDistance(Vector_t<T> _a, Vector_t<T> _b);
+		T getDistance(Vector_t<T> _other);
+		static T getDistance(Vector_t<T> _a, Vector_t<T> _b);
 
 		//Get dot product
 		T getDot(Vector_t<T> _other);
 		static T getDot(Vector_t<T> _a, Vector_t<T> _b);
+
+		//Get Lerped value
+		Vector_t<T> lerp(Vector_t<T> _other, T _amount);
+		static Vector_t<T> lerp(Vector_t<T> _a, Vector_t<T> _b, T _amount);
+
+		//Get the magnitude
+		T getMagnitude();
+		static T getMagnitude(Vector_t<T> _other);
+
+		//Get the magnitude squared
+		T getMagnitudeSquared();
+		static T getMagnitudeSquared(Vector_t<T> _other);
+
+		//Normalize the vector
+		Vector_t<T> normalize();
+		static Vector_t<T> normalize(Vector_t<T> _other);
+
+		//Get the normalized vector
+		Vector_t<T> getNormalized();
+		static Vector_t<T> getNormalized(Vector_t<T> _other);
+
+		//Clamp the vector
+		Vector_t<T> clamp(T _min, T _max);
+		static Vector_t<T> clamp(Vector_t<T> _other, T _min, T _max);
+
+		//Get the clamp vector
+		Vector_t<T> getClamped(T _min, T _max);
+		static Vector_t<T> getClamped(Vector_t<T> _other, T _min, T _max);
 
 		//Add another Vector to this Vector
 		Vector_t<T>& operator+=(const Vector_t<T>& _other);
@@ -193,8 +221,9 @@ Vector_t<T> Vector_t<T>::copyVector()
 	return Vector_t<T>(this->x, this->y, this->z);
 }
 
+//Get distance between 2 vectors
 template<class T>
-float Vector_t<T>::getDistance(Vector_t<T> _other)
+T Vector_t<T>::getDistance(Vector_t<T> _other)
 {
 	float distX = this->x - _other.x;
 	float distY = this->y - _other.y;
@@ -204,7 +233,7 @@ float Vector_t<T>::getDistance(Vector_t<T> _other)
 }
 
 template<class T>
-float Vector_t<T>::getDistance(Vector_t<T> _a, Vector_t<T> _b)
+T Vector_t<T>::getDistance(Vector_t<T> _a, Vector_t<T> _b)
 {
 	float distX = _a.x - _b.x;
 	float distY = _a.y - _b.y;
@@ -213,6 +242,7 @@ float Vector_t<T>::getDistance(Vector_t<T> _a, Vector_t<T> _b)
 	return sqrt((distX * distX) + (distY * distY) + (distZ * distZ));
 }
 
+//Get the dot value between 2 vectors
 template<class T>
 T Vector_t<T>::getDot(Vector_t<T> _other)
 {
@@ -231,6 +261,153 @@ T Vector_t<T>::getDot(Vector_t<T> _a, Vector_t<T> _b)
 	T c = (_a.z * _b.z);
 
 	return a + b + c;
+}
+
+//Get lerped value
+template<class T>
+Vector_t<T> Vector_t<T>::lerp(Vector_t<T> _other, T _amount)
+{
+	this->x = (this->x + _other.x) * _amount;
+	this->y = (this->y + _other.y) * _amount;
+	this->z = (this->z + _other.z) * _amount;
+
+	return *this;
+}
+
+template<class T>
+Vector_t<T> Vector_t<T>::lerp(Vector_t<T> _a, Vector_t<T> _b, T _amount)
+{
+	T a = (_a.x + _b.x) * _amount;
+	T b = (_a.y + _b.y) * _amount;
+	T c = (_a.z + _b.z) * _amount;
+
+	return Vector_t<T>(a, b, c);
+}
+
+//Get the magnitude of the vector
+template<class T>
+T Vector_t<T>::getMagnitude()
+{
+	return sqrt((this->x * this->x) + (this->y * this->y) + (this->z * this->z));
+}
+
+template<class T>
+T Vector_t<T>::getMagnitude(Vector_t<T> _other)
+{
+	return sqrt((_other.x * _other.x) + (_other.y * _other.y) + (_other.z * _other.z));
+}
+
+//Get the magnitude squared
+template<class T>
+T Vector_t<T>::getMagnitudeSquared()
+{
+	return (this->x * this->x) + (this->y * this->y) + (this->z * this->z);
+}
+
+template<class T>
+T Vector_t<T>::getMagnitudeSquared(Vector_t<T> _other)
+{
+	return (_other.x * _other.x) + (_other.y * _other.y) + (_other.z * _other.z);
+}
+
+//Normalize the vector
+template<class T>
+Vector_t<T> Vector_t<T>::normalize()
+{
+	T magnitude = this->getMagnitude();
+	this->x /= magnitude;
+	this->y /= magnitude;
+	this->z /= magnitude;
+
+	return *this;
+}
+
+template<class T>
+Vector_t<T> Vector_t<T>::normalize(Vector_t<T> _other)
+{
+	T magnitude = _other.getMagnitude();
+	_other.x /= magnitude;
+	_other.y /= magnitude;
+	_other.z /= magnitude;
+
+	return _other;
+}
+
+//Get the normalized vector
+template<class T>
+Vector_t<T> Vector_t<T>::getNormalized()
+{
+	return Vector_t<T>(this->x/this->getMagnitude(), this->y/this->getMagnitude(), this->z/this->getMagnitude());
+}
+
+template<class T>
+Vector_t<T> Vector_t<T>::getNormalized(Vector_t<T> _other)
+{
+	return Vector_t<T>(_other.x / _other.getMagnitude(), _other.y / _other.getMagnitude(), _other.z / _other.getMagnitude());
+}
+
+//Clamp the vector
+template<class T>
+Vector_t<T> Vector_t<T>::clamp(T _min, T _max)
+{
+	if (this->x < _min) {this->x = _min;};
+	if (this->x > _max) {this->x = _max;};
+
+	if (this->y < _min) {this->y = _min;};
+	if (this->y > _max) {this->y = _max;};
+
+	if (this->z < _min) {this->z = _min;};
+	if (this->z > _max) {this->z = _max;};
+
+	return *this;
+}
+
+template<class T>
+Vector_t<T> Vector_t<T>::clamp(Vector_t<T> _other, T _min, T _max)
+{
+	if (_other.x < _min) {_other.x = _min;};
+	if (_other.x > _max) {_other.x = _max;};
+
+	if (_other.y < _min) {_other.y = _min;};
+	if (_other.y > _max) {_other.y = _max;};
+
+	if (_other.z < _min) {_other.z = _min;};
+	if (_other.z > _max) { _other.z = _max;};
+
+	return _other;
+}
+
+//Get the clamped the vector
+template<class T>
+Vector_t<T> Vector_t<T>::getClamped(T _min, T _max)
+{
+	Vector3 tempVector(this->x, this->y, this->z);
+	if (tempVector.x < _min) {tempVector.x = _min;};
+	if (tempVector.x > _max) {tempVector.x = _max;};
+
+	if (tempVector.y < _min) {tempVector.y = _min;};
+	if (tempVector.y > _max) {tempVector.y = _max;};
+
+	if (tempVector.z < _min) {tempVector.z = _min;};
+	if (tempVector.z > _max) {tempVector.z = _max;};
+
+	return tempVector;
+}
+
+template<class T>
+Vector_t<T> Vector_t<T>::getClamped(Vector_t<T> _other, T _min, T _max)
+{
+	Vector3 tempVector(_other.x, _other.y, _other.z);
+	if (tempVector.x < _min) {tempVector.x = _min;};
+	if (tempVector.x > _max) {tempVector.x = _max;};
+
+	if (tempVector.y < _min) {tempVector.y = _min;};
+	if (tempVector.y > _max) {tempVector.y = _max;};
+
+	if (tempVector.z < _min) {tempVector.z = _min;};
+	if (tempVector.z > _max) {tempVector.z = _max;};
+
+	return tempVector;
 }
 
 //Add another Vector to this Vector
