@@ -49,7 +49,7 @@ void Mesh::generateCubeBuffers() {
 
 	// Our vertices. Tree consecutive floats give a 3D vertex; Three consecutive vertices give a triangle.
 	// A cube has 6 faces with 2 triangles each, so this makes 6*2=12 triangles, and 12*3 vertices
-	static const GLfloat g_vertex_buffer_data[] = {
+	GLfloat g_vertex_buffer_data[] = {
 		-1.0f,-1.0f,-1.0f,
 		-1.0f,-1.0f, 1.0f,
 		-1.0f, 1.0f, 1.0f,
@@ -89,7 +89,7 @@ void Mesh::generateCubeBuffers() {
 	};
 
 	// Two UV coordinatesfor each vertex. They were created with Blender.
-	static const GLfloat g_uv_buffer_data[] = {
+	GLfloat g_uv_buffer_data[] = {
 		0.000059f, 1.0f - 0.000004f,
 		0.000103f, 1.0f - 0.336048f,
 		0.335973f, 1.0f - 0.335903f,
