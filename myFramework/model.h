@@ -15,6 +15,7 @@
 
 #include <myFramework/entity.h>
 #include <myFramework/mesh.h>
+#include <myFramework/objloader.h>
 
 class Model : public Entity
 {
@@ -22,10 +23,10 @@ class Model : public Entity
 		Model(const char* _path, const char* _imagepath);
 		virtual ~Model();
 
-		Mesh* getMesh() { return mesh; };
-
 	private:
-		Mesh* mesh;
+		std::vector<glm::vec3> vertices;
+		std::vector<glm::vec2> uvs;
+		std::vector<glm::vec3> normals;
 };
 
 #endif /* MODEL_H */

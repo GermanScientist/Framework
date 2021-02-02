@@ -13,8 +13,8 @@ Model::Model(const char* _path, const char* _imagepath)
 
 	//Create the mesh
 	mesh = new Mesh();
-	mesh->loadObject(_path);
-	mesh->generateBuffers("OBJ");
+	bool loaded = loadOBJ(_path, vertices, uvs, normals);
+	mesh->generateModelBuffers(vertices, uvs, normals);
 }
 
 //Destructor

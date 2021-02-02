@@ -131,13 +131,13 @@ void Renderer::renderSprite(Sprite* _sprite)
 	//1st attribute buffer : vertices
 	GLuint vertexPositionID = _sprite->getMaterial()->getShader()->getVertexPositionID();
 	glEnableVertexAttribArray(vertexPositionID);
-	glBindBuffer(GL_ARRAY_BUFFER, _sprite->getVertexbuffer());
+	glBindBuffer(GL_ARRAY_BUFFER, _sprite->getMesh()->getVertexbuffer());
 	glVertexAttribPointer(vertexPositionID, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 	//2nd attribute buffer : UVs
 	GLuint vertexUVID = _sprite->getMaterial()->getShader()->getVertexUVID();
 	glEnableVertexAttribArray(vertexUVID);
-	glBindBuffer(GL_ARRAY_BUFFER, _sprite->getUvbuffer());
+	glBindBuffer(GL_ARRAY_BUFFER, _sprite->getMesh()->getUvbuffer());
 	glVertexAttribPointer(vertexUVID, 2, GL_FLOAT, GL_FALSE,  0, (void*)0);
 
 	//Draw the triangles

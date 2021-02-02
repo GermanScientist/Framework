@@ -12,7 +12,7 @@ Cube::Cube(const char* _imagepath)
 	material->getShader()->load3DShaders();
 
 	mesh = new Mesh();
-	mesh->generateBuffers("Cube");
+	mesh->generateCubeBuffers();
 }
 
 //Destructor

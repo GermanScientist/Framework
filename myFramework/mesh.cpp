@@ -20,36 +20,28 @@ Mesh::~Mesh()
 }
 
 //Generate the buffers for the object
-void Mesh::generateBuffers(std::string _type) {
+void Mesh::generateModelBuffers(std::vector<glm::vec3>& _vertices, std::vector<glm::vec2>& _uvs, std::vector<glm::vec3>& _normals) {
+
+	this->vertices = _vertices;
+	this->uvs = _uvs;
+	this->normals = _normals;
 	
-	if (_type == "OBJ") {
-		//Generate buffers
-		glGenBuffers(1, &vertexbuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-		glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
+	//Generate buffers
+	glGenBuffers(1, &vertexbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), &vertices[0], GL_STATIC_DRAW);
 
-		glGenBuffers(1, &uvbuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-		glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
+	glGenBuffers(1, &uvbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+	glBufferData(GL_ARRAY_BUFFER, uvs.size() * sizeof(glm::vec2), &uvs[0], GL_STATIC_DRAW);
 
-		glGenBuffers(1, &normalbuffer);
-		glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
-		glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(glm::vec3), &normals[0], GL_STATIC_DRAW);
-	}
-	else if (_type == "Cube") {
-		
-		createCubeData();
-	}
-}
-
-//Load an object
-void Mesh::loadObject(const char* _path) {
-
-	bool loaded = loadOBJ(_path, vertices, uvs, normals);
+	glGenBuffers(1, &normalbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
+	glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(glm::vec3), &normals[0], GL_STATIC_DRAW);
 }
 
 //Create the cube's data
-void Mesh::createCubeData() {
+void Mesh::generateCubeBuffers() {
 	
 	//Generate and bind vertex arrays
 	glGenVertexArrays(1, &vertexArrayID);
@@ -134,6 +126,42 @@ void Mesh::createCubeData() {
 		0.667969f, 1.0f - 0.671889f,
 		1.000004f, 1.0f - 0.671847f,
 		0.667979f, 1.0f - 0.335851f
+	};
+
+	//Generate buffers
+	glGenBuffers(1, &vertexbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+
+	glGenBuffers(1, &uvbuffer);
+	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(g_uv_buffer_data), g_uv_buffer_data, GL_STATIC_DRAW);
+}
+
+//Create the sprite's data
+void Mesh::generateSpriteBuffers(Material* _material) {
+
+	// Our vertices. Tree consecutive floats give a 3D vertex; Three consecutive vertices give a triangle.
+	// A sprite has 1 face (quad) with 2 triangles each, so this makes 1*2=2 triangles, and 2*3 vertices
+	GLfloat g_vertex_buffer_data[18] = {
+		 0.5f * _material->getWidth(), -0.5f * _material->getHeight(), 0.0f,
+		-0.5f * _material->getWidth(), -0.5f * _material->getHeight(), 0.0f,
+		-0.5f * _material->getWidth(),  0.5f * _material->getHeight(), 0.0f,
+
+		-0.5f * _material->getWidth(),  0.5f * _material->getHeight(), 0.0f,
+		 0.5f * _material->getWidth(),  0.5f * _material->getHeight(), 0.0f,
+		 0.5f * _material->getWidth(), -0.5f * _material->getHeight(), 0.0f
+	};
+
+	// Two UV coordinates for each vertex.
+	GLfloat g_uv_buffer_data[12] = {
+		1.0f, 1.0f,
+		0.0f, 1.0f,
+		0.0f, 0.0f,
+
+		0.0f, 0.0f,
+		1.0f, 0.0f,
+		1.0f, 1.0f
 	};
 
 	//Generate buffers

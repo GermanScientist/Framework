@@ -12,7 +12,7 @@
 #include <GLFW/glfw3.h>
 #include <glm/glm.hpp>
 
-#include <myFramework/objloader.h>
+#include <myFramework/material.h>
 
 class Mesh
 {
@@ -20,8 +20,9 @@ class Mesh
 		Mesh();
 		virtual ~Mesh();
 
-		void loadObject(const char* _path);
-		void generateBuffers(std::string _type);
+		void generateModelBuffers(std::vector<glm::vec3>& _vertices, std::vector<glm::vec2>& _uvs, std::vector<glm::vec3>& _normals);
+		void generateCubeBuffers();
+		void generateSpriteBuffers(Material* _material);
 
 		GLuint getVertexbuffer() { return vertexbuffer; };
 		GLuint getUvbuffer() { return uvbuffer; };
@@ -41,8 +42,6 @@ class Mesh
 		std::vector<glm::vec3> vertices;
 		std::vector<glm::vec2> uvs;
 		std::vector<glm::vec3> normals;
-
-		void createCubeData();
 };
 
 #endif /* MESH_H */

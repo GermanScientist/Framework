@@ -13,6 +13,7 @@
 #include <glm/glm.hpp>
 
 #include <myFramework/material.h>
+#include <myFramework/mesh.h>
 #include <myFramework/vector.h>
 
 class Entity
@@ -26,6 +27,7 @@ class Entity
 		Vector rotation;
 
 		Material* getMaterial() { return material; };
+		Mesh* getMesh() { return mesh; };
 
 		unsigned int getWidth() { return width; };
 		unsigned int getHeight() { return height; };
@@ -36,6 +38,7 @@ class Entity
 		
 	protected:
 		Material* material;
+		Mesh* mesh;
 
 		unsigned int width;
 		unsigned int height;

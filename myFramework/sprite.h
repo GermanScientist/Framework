@@ -19,13 +19,8 @@ class Sprite : public Entity
 		Sprite(const std::string& _imagepath);
 		virtual ~Sprite();
 
-		GLuint getVertexbuffer() { return vertexbuffer; };
-		GLuint getUvbuffer() { return uvbuffer; };
-
 	private:
 
-		GLuint vertexbuffer;
-		GLuint uvbuffer;
 };
 
 #endif /* SPRITE_H */
