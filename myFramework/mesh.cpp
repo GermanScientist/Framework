@@ -22,9 +22,14 @@ Mesh::~Mesh()
 //Generate the buffers for the object
 void Mesh::generateBuffers(std::vector<glm::vec3>& _vertices, std::vector<glm::vec2>& _uvs, std::vector<glm::vec3>& _normals) {
 
+	//Assign lists/vectors
 	this->vertices = _vertices;
 	this->uvs = _uvs;
 	this->normals = _normals;
+
+	//Generate and bind vertex arrays
+	glGenVertexArrays(1, &vertexArrayID);
+	glBindVertexArray(vertexArrayID);
 	
 	//Generate buffers
 	glGenBuffers(1, &vertexbuffer);
@@ -43,6 +48,7 @@ void Mesh::generateBuffers(std::vector<glm::vec3>& _vertices, std::vector<glm::v
 //Generate the buffers for the object
 void Mesh::generateBuffers(std::vector<GLfloat>& _vertexBufferdata, std::vector<GLfloat>& _uvBufferdata) {
 
+	//Assign lists/vectors
 	this->vertexBufferdata = _vertexBufferdata;
 	this->uvBufferdata = _uvBufferdata;
 
