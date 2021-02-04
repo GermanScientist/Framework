@@ -20,7 +20,7 @@ Mesh::~Mesh()
 }
 
 //Generate the buffers for the object
-void Mesh::generateModelBuffers(std::vector<glm::vec3>& _vertices, std::vector<glm::vec2>& _uvs, std::vector<glm::vec3>& _normals) {
+void Mesh::generateBuffers(std::vector<glm::vec3>& _vertices, std::vector<glm::vec2>& _uvs, std::vector<glm::vec3>& _normals) {
 
 	this->vertices = _vertices;
 	this->uvs = _uvs;
@@ -40,28 +40,8 @@ void Mesh::generateModelBuffers(std::vector<glm::vec3>& _vertices, std::vector<g
 	glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(glm::vec3), &normals[0], GL_STATIC_DRAW);
 }
 
-//Create the cube's data
-void Mesh::generateCubeBuffers(std::vector<GLfloat>& _vertexBufferdata, std::vector<GLfloat>& _uvBufferdata) {
-	
-	this->vertexBufferdata = _vertexBufferdata;
-	this->uvBufferdata = _uvBufferdata;
-
-	//Generate and bind vertex arrays
-	glGenVertexArrays(1, &vertexArrayID);
-	glBindVertexArray(vertexArrayID);
-
-	//Generate buffers
-	glGenBuffers(1, &vertexbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-	glBufferData(GL_ARRAY_BUFFER, vertexBufferdata.size() * sizeof(GLfloat), &vertexBufferdata[0], GL_STATIC_DRAW);
-
-	glGenBuffers(1, &uvbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-	glBufferData(GL_ARRAY_BUFFER, uvBufferdata.size() * sizeof(GLfloat), &uvBufferdata[0], GL_STATIC_DRAW);
-}
-
-//Create the sprite's data
-void Mesh::generateSpriteBuffers(std::vector<GLfloat>& _vertexBufferdata, std::vector<GLfloat>& _uvBufferdata) {
+//Generate the buffers for the object
+void Mesh::generateBuffers(std::vector<GLfloat>& _vertexBufferdata, std::vector<GLfloat>& _uvBufferdata) {
 
 	this->vertexBufferdata = _vertexBufferdata;
 	this->uvBufferdata = _uvBufferdata;

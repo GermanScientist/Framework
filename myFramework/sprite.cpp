@@ -37,7 +37,7 @@ Sprite::Sprite(const std::string& _imagepath)
 	};
 
 	mesh = new Mesh();
-	mesh->generateSpriteBuffers(vertexBufferdata, uvBufferdata);
+	mesh->generateBuffers(vertexBufferdata, uvBufferdata);
 }
 
 //Destructor

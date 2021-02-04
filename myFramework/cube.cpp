@@ -95,7 +95,7 @@ Cube::Cube(const char* _imagepath)
 	};
 
 	mesh = new Mesh();
-	mesh->generateCubeBuffers(vertexBufferData, uvBufferData);
+	mesh->generateBuffers(vertexBufferData, uvBufferData);
 }
 
 //Destructor
