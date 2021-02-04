@@ -18,6 +18,7 @@
 
 #include <myFramework/model.h>
 #include <myFramework/sprite.h>
+#include <myFramework/cube.h>
 
 class Entity
 {
@@ -34,18 +35,19 @@ class Entity
 
 		Model* getModel() { return model; };
 		Sprite* getSprite() { return sprite; };
+		Cube* getCube() { return cube; };
 
 		unsigned int getWidth() { return width; };
 		unsigned int getHeight() { return height; };
-		
-		std::string getType() { return type; };
 
 		void addModel(const char* _path, const char* _imagepath);
 		void addSprite(const std::string& _imagepath);
+		void addCube(const char* _imagepath);
 
 	private:
 		Model* model;
 		Sprite* sprite;
+		Cube* cube;
 		
 	protected:
 		Material* material;
@@ -53,8 +55,6 @@ class Entity
 
 		unsigned int width;
 		unsigned int height;
-
-		std::string type;
 };
 
 #endif /* ENTITY_H */

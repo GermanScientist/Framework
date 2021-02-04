@@ -13,8 +13,8 @@
 
 #include <GL/glew.h>
 
-//#include <myFramework/entity.h>
 #include <myFramework/mesh.h>
+#include <myFramework/material.h>
 #include <myFramework/objloader.h>
 
 class Model

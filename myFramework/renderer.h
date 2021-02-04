@@ -28,7 +28,7 @@ class Renderer
 
 		void renderScene(Scene* _scene);
 		void renderSprite(Sprite* _sprite, glm::mat4 _modelMatrix);
-        void renderCube(Cube* _cube);
+        void renderCube(Cube* _cube, glm::mat4 _modelMatrix);
 		void renderModel(Model* _model, glm::mat4 _modelMatrix);
 		void renderEntity(Entity* _entity);
 

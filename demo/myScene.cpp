@@ -66,8 +66,14 @@ MyScene::MyScene()
     myCube->scale = Vector3(3.0f, 3.0f, 3.0f);
     myCube->rotation = Vector3(0.0f, 0.0f, 22.0f);
 
+    cubeExample = new CubeExample();
+    cubeExample->position = Vector3(-32.0f, 10.0f, 0.0f);
+    cubeExample->scale = Vector3(3.0f, 3.0f, 3.0f);
+    cubeExample->rotation = Vector3(0.0f, 0.0f, 22.0f);
+
     addEntity(myCube);
     addEntity(uvMap);
+    addEntity(cubeExample);
 }
 
 //Destructor
@@ -103,6 +109,9 @@ MyScene::~MyScene()
 
     removeEntity(myCube);
     delete myCube;
+
+    removeEntity(cubeExample);
+    delete cubeExample;
 }
 
 //Update function

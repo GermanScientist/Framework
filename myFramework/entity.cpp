@@ -12,10 +12,9 @@ Entity::Entity()
 	scale = Vector3(1, 1, 1);
 	rotation = Vector3(0, 0, 0);
 
-	type = "";
-
 	model = nullptr;
 	sprite = nullptr;
+	cube = nullptr;
 }
 
 //Destructor
@@ -43,4 +42,15 @@ void Entity::addSprite(const std::string& _imagepath)
 	}
 
 	sprite = new Sprite(_imagepath);
+}
+
+//Adds cube to entity
+void Entity::addCube(const char* _imagepath)
+{
+	if (cube != nullptr) {
+		delete cube;
+		cube = nullptr;
+	}
+
+	cube = new Cube(_imagepath);
 }

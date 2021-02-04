@@ -17,6 +17,7 @@
 
 #include "myCube.h"
 #include "uvMap.h"
+#include "cubeExample.h"
 
 class MyScene : public Scene
 {
@@ -32,6 +33,7 @@ private:
     //Model* houseModel;
     MyCube* myCube;
     UvMap* uvMap;
+    CubeExample* cubeExample;
 
     Sprite* uvTemplate;
     //Sprite* cubeMap;

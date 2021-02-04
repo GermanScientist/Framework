@@ -11,18 +11,20 @@
 #include <string>
 
 #include <GL/glew.h>
-#include <myFramework/entity.h>
 #include <myFramework/mesh.h>
+#include <myFramework/material.h>
 
-class Cube : public Entity
+class Cube
 {
 	public:
         Cube(const char* _imagepath);
 		virtual ~Cube();
 
 		Mesh* getMesh() { return mesh; };
+		Material* getMaterial() { return material; };
 
 	private:
+		Material* material;
 		Mesh* mesh;
 };
 

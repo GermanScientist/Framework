@@ -103,6 +103,8 @@ add_executable(main # g++ demo/main.cpp -o main
 	demo/myCube.h
 	demo/uvMap.cpp
 	demo/uvMap.h
+	demo/cubeExample.cpp
+	demo/cubeExample.h
 )
 target_link_libraries(main # g++ -lmyFramework
 	myFramework

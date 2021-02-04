@@ -3,9 +3,6 @@
 //Constructor
 Cube::Cube(const char* _imagepath)
 {
-	//Get the type of the entity
-	type = "Cube";
-
 	//Create material
 	material = new Material();
 	material->loadDDS(_imagepath);
