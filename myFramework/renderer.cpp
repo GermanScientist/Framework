@@ -84,8 +84,8 @@ void Renderer::renderScene(Scene* _scene) {
 	for (Entity* entity : entities)
 	{
 		//And render the corresponding entity
-		if (entity->getType() == "Sprite")
-			renderSprite((Sprite*)entity);
+		//if (entity->getType() == "Sprite")
+			//renderSprite((Sprite*)entity);
 
 		renderEntity(entity);
 
@@ -111,28 +111,32 @@ void Renderer::renderEntity(Entity* _entity) {
 
 	glm::mat4 modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 
-	// Check for Sprites to see if we need to render anything
+	//Check wheter we need to render any models
 	Model* model = _entity->getModel();
 
 	if (model != nullptr) {
-		// render the Sprite
+		//Render the Model
 		this->renderModel(model, modelMatrix);
+	}
+
+	//Check wheter we need to render any models
+	Sprite* sprite = _entity->getSprite();
+
+	if (sprite != nullptr) {
+		
+		//Render the Sprite
+		this->renderSprite(sprite, modelMatrix);
 	}
 }
 
 //Render a sprite
-void Renderer::renderSprite(Sprite* _sprite)
+void Renderer::renderSprite(Sprite* _sprite, glm::mat4 _modelMatrix)
 {
     //Get viewmatrix from Camera (Camera position and direction)
 	glm::mat4 viewMatrix = getViewMatrix(); 
 	glm::mat4 projectionMatrix = getProjectionMatrix();
 
-	//Build the Model matrix
-	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(_sprite->position.x, _sprite->position.y, _sprite->position.z));
-	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(_sprite->rotation.x, _sprite->rotation.y, _sprite->rotation.z);
-	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(_sprite->scale.x, _sprite->scale.y, _sprite->scale.z));
-
-	glm::mat4 modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
+	glm::mat4 modelMatrix = _modelMatrix;
 
 	glm::mat4 MVP = projectionMatrix * viewMatrix * modelMatrix;
 

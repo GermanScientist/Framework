@@ -11,16 +11,21 @@
 #include <string>
 
 #include <GL/glew.h>
-#include <myFramework/entity.h>
+#include <myFramework/mesh.h>
+#include <myFramework/material.h>
 
-class Sprite : public Entity
+class Sprite
 {
 	public:
 		Sprite(const std::string& _imagepath);
 		virtual ~Sprite();
 
-	private:
+		Material* getMaterial() { return material; };
+		Mesh* getMesh() { return mesh; }
 
+	private:
+		Material* material;
+		Mesh* mesh;
 };
 
 #endif /* SPRITE_H */

@@ -57,17 +57,17 @@ MyScene::MyScene()
     rotationSpeed = 300;
     */
 
-    uvTemplate = new Sprite("assets/cubetest/uvtemplate.tga");
-    uvTemplate->position = Vector3(-32.0f, -5.0f, 0.0f);
-    uvTemplate->scale = Vector3(0.025f, 0.025f, 1.0f);
+    uvMap = new UvMap();
+    uvMap->position = Vector3(-32.0f, -5.0f, 0.0f);
+    uvMap->scale = Vector3(0.025f, 0.025f, 1.0f);
 
     myCube = new MyCube();
     myCube->position = Vector3(-8.0f, 10.0f, 0.0f);
     myCube->scale = Vector3(3.0f, 3.0f, 3.0f);
     myCube->rotation = Vector3(0.0f, 0.0f, 22.0f);
 
-    addEntity(uvTemplate);
     addEntity(myCube);
+    addEntity(uvMap);
 }
 
 //Destructor
@@ -98,8 +98,8 @@ MyScene::~MyScene()
     removeEntity(houseMap);
     */
 
-    removeEntity(uvTemplate);
-    delete uvTemplate;
+    removeEntity(uvMap);
+    delete uvMap;
 
     removeEntity(myCube);
     delete myCube;

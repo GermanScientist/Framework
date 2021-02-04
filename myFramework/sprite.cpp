@@ -3,9 +3,6 @@
 //Constructor
 Sprite::Sprite(const std::string& _imagepath)
 {
-	//Get the type of the entity
-	type = "Sprite";
-
 	//Create a material
 	material = new Material();
 	material->loadTGA(_imagepath);

@@ -15,6 +15,7 @@ Entity::Entity()
 	type = "";
 
 	model = nullptr;
+	sprite = nullptr;
 }
 
 //Destructor
@@ -22,6 +23,7 @@ Entity::~Entity()
 {
 }
 
+//Adds model to entity
 void Entity::addModel(const char* _path, const char* _imagepath)
 {
 	if (model != nullptr) {
@@ -30,4 +32,15 @@ void Entity::addModel(const char* _path, const char* _imagepath)
 	}
 
 	model = new Model(_path, _imagepath);
+}
+
+//Adds model to entity
+void Entity::addSprite(const std::string& _imagepath)
+{
+	if (sprite != nullptr) {
+		delete sprite;
+		sprite = nullptr;
+	}
+
+	sprite = new Sprite(_imagepath);
 }

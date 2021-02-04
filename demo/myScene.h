@@ -16,6 +16,7 @@
 #include <myFramework/vector.h>
 
 #include "myCube.h"
+#include "uvMap.h"
 
 class MyScene : public Scene
 {
@@ -30,6 +31,7 @@ private:
     //Model* ballModel;
     //Model* houseModel;
     MyCube* myCube;
+    UvMap* uvMap;
 
     Sprite* uvTemplate;
     //Sprite* cubeMap;

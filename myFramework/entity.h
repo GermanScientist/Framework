@@ -17,6 +17,7 @@
 #include <myFramework/vector.h>
 
 #include <myFramework/model.h>
+#include <myFramework/sprite.h>
 
 class Entity
 {
@@ -32,6 +33,7 @@ class Entity
 		Mesh* getMesh() { return mesh; };
 
 		Model* getModel() { return model; };
+		Sprite* getSprite() { return sprite; };
 
 		unsigned int getWidth() { return width; };
 		unsigned int getHeight() { return height; };
@@ -39,9 +41,11 @@ class Entity
 		std::string getType() { return type; };
 
 		void addModel(const char* _path, const char* _imagepath);
+		void addSprite(const std::string& _imagepath);
 
 	private:
 		Model* model;
+		Sprite* sprite;
 		
 	protected:
 		Material* material;

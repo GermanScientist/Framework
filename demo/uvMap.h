@@ -1,5 +1,5 @@
-#ifndef MYCUBE_H
-#define MYCUBE_H
+#ifndef UVMAP_H
+#define UVMAP_H
 
 #include <cstdio>
 #include <cstdlib>
@@ -9,17 +9,18 @@
 
 #include <GL/glew.h>
 
+#include <myFramework/sprite.h>
 #include <myFramework/Entity.h>
 
-class MyCube : public Entity
+class UvMap : public Entity
 {
 public:
-    MyCube();
-	virtual ~MyCube();
+	UvMap();
+	virtual ~UvMap();
 	void update(float _deltaTime);
 
 private:
 
 };
 
-#endif /* MYCUBE_H */
+#endif /* UVMAP_H */
