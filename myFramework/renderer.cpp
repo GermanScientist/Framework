@@ -87,16 +87,37 @@ void Renderer::renderScene(Scene* _scene) {
 		if (entity->getType() == "Sprite")
 			renderSprite((Sprite*)entity);
 
-		if (entity->getType() == "Cube")
-			renderCube((Cube*)entity);
+		renderEntity(entity);
 
-		if (entity->getType() == "Model")
-			renderModel((Model*)entity);
+		//if (entity->getType() == "Cube")
+			//renderCube((Cube*)entity);
+
+		//if (entity->getType() == "Model")
+			//renderModel((Model*)entity);
 	}
 
 	// Swap buffers
 	glfwSwapBuffers(window);
 	glfwPollEvents();
+}
+
+//Render entity
+void Renderer::renderEntity(Entity* _entity) {
+
+	//Build the Model matrix
+	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(_entity->position.x, _entity->position.y, _entity->position.z));
+	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(_entity->rotation.x, _entity->rotation.y, _entity->rotation.z);
+	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(_entity->scale.x, _entity->scale.y, _entity->scale.z));
+
+	glm::mat4 modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
+
+	// Check for Sprites to see if we need to render anything
+	Model* model = _entity->getModel();
+
+	if (model != nullptr) {
+		// render the Sprite
+		this->renderModel(model, modelMatrix);
+	}
 }
 
 //Render a sprite
@@ -147,6 +168,7 @@ void Renderer::renderSprite(Sprite* _sprite)
 	glDisableVertexAttribArray(vertexUVID);
 }
 
+/*
 //Render a cube
 void Renderer::renderCube(Cube* _cube)
 {
@@ -193,20 +215,16 @@ void Renderer::renderCube(Cube* _cube)
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
 }
+*/
 
 //Render a model
-void Renderer::renderModel(Model* _model)
+void Renderer::renderModel(Model* _model, glm::mat4 _modelMatrix)
 {
 	//Get viewmatrix from Camera (Camera position and direction)
 	glm::mat4 viewMatrix = getViewMatrix();
 	glm::mat4 projectionMatrix = getProjectionMatrix();
 
-	//Build the Model matrix
-	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(_model->position.x, _model->position.y, _model->position.z));
-	glm::mat4 rotationMatrix = glm::eulerAngleYXZ(_model->rotation.x, _model->rotation.y, _model->rotation.z);
-	glm::mat4 scalingMatrix = glm::scale(glm::mat4(1.0f), glm::vec3(_model->scale.x, _model->scale.y, _model->scale.z));
-
-	glm::mat4 modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
+	glm::mat4 modelMatrix = _modelMatrix;
 
 	glm::mat4 MVP = projectionMatrix * viewMatrix * modelMatrix;
 

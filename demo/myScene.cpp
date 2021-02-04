@@ -3,6 +3,7 @@
 //Constructor
 MyScene::MyScene()
 {
+    /*
     //Create cubes
     cube = new Cube("assets/cubetest/uvtemplate.DDS");
     cube->position = Vector3(-32.0f, 10.0f, 0.0f);
@@ -54,11 +55,25 @@ MyScene::MyScene()
 
     //Properties
     rotationSpeed = 300;
+    */
+
+    uvTemplate = new Sprite("assets/cubetest/uvtemplate.tga");
+    uvTemplate->position = Vector3(-32.0f, -5.0f, 0.0f);
+    uvTemplate->scale = Vector3(0.025f, 0.025f, 1.0f);
+
+    myCube = new MyCube();
+    myCube->position = Vector3(-8.0f, 10.0f, 0.0f);
+    myCube->scale = Vector3(3.0f, 3.0f, 3.0f);
+    myCube->rotation = Vector3(0.0f, 0.0f, 22.0f);
+
+    addEntity(uvTemplate);
+    addEntity(myCube);
 }
 
 //Destructor
 MyScene::~MyScene()
 {
+    /*
     //Delete sprites
     delete uvTemplate;
     delete cubeMap;
@@ -81,14 +96,23 @@ MyScene::~MyScene()
     removeEntity(cubeMap);
     removeEntity(ballMap);
     removeEntity(houseMap);
+    */
+
+    removeEntity(uvTemplate);
+    delete uvTemplate;
+
+    removeEntity(myCube);
+    delete myCube;
 }
 
 //Update function
 void MyScene::update(float _deltaTime) {
     
+    /*
     //Rotate models
     cube->rotation.x += rotationSpeed * _deltaTime;
     cubeModel->rotation.x += rotationSpeed * _deltaTime;
     ballModel->rotation.x += rotationSpeed * _deltaTime;
     houseModel->rotation.x += rotationSpeed * _deltaTime;
+    */
 }

@@ -15,6 +15,8 @@
 #include <myFramework/scene.h>
 #include <myFramework/vector.h>
 
+#include "myCube.h"
+
 class MyScene : public Scene
 {
 public:
@@ -23,17 +25,20 @@ public:
 	void update(float _deltaTime);
 
 private:
-    Cube* cube;
-    Model* cubeModel;
-    Model* ballModel;
-    Model* houseModel;
+    //Cube* cube;
+    //Model* cubeModel;
+    //Model* ballModel;
+    //Model* houseModel;
+    MyCube* myCube;
 
     Sprite* uvTemplate;
-    Sprite* cubeMap;
-    Sprite* ballMap;
-    Sprite* houseMap;
+    //Sprite* cubeMap;
+    //Sprite* ballMap;
+    //Sprite* houseMap;
 
-    float rotationSpeed;
+    //float rotationSpeed;
+
+
 };
 
 #endif /* MYSCENE_H */

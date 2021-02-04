@@ -16,6 +16,8 @@
 #include <myFramework/mesh.h>
 #include <myFramework/vector.h>
 
+#include <myFramework/model.h>
+
 class Entity
 {
 	public:
@@ -29,12 +31,17 @@ class Entity
 		Material* getMaterial() { return material; };
 		Mesh* getMesh() { return mesh; };
 
+		Model* getModel() { return model; };
+
 		unsigned int getWidth() { return width; };
 		unsigned int getHeight() { return height; };
 		
 		std::string getType() { return type; };
 
+		void addModel(const char* _path, const char* _imagepath);
+
 	private:
+		Model* model;
 		
 	protected:
 		Material* material;

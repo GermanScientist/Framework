@@ -13,20 +13,26 @@
 
 #include <GL/glew.h>
 
-#include <myFramework/entity.h>
+//#include <myFramework/entity.h>
 #include <myFramework/mesh.h>
 #include <myFramework/objloader.h>
 
-class Model : public Entity
+class Model
 {
 	public:
 		Model(const char* _path, const char* _imagepath);
 		virtual ~Model();
 
+		Material* getMaterial() { return material; };
+		Mesh* getMesh() { return mesh; };
+
 	private:
 		std::vector<glm::vec3> vertices;
 		std::vector<glm::vec2> uvs;
 		std::vector<glm::vec3> normals;
+
+		Material* material;
+		Mesh* mesh;
 };
 
 #endif /* MODEL_H */
