@@ -83,17 +83,7 @@ void Renderer::renderScene(Scene* _scene) {
 	//Go through the list of sprites
 	for (Entity* entity : entities)
 	{
-		//And render the corresponding entity
-		//if (entity->getType() == "Sprite")
-			//renderSprite((Sprite*)entity);
-
 		renderEntity(entity);
-
-		//if (entity->getType() == "Cube")
-			//renderCube((Cube*)entity);
-
-		//if (entity->getType() == "Model")
-			//renderModel((Model*)entity);
 	}
 
 	// Swap buffers
