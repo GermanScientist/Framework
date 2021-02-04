@@ -22,7 +22,7 @@ class Mesh
 
 		void generateModelBuffers(std::vector<glm::vec3>& _vertices, std::vector<glm::vec2>& _uvs, std::vector<glm::vec3>& _normals);
 		void generateCubeBuffers();
-		void generateSpriteBuffers(Material* _material);
+		void generateSpriteBuffers(Material* _material, std::vector<GLfloat>& _vertices, std::vector<GLfloat>& _uvs);
 
 		GLuint getVertexbuffer() { return vertexbuffer; };
 		GLuint getUvbuffer() { return uvbuffer; };
@@ -42,6 +42,9 @@ class Mesh
 		std::vector<glm::vec3> vertices;
 		std::vector<glm::vec2> uvs;
 		std::vector<glm::vec3> normals;
+
+		std::vector<GLfloat> vertexBufferdata;
+		std::vector<GLfloat> uvBufferdata;
 };
 
 #endif /* MESH_H */
