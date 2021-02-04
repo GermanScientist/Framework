@@ -61,7 +61,7 @@ void Mesh::generateCubeBuffers(std::vector<GLfloat>& _vertexBufferdata, std::vec
 }
 
 //Create the sprite's data
-void Mesh::generateSpriteBuffers(Material* _material, std::vector<GLfloat>& _vertexBufferdata, std::vector<GLfloat>& _uvBufferdata) {
+void Mesh::generateSpriteBuffers(std::vector<GLfloat>& _vertexBufferdata, std::vector<GLfloat>& _uvBufferdata) {
 
 	this->vertexBufferdata = _vertexBufferdata;
 	this->uvBufferdata = _uvBufferdata;
