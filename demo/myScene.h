@@ -11,7 +11,6 @@
 
 #include <myFramework/sprite.h>
 #include <myFramework/cube.h>
-#include <myFramework/time.h>
 #include <myFramework/scene.h>
 #include <myFramework/vector.h>
 

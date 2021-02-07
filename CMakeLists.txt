@@ -81,8 +81,6 @@ add_library(myFramework # ar rcs libmyFramework.a
 	myFramework/model.cpp
 	myFramework/runner.h
 	myFramework/runner.cpp
-	myFramework/time.h
-	myFramework/time.cpp
 	myFramework/scene.cpp
 	myFramework/scene.h
 	myFramework/entity.cpp
