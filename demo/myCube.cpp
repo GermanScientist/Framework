@@ -15,4 +15,6 @@ MyCube::~MyCube()
 //Update function
 void MyCube::update(float _deltaTime) {
     
+    //Rotate this object
+    rotation.x += 300 * _deltaTime;
 }

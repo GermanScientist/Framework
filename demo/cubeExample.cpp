@@ -15,4 +15,6 @@ CubeExample::~CubeExample()
 //Update function
 void CubeExample::update(float _deltaTime) {
     
+    //Rotate this object
+    rotation.x += 300 * _deltaTime;
 }

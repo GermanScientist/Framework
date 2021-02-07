@@ -15,4 +15,6 @@ MyHouse::~MyHouse()
 //Update function
 void MyHouse::update(float _deltaTime) {
     
+    //Rotate this object
+    rotation.x += 300 * _deltaTime;
 }

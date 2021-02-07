@@ -15,4 +15,6 @@ MyBall::~MyBall()
 //Update function
 void MyBall::update(float _deltaTime) {
     
+    //Rotate this object
+    rotation.x += 300 * _deltaTime;
 }

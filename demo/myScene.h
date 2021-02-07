@@ -44,8 +44,6 @@ private:
     CubeMap* cubeMap;
     BallMap* ballMap;
     HouseMap* houseMap;
-
-    float rotationSpeed;
 };
 
 #endif /* MYSCENE_H */

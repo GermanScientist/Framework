@@ -54,8 +54,6 @@ MyScene::MyScene()
     houseMap->position = Vector3(28.0f, -5.0f, 0.0f);
     houseMap->scale = Vector3(0.01f, 0.01f, 1.0f);
     addEntity(houseMap);
-
-    rotationSpeed = 300;
 }
 
 //Destructor
@@ -96,10 +94,10 @@ MyScene::~MyScene()
 
 //Update function
 void MyScene::update(float _deltaTime) {
-    
-    //Rotate models
-    cubeExample->rotation.x += rotationSpeed * _deltaTime;
-    myCube->rotation.x += rotationSpeed * _deltaTime;
-    myBall->rotation.x += rotationSpeed * _deltaTime;
-    myHouse->rotation.x += rotationSpeed * _deltaTime;
+
+    //Update all objects
+    cubeExample->update(_deltaTime);
+    myCube->update(_deltaTime);
+    myBall->update(_deltaTime);
+    myHouse->update(_deltaTime);
 }
