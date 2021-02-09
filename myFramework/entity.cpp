@@ -22,6 +22,36 @@ Entity::~Entity()
 {
 }
 
+//Add child
+void Entity::addChild(Entity* _child)
+{
+	//Set this class as the parent
+	_child->parent = this;
+
+	//Add the child to the list of children
+	this->children.push_back(_child);
+}
+
+//Remove child
+void Entity::removeChild(Entity* _child)
+{
+	//The iterator iterates through the list of children
+	std::vector<Entity*>::iterator iterator = std::find(children.begin(), children.end(), _child);
+
+	//If the iterator finds _child
+	if (iterator != children.cend()) {
+
+		//Store the index
+		int index = std::distance(children.begin(), iterator);
+
+		//Set the child's parent to null
+		_child->parent = nullptr;
+
+		//Erase the child from the list of children
+		children.erase(children.begin() + index);
+	}
+}
+
 //Adds model to entity
 void Entity::addModel(const char* _path, const char* _imagepath)
 {

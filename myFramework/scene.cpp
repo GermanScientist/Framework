@@ -20,19 +20,3 @@ Scene::~Scene()
 void Scene::update(float _deltaTime) {
 
 }
-
-void Scene::addEntity(Entity* _entity)
-{
-    entities.push_back(_entity);
-}
-
-void Scene::removeEntity(Entity* _entity) {
-    
-    std::vector<Entity*>::iterator iterator = std::find(entities.begin(), entities.end(), _entity);
-
-    if (iterator != entities.cend()) {
-        int index = std::distance(entities.begin(), iterator);
-
-        entities.erase(entities.begin() + index);
-    }
-}

@@ -40,11 +40,20 @@ class Entity
 		unsigned int getWidth() { return width; };
 		unsigned int getHeight() { return height; };
 
+		void addChild(Entity* _child);
+		void removeChild(Entity* _child);
+
 		void addModel(const char* _path, const char* _imagepath);
 		void addSprite(const std::string& _imagepath);
 		void addCube(const char* _imagepath);
 
+		std::vector<Entity*> getChildren() { return children; };
+
 	private:
+
+		Entity* parent;
+		std::vector<Entity*> children;
+
 		Model* model;
 		Sprite* sprite;
 		Cube* cube;

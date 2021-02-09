@@ -80,14 +80,8 @@ void Renderer::renderScene(Scene* _scene) {
 	viewMatrix = _scene->getCamera()->getViewMatrix();
 	projectionMatrix = _scene->getCamera()->getProjectionMatrix();
 
-	//Get all the sprites in the scene
-	std::vector<Entity*> entities = _scene->getEntities();
-
-	//Go through the list of sprites
-	for (Entity* entity : entities)
-	{
-		renderEntity(entity);
-	}
+	//Render the scene
+	renderEntity(_scene);
 
 	// Swap buffers
 	glfwSwapBuffers(window);
@@ -128,6 +122,14 @@ void Renderer::renderEntity(Entity* _entity) {
 
 		//Render the Sprite
 		this->renderCube(cube, modelMatrix);
+	}
+
+	//Render all children of this entity
+	std::vector<Entity*> children = _entity->getChildren();
+	
+	for(Entity* c : children)
+	{
+		this->renderEntity(c);
 	}
 }
 

@@ -16,7 +16,7 @@
 
 #include <myFramework/camera.h>
 
-class Scene
+class Scene : public Entity
 {
     public:
 	    Scene();
@@ -28,20 +28,12 @@ class Scene
 
         bool getIsRunning() { return isRunning; };
 
-        std::vector<Entity*> getEntities() { return entities; };
-
-        void addEntity(Entity* _entity);
-        void removeEntity(Entity* _entity);
-
         Camera* getCamera() { return camera;; };
 
     private:
 
         bool isRunning;
         Camera* camera;
-
-    protected:
-        std::vector<Entity*> entities;
 };
 
 #endif /* SCENE_H */
