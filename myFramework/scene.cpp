@@ -17,6 +17,16 @@ Scene::~Scene()
 }
 
 //Update function
-void Scene::update(float _deltaTime) {
+void Scene::updateEntity(Entity* _entity, float _deltaTime) {
 
+	// call update() for this entity
+	_entity->update(_deltaTime);
+
+	//Render all children of this entity
+	std::vector<Entity*> children = _entity->getChildren();
+
+	for (Entity* c : children)
+	{
+		this->updateEntity(c, _deltaTime);
+	}
 }

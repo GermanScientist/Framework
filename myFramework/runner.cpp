@@ -19,7 +19,7 @@ void Runner::run(Scene* _scene) {
     _scene->getCamera()->computeMatricesFromInputs(renderer->getWindow(), renderer->getWidth(), renderer->getHeight(), getDeltaTime());
 
     //Update the scene
-    _scene->update(getDeltaTime());
+    _scene->updateEntity(_scene, getDeltaTime());
 
     //Render the scene
     renderer->renderScene(_scene);

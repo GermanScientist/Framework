@@ -21,7 +21,7 @@ class Scene : public Entity
     public:
 	    Scene();
 	    virtual ~Scene();
-	    void update(float _deltaTime);
+	    void updateEntity(Entity* _entity, float _deltaTime);
 
         void run() { isRunning = true; };
         void exit() { isRunning = false; };

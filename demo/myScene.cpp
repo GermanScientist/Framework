@@ -95,9 +95,4 @@ MyScene::~MyScene()
 //Update function
 void MyScene::update(float _deltaTime) {
 
-    //Update all objects
-    cubeExample->update(_deltaTime);
-    myCube->update(_deltaTime);
-    myBall->update(_deltaTime);
-    myHouse->update(_deltaTime);
 }

@@ -49,6 +49,8 @@ class Entity
 
 		std::vector<Entity*> getChildren() { return children; };
 
+		virtual void update(float deltaTime) = 0;
+
 	private:
 
 		Entity* parent;
