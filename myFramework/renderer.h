@@ -19,6 +19,7 @@
 #include <myFramework/cube.h>
 #include <myFramework/model.h>
 #include <myFramework/scene.h>
+#include <myFramework/camera.h>
 
 class Renderer
 {
@@ -26,7 +27,7 @@ class Renderer
 		Renderer(unsigned int _width, unsigned int _height);
 		virtual ~Renderer();
 
-		void renderScene(Scene* _scene);
+		void renderScene(Scene* _scene, Camera* _camera);
 		void renderSprite(Sprite* _sprite, glm::mat4 _modelMatrix);
         void renderCube(Cube* _cube, glm::mat4 _modelMatrix);
 		void renderModel(Model* _model, glm::mat4 _modelMatrix);

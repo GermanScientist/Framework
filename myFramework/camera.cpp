@@ -1,36 +1,31 @@
 #include <myFramework/camera.h>
 
-//Gets the view matrix
-glm::mat4 viewMatrix;
-glm::mat4 getViewMatrix(){
-	return viewMatrix;
+Camera::Camera()
+{
+	// Initial position : on +Z
+	offset = glm::vec3(0, 0, -45);
+	position = glm::vec3(0, 0, 0) + offset;
+
+	//Initial horizontal angle : toward -Z
+	initialHorizontalAngle = 2.733f;
+	horizontalAngle = initialHorizontalAngle;
+
+	//Initial vertical angle : none
+	verticalAngle = 1.485f;
+
+	//Initial Field of View
+	initialFoV = 60.0f;
+
+	speed = 50.0f;
+	mouseSpeed = 0.0035f;
 }
 
-//Gets the projection matrix
-glm::mat4 projectionMatrix;
-glm::mat4 getProjectionMatrix() {
-	return projectionMatrix;
+Camera::~Camera()
+{
 }
-
-// Initial position : on +Z
-glm::vec3 offset = glm::vec3(0, 0, -45);
-glm::vec3 position = glm::vec3(0, 0, 0) + offset;
-
-// Initial horizontal angle : toward -Z
-float initialHorizontalAngle = 2.733f;
-float horizontalAngle = initialHorizontalAngle;
-
-// Initial vertical angle : none
-float verticalAngle = 1.485f;
-
-// Initial Field of View
-float initialFoV = 60.0f;
-
-float speed = 50.0f;
-float mouseSpeed = 0.0035f;
 
 //Control camera using keyboard input
-void computeMatricesFromInputs(GLFWwindow* _window, unsigned int _width, unsigned int _height, float _deltaTime)
+void Camera::computeMatricesFromInputs(GLFWwindow* _window, unsigned int _width, unsigned int _height, float _deltaTime)
 {
 	//Get mouse position
 	double xpos, ypos;

@@ -4,25 +4,27 @@
 Runner::Runner()
 {
     renderer = new Renderer(1920, 1080);
+    camera = new Camera();
 }
 
 //Destructor
 Runner::~Runner()
 {
     delete renderer;
+    delete camera;
 }
 
 //Run the scene
 void Runner::run(Scene* _scene) {
     
     //Compute the ViewMatrix from keyboard and mouse input (see: camera.h/cpp)
-    computeMatricesFromInputs(renderer->getWindow(), renderer->getWidth(), renderer->getHeight(), getDeltaTime());
+    camera->computeMatricesFromInputs(renderer->getWindow(), renderer->getWidth(), renderer->getHeight(), getDeltaTime());
 
     //Update the scene
     _scene->update(getDeltaTime());
 
     //Render the scene
-    renderer->renderScene(_scene);
+    renderer->renderScene(_scene, camera);
 
     if (glfwWindowShouldClose(renderer->getWindow()) == 1 || glfwGetKey(renderer->getWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS) {
         _scene->exit();

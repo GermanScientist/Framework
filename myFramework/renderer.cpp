@@ -1,4 +1,3 @@
-#include <myFramework/camera.h>
 #include <myFramework/renderer.h>
 
 //Constructor
@@ -72,14 +71,14 @@ int Renderer::initialize()
 }
 
 //Render the scene
-void Renderer::renderScene(Scene* _scene) {
+void Renderer::renderScene(Scene* _scene, Camera* _camera) {
 
 	//Clear the screen
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//Get viewmatrix from Camera (Camera position and direction)
-	viewMatrix = getViewMatrix();
-	projectionMatrix = getProjectionMatrix();
+	viewMatrix = _camera->getViewMatrix();
+	projectionMatrix = _camera->getProjectionMatrix();
 
 	//Get all the sprites in the scene
 	std::vector<Entity*> entities = _scene->getEntities();

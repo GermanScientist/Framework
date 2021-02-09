@@ -28,6 +28,7 @@ class Runner
 
 	private:
 		Renderer* renderer;
+		Camera* camera;
 };
 
 #endif /* RUNNER_H */

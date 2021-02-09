@@ -9,10 +9,33 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp> // glm::lookAt()
 
-#include <myFramework/runner.h>
+class Camera {
+    public:
+        Camera();
+        virtual ~Camera();
 
-void computeMatricesFromInputs(GLFWwindow* _window, unsigned int _width, unsigned int _height, float _deltaTime);
-glm::mat4 getViewMatrix();
-glm::mat4 getProjectionMatrix();
+        glm::mat4 getViewMatrix() { return viewMatrix; }
+        glm::mat4 getProjectionMatrix() { return projectionMatrix; }
+
+        void computeMatricesFromInputs(GLFWwindow* _window, unsigned int _width, unsigned int _height, float _deltaTime);
+
+    private:
+
+        glm::mat4 viewMatrix;
+        glm::mat4 projectionMatrix;
+
+        glm::vec3 offset;
+        glm::vec3 position;
+
+        float initialHorizontalAngle;
+        float horizontalAngle;
+
+        float verticalAngle;
+
+        float initialFoV;
+
+        float speed;
+        float mouseSpeed;
+};
 
 #endif
