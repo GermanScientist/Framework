@@ -14,6 +14,8 @@
 #include <myFramework/cube.h>
 #include <myFramework/model.h>
 
+#include <myFramework/camera.h>
+
 class Scene
 {
     public:
@@ -31,9 +33,12 @@ class Scene
         void addEntity(Entity* _entity);
         void removeEntity(Entity* _entity);
 
+        Camera* getCamera() { return camera;; };
+
     private:
 
         bool isRunning;
+        Camera* camera;
 
     protected:
         std::vector<Entity*> entities;

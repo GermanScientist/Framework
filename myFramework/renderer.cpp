@@ -71,14 +71,14 @@ int Renderer::initialize()
 }
 
 //Render the scene
-void Renderer::renderScene(Scene* _scene, Camera* _camera) {
+void Renderer::renderScene(Scene* _scene) {
 
 	//Clear the screen
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//Get viewmatrix from Camera (Camera position and direction)
-	viewMatrix = _camera->getViewMatrix();
-	projectionMatrix = _camera->getProjectionMatrix();
+	viewMatrix = _scene->getCamera()->getViewMatrix();
+	projectionMatrix = _scene->getCamera()->getProjectionMatrix();
 
 	//Get all the sprites in the scene
 	std::vector<Entity*> entities = _scene->getEntities();

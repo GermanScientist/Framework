@@ -3,6 +3,9 @@
 //Constructor
 Scene::Scene()
 {
+    //Initializes camera
+    camera = new Camera();
+
     //Assign properties
     isRunning = true;
 }
@@ -10,6 +13,7 @@ Scene::Scene()
 //Destructor
 Scene::~Scene()
 {
+    delete camera;
 }
 
 //Update function

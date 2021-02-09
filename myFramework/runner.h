@@ -10,7 +10,6 @@
 #include <GL/glew.h>
 
 #include <myFramework/renderer.h>
-#include <myFramework/camera.h>
 
 #include "demo/myScene.h"
 #include <myFramework/scene.h>
@@ -28,7 +27,6 @@ class Runner
 
 	private:
 		Renderer* renderer;
-		Camera* camera;
 };
 
 #endif /* RUNNER_H */
