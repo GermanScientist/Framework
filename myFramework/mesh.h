@@ -47,56 +47,56 @@ class Mesh
 		///@return void
 		void generateBuffers(std::vector<GLfloat>& _vertexBufferdata, std::vector<GLfloat>& _uvBufferdata);
 
-		///@brief Gets the vertex buffer
-		///@return vertexbuffer
+		///@brief Gets the vertex buffer.
+		///@return vertexbuffer.
 		GLuint getVertexbuffer() { return vertexbuffer; };
 
-		///@brief Gets the UV buffer
-		///@return uvbuffer
+		///@brief Gets the UV buffer.
+		///@return uvbuffer.
 		GLuint getUvbuffer() { return uvbuffer; };
 
-		///@brief Gets the normal buffer
-		///@return normalbuffer
+		///@brief Gets the normal buffer.
+		///@return normalbuffer.
 		GLuint getNormalbuffer() { return normalbuffer; };
 
-		///@brief Gets the vertices of the Mesh
-		///@return vertices
+		///@brief Gets the vertices of the Mesh.
+		///@return vertices.
 		std::vector<glm::vec3> getVertices() { return vertices; };
 
-		///@brief Gets the UVs of the Mesh
-		///@return UVs
+		///@brief Gets the UVs of the Mesh.
+		///@return UVs.
 		std::vector<glm::vec2> getUvs() { return uvs; };
 
-		///@brief Gets the normals of the Mesh
-		///@return normals
+		///@brief Gets the normals of the Mesh.
+		///@return normals.
 		std::vector<glm::vec3> getNormals() { return normals; };
 
 	private:
-		///@brief The vertex buffer of the Mesh
+		///@brief The vertex buffer of the Mesh.
 		GLuint vertexbuffer;
 
-		///@brief The UV buffer of the Mesh
+		///@brief The UV buffer of the Mesh.
 		GLuint uvbuffer;
 
-		///@brief The normal buffer of the Mesh
+		///@brief The normal buffer of the Mesh.
 		GLuint normalbuffer;
 
-		///@brief The vertex array ID of the Mesh
+		///@brief The vertex array ID of the Mesh.
 		GLuint vertexArrayID;
 
-		///@brief The list of vertices of this Mesh
+		///@brief The list of vertices of this Mesh.
 		std::vector<glm::vec3> vertices;
 
-		///@brief The list of UVs of this Mesh
+		///@brief The list of UVs of this Mesh.
 		std::vector<glm::vec2> uvs;
 
-		///@brief The list of normals of this Mesh
+		///@brief The list of normals of this Mesh.
 		std::vector<glm::vec3> normals;
 
-		///@brief The vertex buffer data of this Mesh
+		///@brief The vertex buffer data of this Mesh.
 		std::vector<GLfloat> vertexBufferdata;
 
-		///@brief The UV buffer data of this Mesh
+		///@brief The UV buffer data of this Mesh.
 		std::vector<GLfloat> uvBufferdata;
 };
 
