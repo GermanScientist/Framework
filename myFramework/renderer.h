@@ -43,6 +43,9 @@ class Renderer
 		GLFWwindow* window;
 		unsigned int windowWidth;
 		unsigned int windowHeight;
+
+		glm::mat4 viewMatrix;
+		glm::mat4 projectionMatrix;
 };
 
 #endif /* RENDERER_H */
