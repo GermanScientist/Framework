@@ -33,19 +33,19 @@ class Material
 		virtual ~Material();
 
 		///@brief Get the shader of the Material.
-		///@return shader
+		///@return Shader* shader
 		Shader* getShader() { return shader; };
 
 		///@brief Get the texture of the Material.
-		///@return shader
+		///@return GLuint shader
 		GLuint getTexture() { return texture; };
 
 		///@brief Get the width from the textureloader.
-		///@return textureloader->getWidth()
+		///@return GLuint textureloader->getWidth()
 		GLuint getWidth() { return textureloader->getWidth(); };
 
 		///@brief Get the height from the textureloader.
-		///@return textureloader->getHeight()
+		///@return GLuint textureloader->getHeight()
 		GLuint getHeight() { return textureloader->getHeight(); };
 
 		///@brief Loads a .BMP file and sets the texture to the loaded image.

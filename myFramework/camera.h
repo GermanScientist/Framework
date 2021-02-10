@@ -29,11 +29,11 @@ class Camera {
         virtual ~Camera();
 
         ///@brief Get the viewmatrix of the Camera
-        ///@return viewMatrix
+        ///@return glm::mat4 viewMatrix
         glm::mat4 getViewMatrix() { return viewMatrix; }
 
         ///@brief Get the projectionmatrix of the Camera
-        ///@return projectionMatrix
+        ///@return glm::mat4 projectionMatrix
         glm::mat4 getProjectionMatrix() { return projectionMatrix; }
 
         ///@brief Moves the camera using keyboard and mouse input

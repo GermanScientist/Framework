@@ -40,11 +40,11 @@ class Model
 		virtual ~Model();
 
 		///@brief Gets the material of this Model.
-		///@return material.
+		///@return Material* material.
 		Material* getMaterial() { return material; };
 
 		///@brief Gets the mesh of this Model.
-		///@return mesh.
+		///@return Mesh* mesh.
 		Mesh* getMesh() { return mesh; };
 
 	private:

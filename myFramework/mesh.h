@@ -48,27 +48,27 @@ class Mesh
 		void generateBuffers(std::vector<GLfloat>& _vertexBufferdata, std::vector<GLfloat>& _uvBufferdata);
 
 		///@brief Gets the vertex buffer.
-		///@return vertexbuffer.
+		///@return GLuint vertexbuffer.
 		GLuint getVertexbuffer() { return vertexbuffer; };
 
 		///@brief Gets the UV buffer.
-		///@return uvbuffer.
+		///@return GLuint uvbuffer.
 		GLuint getUvbuffer() { return uvbuffer; };
 
 		///@brief Gets the normal buffer.
-		///@return normalbuffer.
+		///@return GLuint normalbuffer.
 		GLuint getNormalbuffer() { return normalbuffer; };
 
 		///@brief Gets the vertices of the Mesh.
-		///@return vertices.
+		///@return std::vector<glm::vec3> vertices.
 		std::vector<glm::vec3> getVertices() { return vertices; };
 
 		///@brief Gets the UVs of the Mesh.
-		///@return UVs.
+		///@return std::vector<glm::vec2> UVs.
 		std::vector<glm::vec2> getUvs() { return uvs; };
 
 		///@brief Gets the normals of the Mesh.
-		///@return normals.
+		///@return std::vector<glm::vec3> normals.
 		std::vector<glm::vec3> getNormals() { return normals; };
 
 	private:

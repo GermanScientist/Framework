@@ -50,31 +50,31 @@ class Entity
 		Vector rotation;
 
 		///@brief Get the material of this Entity
-		///@return material
+		///@return Material*  material
 		Material* getMaterial() { return material; };
 
 		///@brief Get the mesh of this Entity
-		///@return mesh
+		///@return Mesh* mesh
 		Mesh* getMesh() { return mesh; };
 
 		///@brief Get the model of this Entity
-		///@return model
+		///@return Model* model
 		Model* getModel() { return model; };
 
 		///@brief Get the sprite of this Entity
-		///@return sprite
+		///@return Sprite* sprite
 		Sprite* getSprite() { return sprite; };
 
 		///@brief Get the cube of this Entity
-		///@return cube
+		///@return Cube* cube
 		Cube* getCube() { return cube; };
 
 		///@brief Get the width of this Entity
-		///@return width
+		///@return unsigned int width
 		unsigned int getWidth() { return width; };
 
 		///@brief Get the height of this Entity
-		///@return height
+		///@return unsigned int height
 		unsigned int getHeight() { return height; };
 
 		///@brief Adds a child to the list of children in this Entity
@@ -104,7 +104,7 @@ class Entity
 		void addCube(const char* _imagepath);
 
 		///@brief Gets the list of children of this Entity
-		///@return children
+		///@return std::vector<Entity*> children
 		std::vector<Entity*> getChildren() { return children; };
 
 		///@brief The update function for the children of this Entity

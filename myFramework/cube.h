@@ -36,11 +36,11 @@ class Cube
 		virtual ~Cube();
 
 		///@brief Get the mesh of the Cube
-		///@return mesh
+		///@return Mesh* mesh
 		Mesh* getMesh() { return mesh; };
 
 		///@brief Get the material of the Cube
-		///@return material
+		///@return Material* material
 		Material* getMaterial() { return material; };
 
 	private:

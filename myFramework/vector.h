@@ -1,3 +1,14 @@
+/**
+ * @file vector.h
+ *
+ * @brief The Textureloader header file.
+ *
+ * This file is part of myFramework, a 3D OpenGL framework.
+ *
+ * - Copyright 2020 Jack Hulspas
+ *   - Initial commit
+ */
+
 #ifndef VECTOR_H
 #define VECTOR_H
 
@@ -8,103 +19,234 @@ template <class T>
 class Vector_t
 {
 	public:
-		//Constructors
+		///@brief Constructor of the Vector.
 		Vector_t<T>();
+
+		///@brief Constructor of the Vector.
+		///@param _x The X value of the vector.
+		///@param _y The Y value of the vector.
 		Vector_t<T>(T _x, T _y);
+
+		///@brief Constructor of the Vector.
+		///@param _x The X value of the vector.
+		///@param _y The Y value of the vector.
+		///@param _z The Z value of the vector.
 		Vector_t<T>(T _x, T _y, T _z);
+
+		///@brief Destructor of the Vector.
 		virtual ~Vector_t<T>();
 
-		//Positions
+		///@brief The X value of the vector.
 		T x;
+
+		///@brief The Y value of the vector.
 		T y;
+
+		///@brief The Z value of the vector.
 		T z;
 
-		//Get directions
+		///@brief Gets the down vector.
+		///@return Vector_t<T>(0, 1, 0)
 		static Vector_t<T> getDown();
+
+		///@brief Gets the up vector.
+		///@return Vector_t<T>(0, -1, 0)
 		static Vector_t<T> getUp();
+
+		///@brief Gets the left vector.
+		///@return Vector_t<T>(-1, 0, 0)
 		static Vector_t<T> getLeft();
+
+		///@brief Gets the right vector.
+		///@return Vector_t<T>(1, 0, 0)
 		static Vector_t<T> getRight();
+
+		///@brief Gets the forward vector.
+		///@return Vector_t<T>(0, 0, -1)
 		static Vector_t<T> getForward();
+
+		///@brief Gets the backward vector.
+		///@return Vector_t<T>(0, 0, 1)
 		static Vector_t<T> getBackward();
 
-		//Set vector values
+		///@brief Sets the Vector values to the given values.
+		///@param _x The new X value.
+		///@param _y The new Y value.
+		///@param _z The new Z value.
+		///@return Vector_t<T> *this
 		Vector_t<T> setVector(T _x, T _y, T _z);
 		
-		//Copy vector
+		///@brief Creates a copy of the Vector.
+		///@return Vector_t<T>(this->x, this->y, this->z)
 		Vector_t<T> copyVector();
 
-		//Get difference
+		///@brief Gets the distance between this Vector and the other Vector.
+		///@param _other The other vector.
+		///@return T distance
 		T getDistance(Vector_t<T> _other);
+
+		///@brief Gets the distance between Vector a and Vector b.
+		///@param _a Vector a.
+		///@param _b Vector b.
+		///@return T distance
 		static T getDistance(Vector_t<T> _a, Vector_t<T> _b);
 
-		//Get dot product
+		///@brief Gets the dot product between this Vector and the other Vector.
+		///@param _other The other vector.
+		///@return T dotProduct
 		T getDot(Vector_t<T> _other);
+
+		///@brief Gets the dot product between Vector a and Vector b.
+		///@param _a Vector a.
+		///@param _b Vector b.
+		///@return T dotProduct
 		static T getDot(Vector_t<T> _a, Vector_t<T> _b);
 
-		//Get Lerped value
+		///@brief Gets the interpolated value between this Vector and the other Vector.
+		///@param _other The other vector.
+		///@param _amount The value used to interpolate between this Vector and the other Vector.
+		///@return Vector_t<T> *this
 		Vector_t<T> lerp(Vector_t<T> _other, T _amount);
+
+		///@brief Gets the interpolated value between Vector a and Vector b.
+		///@param _a Vector a.
+		///@param _b Vector b.
+		///@param _amount The value used to interpolate between Vector a and Vector b.
+		///@return Vector_t<T>
 		static Vector_t<T> lerp(Vector_t<T> _a, Vector_t<T> _b, T _amount);
 
-		//Get the magnitude
+		///@brief Gets the magnitude of this Vector.
+		///@return T magnitude
 		T getMagnitude();
+
+		///@brief Gets the magnitude of a Vector.
+		///@param _other The Vector you want to know the magnitude of.
+		///@return T magnitude
 		static T getMagnitude(Vector_t<T> _other);
 
-		//Get the magnitude squared
+		///@brief Gets the squared magnitude of this Vector.
+		///@return T squaredMagnitude
 		T getMagnitudeSquared();
+
+		///@brief Gets the squared magnitude of a Vector.
+		///@param _other The Vector you want to know the squared magnitude of.
+		///@return T squaredMagnitude
 		static T getMagnitudeSquared(Vector_t<T> _other);
 
-		//Normalize the vector
+		///@brief Normalizes this Vector.
+		///@return Vector_t<T> *this
 		Vector_t<T> normalize();
+
+		///@brief Normalizes a Vector.
+		///@param _other The Vector you want to normalize.
+		///@return Vector_t<T> _other
 		static Vector_t<T> normalize(Vector_t<T> _other);
 
-		//Get the normalized vector
+		///@brief Gets the normalized Vector.
+		///@return Vector_t<T> normalizedVector
 		Vector_t<T> getNormalized();
+
+		///@brief Gets the normalized Vector.
+		///@param _other The Vector you want the normalized Vector of.
+		///@return Vector_t<T> normalizedVector
 		static Vector_t<T> getNormalized(Vector_t<T> _other);
 
-		//Clamp the vector
+		///@brief Clamps this Vector.
+		///@param _min The minimum the value is allowed to be clamped.
+		///@param _max The maximum the value is allowed to be clamped.
+		///@return Vector_t<T> *this
 		Vector_t<T> clamp(T _min, T _max);
+
+		///@brief Clamps a Vector.
+		///@param _other The Vector that needs to be clamped.
+		///@param _min The minimum the value is allowed to be clamped.
+		///@param _max The maximum the value is allowed to be clamped.
+		///@return Vector_t<T> _other
 		static Vector_t<T> clamp(Vector_t<T> _other, T _min, T _max);
 
-		//Get the clamp vector
+		///@brief Gets the clamped Vector.
+		///@param _min The minimum the value is allowed to be clamped.
+		///@param _max The maximum the value is allowed to be clamped.
+		///@return Vector_t<T> clampedVector
 		Vector_t<T> getClamped(T _min, T _max);
+
+		///@brief Gets the clamped Vector.
+		///@param _other The Vector you want the clamped Vector of.
+		///@param _min The minimum the value is allowed to be clamped.
+		///@param _max The maximum the value is allowed to be clamped.
+		///@return Vector_t<T> clampedVector
 		static Vector_t<T> getClamped(Vector_t<T> _other, T _min, T _max);
 
-		//Add another Vector to this Vector
+		///@brief Overloads the += operator.
+		///@param _other The Vector you want add to this Vector.
 		Vector_t<T>& operator+=(const Vector_t<T>& _other);
+
+		///@brief Overloads the + operator.
+		///@param _other The Vector you want add to this Vector.
 		Vector_t<T> operator+(const Vector_t<T>& _other) const;
 
-		//Subtract another Vector to this Vector
+		///@brief Overloads the -= operator.
+		///@param _other The Vector you want subtract from this Vector.
 		Vector_t<T>& operator-=(const Vector_t<T>& _other);
+
+		///@brief Overloads the - operator.
+		///@param _other The Vector you want subtract from this Vector.
 		Vector_t<T> operator-(const Vector_t<T>& _other) const;
 
-		//Add another Vector to this Vector
+		///@brief Overloads the *= operator.
+		///@param _other The Vector you want multiply to this Vector.
 		Vector_t<T>& operator*=(const Vector_t<T>& _other);
+
+		///@brief Overloads the * operator.
+		///@param _other The Vector you want multiply to this Vector.
 		Vector_t<T> operator*(const Vector_t<T>& _other) const;
 
-		//Divide another Vector by this Vector
+		///@brief Overloads the /= operator.
+		///@param _other The Vector you want divide by this Vector.
 		Vector_t<T>& operator/=(const Vector_t<T>& _other);
+
+		///@brief Overloads the / operator.
+		///@param _other The Vector you want divide by this Vector.
 		Vector_t<T> operator/(const Vector_t<T>& _other) const;
 
-		//Add any number to this Vector
+		///@brief Overloads the += operator.
+		///@param _other The number you want add to this Vector.
 		Vector_t<T>& operator+=(const T _other);
+
+		///@brief Overloads the + operator.
+		///@param _other The number you want add to this Vector.
 		Vector_t<T> operator+(const T _other) const;
 
-		//Subtract any number to this Vector
+		///@brief Overloads the -= operator.
+		///@param _other The number you want subtract from this Vector.
 		Vector_t<T>& operator-=(const T _other);
+
+		///@brief Overloads the - operator.
+		///@param _other The number you want subtract from this Vector.
 		Vector_t<T> operator-(const T _other) const;
 
-		//Multiply any number to this Vector
+		///@brief Overloads the *= operator.
+		///@param _other The number you want multiply to this Vector.
 		Vector_t<T>& operator*=(const T _other);
+
+		///@brief Overloads the * operator.
+		///@param _other The number you want multiply to this Vector.
 		Vector_t<T> operator*(const T _other) const;
 
-		//Divide any number by this Vector
+		///@brief Overloads the /= operator.
+		///@param _other The number you want divide by this Vector.
 		Vector_t<T>& operator/=(const T _other);
+
+		///@brief Overloads the / operator.
+		///@param _other The number you want divide by this Vector.
 		Vector_t<T> operator/(const T _other) const;
 
-		//Check if this is equal to other
+		///@brief Overloads the == operator.
+		///@param _other The Vector you want to compare with this Vector.
 		bool operator==(const Vector_t<T>& _other) const;
 
-		//Check if this is not equal to other
+		///@brief Overloads the != operator.
+		///@param _other The Vector you want to compare with this Vector.
 		bool operator!=(const Vector_t<T>& _other) const;
 };
 
