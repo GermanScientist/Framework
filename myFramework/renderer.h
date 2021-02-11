@@ -69,7 +69,7 @@ class Renderer
 		///@brief Renders the entity and checks whether it has a model, sprite or cube to render.
 		///@param _model The entity that needs to be renderered.
 		///@return void
-		void renderEntity(Entity* _entity);
+		void renderEntity(Entity* _entity, glm::mat4 _modelMatrix);
 
 		///@brief Gets the application window.
 		///@return GLFWwindow* window

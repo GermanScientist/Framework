@@ -10,6 +10,7 @@
 #include <GL/glew.h>
 
 #include <myFramework/Entity.h>
+#include "myBall.h"
 
 class MyCube : public Entity
 {
@@ -19,7 +20,7 @@ public:
 	void update(float _deltaTime);
 
 private:
-
+	MyBall* myBall;
 };
 
 #endif /* MYCUBE_H */

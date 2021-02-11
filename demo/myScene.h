@@ -37,7 +37,6 @@ private:
     CubeExample* cubeExample;
 
     MyCube* myCube;
-    MyBall* myBall;
     MyHouse* myHouse;
 
     UvMap* uvMap;

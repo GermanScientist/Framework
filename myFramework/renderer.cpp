@@ -80,8 +80,11 @@ void Renderer::renderScene(Scene* _scene) {
 	viewMatrix = _scene->getCamera()->getViewMatrix();
 	projectionMatrix = _scene->getCamera()->getProjectionMatrix();
 
+	//The first matrix is the identity matrix
+	glm::mat4 modelMatrix = glm::mat4(1.0f);
+
 	//Render the scene
-	renderEntity(_scene);
+	renderEntity(_scene, modelMatrix);
 
 	// Swap buffers
 	glfwSwapBuffers(window);
@@ -89,7 +92,7 @@ void Renderer::renderScene(Scene* _scene) {
 }
 
 //Render entity
-void Renderer::renderEntity(Entity* _entity) {
+void Renderer::renderEntity(Entity* _entity, glm::mat4 _modelMatrix) {
 
 	//Build the Model matrix
 	glm::mat4 translationMatrix = glm::translate(glm::mat4(1.0f), glm::vec3(_entity->position.x, _entity->position.y, _entity->position.z));
@@ -98,12 +101,14 @@ void Renderer::renderEntity(Entity* _entity) {
 
 	glm::mat4 modelMatrix = translationMatrix * rotationMatrix * scalingMatrix;
 
+	_modelMatrix *= modelMatrix;
+
 	//Check wheter we need to render any models
 	Model* model = _entity->getModel();
 
 	if (model != nullptr) {
 		//Render the Model
-		this->renderModel(model, modelMatrix);
+		this->renderModel(model, _modelMatrix);
 	}
 
 	//Check wheter we need to render any models
@@ -112,7 +117,7 @@ void Renderer::renderEntity(Entity* _entity) {
 	if (sprite != nullptr) {
 		
 		//Render the Sprite
-		this->renderSprite(sprite, modelMatrix);
+		this->renderSprite(sprite, _modelMatrix);
 	}
 
 	//Check wheter we need to render any cubes
@@ -121,7 +126,7 @@ void Renderer::renderEntity(Entity* _entity) {
 	if (cube != nullptr) {
 
 		//Render the Sprite
-		this->renderCube(cube, modelMatrix);
+		this->renderCube(cube, _modelMatrix);
 	}
 
 	//Render all children of this entity
@@ -129,7 +134,7 @@ void Renderer::renderEntity(Entity* _entity) {
 	
 	for(Entity* c : children)
 	{
-		this->renderEntity(c);
+		this->renderEntity(c, _modelMatrix);
 	}
 }
 

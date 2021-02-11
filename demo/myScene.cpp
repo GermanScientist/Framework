@@ -18,13 +18,6 @@ MyScene::MyScene()
     addChild(myCube);
 
     //Add myBall
-    myBall = new MyBall();
-    myBall->position = Vector3(6.0f, 10.0f, 0.0f);
-    myBall->scale = Vector3(3.0f, 3.0f, 3.0f);
-    myBall->rotation = Vector3(0.0f, 0.0f, 22.0f);
-    addChild(myBall);
-
-    //Add myBall
     myHouse = new MyHouse();
     myHouse->position = Vector3(28.0f, 15.0f, 0.0f);
     myHouse->scale = Vector3(2.0f, 2.0f, 2.0f);
@@ -66,10 +59,6 @@ MyScene::~MyScene()
     //Remove myCube
     removeChild(myCube);
     delete myCube;
-
-    //Remove myBall
-    removeChild(myBall);
-    delete myBall;
 
     //Remove myHouse
     removeChild(myHouse);
