@@ -10,7 +10,7 @@
 #include <GL/glew.h>
 
 #include <myFramework/sprite.h>
-#include <myFramework/Entity.h>
+#include <myFramework/entity.h>
 
 class CubeExample : public Entity
 {

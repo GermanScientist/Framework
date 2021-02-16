@@ -9,7 +9,7 @@
 
 #include <GL/glew.h>
 
-#include <myFramework/Entity.h>
+#include <myFramework/entity.h>
 #include "myBall.h"
 
 class MyCube : public Entity
