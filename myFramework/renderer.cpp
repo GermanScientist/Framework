@@ -145,8 +145,11 @@ void Renderer::renderSprite(Sprite* _sprite, glm::mat4 _modelMatrix)
 
 	glm::mat4 MVP = projectionMatrix * viewMatrix * modelMatrix;
 
+	//A pointer to the shader
+	Shader* shader = _sprite->getMaterial()->getShader();
+
 	//Send our transformation to the currently bound shader, in the "MVP" uniform
-	GLuint matrixID = _sprite->getMaterial()->getShader()->getMatrixID();
+	GLuint matrixID = shader->getMatrixID();
 	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
 
 	//Bind our texture in Texture Unit 0
@@ -155,17 +158,17 @@ void Renderer::renderSprite(Sprite* _sprite, glm::mat4 _modelMatrix)
     glBindTexture(GL_TEXTURE_2D, _sprite->getMaterial()->getTexture());
 	
     //Set our "textureSampler" sampler to user Texture Unit 0
-	GLuint textureID = _sprite->getMaterial()->getShader()->getTextureID();
+	GLuint textureID = shader->getTextureID();
 	glUniform1i(textureID, 0);
 
 	//1st attribute buffer : vertices
-	GLuint vertexPositionID = _sprite->getMaterial()->getShader()->getVertexPositionID();
+	GLuint vertexPositionID = shader->getVertexPositionID();
 	glEnableVertexAttribArray(vertexPositionID);
 	glBindBuffer(GL_ARRAY_BUFFER, _sprite->getMesh()->getVertexbuffer());
 	glVertexAttribPointer(vertexPositionID, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 	//2nd attribute buffer : UVs
-	GLuint vertexUVID = _sprite->getMaterial()->getShader()->getVertexUVID();
+	GLuint vertexUVID = shader->getVertexUVID();
 	glEnableVertexAttribArray(vertexUVID);
 	glBindBuffer(GL_ARRAY_BUFFER, _sprite->getMesh()->getUvbuffer());
 	glVertexAttribPointer(vertexUVID, 2, GL_FLOAT, GL_FALSE,  0, (void*)0);
@@ -184,15 +187,18 @@ void Renderer::renderCube(Cube* _cube, glm::mat4 _modelMatrix)
 
 	glm::mat4 MVP = projectionMatrix * viewMatrix * modelMatrix;
 
+	//A pointer to the shader
+	Shader* shader = _cube->getMaterial()->getShader();
+
 	//Send our transformation to the currently bound shader, in the "MVP" uniform
-	GLuint matrixID = _cube->getMaterial()->getShader()->getMatrixID();
+	GLuint matrixID = shader->getMatrixID();
 	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
 
 	//Bind our texture in Texture Unit 0
 	glActiveTexture(GL_TEXTURE0);
 
 	//Set our "textureSampler" sampler to user Texture Unit 0
-	GLuint textureID = _cube->getMaterial()->getShader()->getTextureID();
+	GLuint textureID = shader->getTextureID();
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _cube->getMaterial()->getTexture());
 
@@ -222,15 +228,18 @@ void Renderer::renderModel(Model* _model, glm::mat4 _modelMatrix)
 
 	glm::mat4 MVP = projectionMatrix * viewMatrix * modelMatrix;
 
+	//A pointer to the shader
+	Shader* shader = _model->getMaterial()->getShader();
+
 	//Get a handle for our "MVP" uniform
-	GLuint matrixID = _model->getMaterial()->getShader()->getMatrixID();
-	GLuint viewMatrixID = _model->getMaterial()->getShader()->getViewMatrixID();
-	GLuint modelMatrixID = _model->getMaterial()->getShader()->getModelMatrixID();
+	GLuint matrixID = shader->getMatrixID();
+	GLuint viewMatrixID = shader->getViewMatrixID();
+	GLuint modelMatrixID = shader->getModelMatrixID();
 
 	//Get a handle for our buffers
-	GLuint vertexPositionModelspaceID = _model->getMaterial()->getShader()->getVertexPositionModelspaceID();
-	GLuint vertexUVID = _model->getMaterial()->getShader()->getVertexUVID();
-	GLuint vertexNormalModelspaceID = _model->getMaterial()->getShader()->getVertexNormalModelspaceID();
+	GLuint vertexPositionModelspaceID = shader->getVertexPositionModelspaceID();
+	GLuint vertexUVID = shader->getVertexUVID();
+	GLuint vertexNormalModelspaceID = shader->getVertexNormalModelspaceID();
 
 	//Send our transformation to the currently bound shader, in the "MVP" uniform
 	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
@@ -238,13 +247,13 @@ void Renderer::renderModel(Model* _model, glm::mat4 _modelMatrix)
 	glUniformMatrix4fv(viewMatrixID, 1, GL_FALSE, &viewMatrix[0][0]);
 
 	glm::vec3 lightPos = glm::vec3(4, 4, 4);
-	glUniform3f(_model->getMaterial()->getShader()->getLightID(), lightPos.x, lightPos.y, lightPos.z);
+	glUniform3f(shader->getLightID(), lightPos.x, lightPos.y, lightPos.z);
 
 	//Bind our texture in Texture Unit 0
 	glActiveTexture(GL_TEXTURE0);
 
 	//Set our "textureSampler" sampler to user Texture Unit 0
-	GLuint textureID = _model->getMaterial()->getShader()->getTextureID();
+	GLuint textureID = shader->getTextureID();
 	glActiveTexture(GL_TEXTURE0);
 	glBindTexture(GL_TEXTURE_2D, _model->getMaterial()->getTexture());
 

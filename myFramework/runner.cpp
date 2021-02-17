@@ -28,11 +28,7 @@ void Runner::run(Scene* _scene) {
         _scene->exit();
     }
 
-    //This doesn't seem to be needed
-    /*
-    //Close OpenGL window and terminate GLFW
     //glfwTerminate();
-    */
 }
 
 //Update delta time function
