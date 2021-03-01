@@ -3,8 +3,11 @@
 Camera::Camera()
 {
 	// Initial position : on +Z
-	offset = glm::vec3(0, 0, -45);
-	position = glm::vec3(0, 0, 0) + offset;
+	position = Vector3(0, 0, 0);
+	offset = Vector3(0, 0, -45);
+	position += offset;
+
+	localPosition = glm::vec3(position.x, position.y, position.z);
 
 	//Initial horizontal angle : toward -Z
 	initialHorizontalAngle = 2.733f;
@@ -27,6 +30,9 @@ Camera::~Camera()
 //Control camera using keyboard input
 void Camera::computeMatricesFromInputs(GLFWwindow* _window, unsigned int _width, unsigned int _height, float _deltaTime)
 {
+	//Sets the localposition to the position
+	localPosition = glm::vec3(position.x, position.y, position.z);
+
 	//Get mouse position
 	double xpos, ypos;
 	glfwGetCursorPos(_window, &xpos, &ypos);
@@ -50,22 +56,22 @@ void Camera::computeMatricesFromInputs(GLFWwindow* _window, unsigned int _width,
 
 	//Move forward
 	if (glfwGetKey(_window, GLFW_KEY_W) == GLFW_PRESS) {
-		position += direction * _deltaTime * speed;
+		localPosition += direction * _deltaTime * speed;
 	}
 
 	//Move backward
 	if (glfwGetKey(_window, GLFW_KEY_S) == GLFW_PRESS) {
-		position -= direction * _deltaTime * speed;
+		localPosition -= direction * _deltaTime * speed;
 	}
 
 	//Strafe right
 	if (glfwGetKey(_window, GLFW_KEY_D) == GLFW_PRESS) {
-		position += right * _deltaTime * speed;
+		localPosition += right * _deltaTime * speed;
 	}
 
 	//Strafe left
 	if (glfwGetKey(_window, GLFW_KEY_A) == GLFW_PRESS) {
-		position -= right * _deltaTime * speed;
+		localPosition -= right * _deltaTime * speed;
 	}
 
 	float FoV = initialFoV;
@@ -75,6 +81,8 @@ void Camera::computeMatricesFromInputs(GLFWwindow* _window, unsigned int _width,
 
 	//View matrix
 	//Camera matrix
-	viewMatrix = glm::lookAt(position, position + direction, up);
+	viewMatrix = glm::lookAt(localPosition, localPosition + direction, up);
     /*std::cout << position.x << " + " << position.y << " + " << position.z << " + " << horizontalAngle << " + " << verticalAngle << "\n";*/
+
+	position = Vector3(localPosition.x, localPosition.y, localPosition.z);
 }

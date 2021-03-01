@@ -19,6 +19,7 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <myFramework/vector.h>
 
 class Camera {
     public:
@@ -44,6 +45,9 @@ class Camera {
         ///@return void
         void computeMatricesFromInputs(GLFWwindow* _window, unsigned int _width, unsigned int _height, float _deltaTime);
 
+        ///@brief The current position of the Camera.
+        Vector3 position;
+
     private:
 
         ///@brief The viewMatrix of the Camera.
@@ -53,10 +57,10 @@ class Camera {
         glm::mat4 projectionMatrix;
 
         ///@brief The offset of the Camera.
-        glm::vec3 offset;
+        Vector3 offset;
 
-        ///@brief The current position of the Camera.
-        glm::vec3 position;
+        ///@brief The current local position of the Camera.
+        glm::vec3 localPosition;
 
         ///@brief The initial horizontal angle of the Camera.
         float initialHorizontalAngle;

@@ -19,10 +19,12 @@ MyScene::MyScene()
 
     //Add house
     house = new House();
-    house->position = Vector3(-10.0f, 0.0f, 5.0f);
+    house->position = Vector3(-10.0f, -0.4f, 5.0f);
     house->scale = Vector3(3.5f, 3.5f, 3.5f);
     house->rotation = Vector3(0.0f, 0.0f, 22.0f);
     addChild(house);
+
+    this->getCamera()->position = Vector3(0, -25, -60);
 }
 
 //Destructor
