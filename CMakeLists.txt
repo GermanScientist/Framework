@@ -97,22 +97,12 @@ add_executable(main # g++ demo/main.cpp -o main
 	demo/main.cpp
 	demo/myScene.cpp
 	demo/myScene.h
-	demo/myCube.cpp
-	demo/myCube.h
+	demo/grassFloor.cpp
+	demo/grassFloor.h
 	demo/cubeExample.cpp
 	demo/cubeExample.h
-	demo/myBall.cpp
-	demo/myBall.h
-	demo/myHouse.cpp
-	demo/myHouse.h
-	demo/cubeMap.cpp
-	demo/cubeMap.h
-	demo/uvMap.cpp
-	demo/uvMap.h
-	demo/ballMap.cpp
-	demo/ballMap.h
-	demo/houseMap.cpp
-	demo/houseMap.h
+	demo/house.cpp
+	demo/house.h
 )
 target_link_libraries(main # g++ -lmyFramework
 	myFramework

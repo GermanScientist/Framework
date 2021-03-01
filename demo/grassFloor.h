@@ -1,5 +1,5 @@
-#ifndef MYCUBE_H
-#define MYCUBE_H
+#ifndef GRASSFLOOR_H
+#define GRASSFLOOR_H
 
 #include <cstdio>
 #include <cstdlib>
@@ -10,17 +10,16 @@
 #include <GL/glew.h>
 
 #include <myFramework/entity.h>
-#include "myBall.h"
 
-class MyCube : public Entity
+class GrassFloor : public Entity
 {
 public:
-    MyCube();
-	virtual ~MyCube();
+	GrassFloor();
+	virtual ~GrassFloor();
 	void update(float _deltaTime);
 
 private:
-	MyBall* myBall;
+
 };
 
-#endif /* MYCUBE_H */
+#endif /* GRASSFLOOR_H */

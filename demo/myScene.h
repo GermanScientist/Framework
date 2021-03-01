@@ -15,15 +15,8 @@
 #include <myFramework/vector.h>
 
 #include "cubeExample.h"
-
-#include "myCube.h"
-#include "myBall.h"
-#include "myHouse.h"
-
-#include "uvMap.h"
-#include "cubeMap.h"
-#include "ballMap.h"
-#include "houseMap.h"
+#include "grassFloor.h"
+#include "house.h"
 
 class MyScene : public Scene
 {
@@ -35,14 +28,8 @@ public:
 private:
 
     CubeExample* cubeExample;
-
-    MyCube* myCube;
-    MyHouse* myHouse;
-
-    UvMap* uvMap;
-    CubeMap* cubeMap;
-    BallMap* ballMap;
-    HouseMap* houseMap;
+    GrassFloor* grassFloor;
+    House* house;
 };
 
 #endif /* MYSCENE_H */

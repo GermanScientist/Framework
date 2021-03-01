@@ -71,7 +71,7 @@ void Camera::computeMatricesFromInputs(GLFWwindow* _window, unsigned int _width,
 	float FoV = initialFoV;
 
 	//Projection matrix : 45° Field of View, 4:3 ratio, display range : 0.1 unit <-> 100 units
-	projectionMatrix = glm::perspective(glm::radians(FoV), (float)_width / (float)_height, 0.1f, 100.0f);
+	projectionMatrix = glm::perspective(glm::radians(FoV), (float)_width / (float)_height, 0.1f, 500.0f);
 
 	//View matrix
 	//Camera matrix

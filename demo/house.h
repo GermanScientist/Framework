@@ -1,5 +1,5 @@
-#ifndef UVMAP_H
-#define UVMAP_H
+#ifndef HOUSE_H
+#define HOUSE_H
 
 #include <cstdio>
 #include <cstdlib>
@@ -9,18 +9,17 @@
 
 #include <GL/glew.h>
 
-#include <myFramework/sprite.h>
 #include <myFramework/entity.h>
 
-class UvMap : public Entity
+class House : public Entity
 {
 public:
-	UvMap();
-	virtual ~UvMap();
+	House();
+	virtual ~House();
 	void update(float _deltaTime);
 
 private:
 
 };
 
-#endif /* UVMAP_H */
+#endif /* HOUSE_H */
