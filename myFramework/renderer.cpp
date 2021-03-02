@@ -246,7 +246,8 @@ void Renderer::renderModel(Model* _model, glm::mat4 _modelMatrix)
 	glUniformMatrix4fv(modelMatrixID, 1, GL_FALSE, &modelMatrix[0][0]);
 	glUniformMatrix4fv(viewMatrixID, 1, GL_FALSE, &viewMatrix[0][0]);
 
-	glm::vec3 lightPos = glm::vec3(4, 4, 4);
+	//Light position
+	glm::vec3 lightPos = glm::vec3(-10, -7, 7);
 	glUniform3f(shader->getLightID(), lightPos.x, lightPos.y, lightPos.z);
 
 	//Bind our texture in Texture Unit 0
@@ -274,8 +275,11 @@ void Renderer::renderModel(Model* _model, glm::mat4 _modelMatrix)
 	glBindBuffer(GL_ARRAY_BUFFER, _model->getMesh()->getNormalbuffer());
 	glVertexAttribPointer(vertexNormalModelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
-	// Draw the triangle !
-	glDrawArrays(GL_TRIANGLES, 0, _model->getMesh()->getVertices().size());
+	//Bind the index buffer
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _model->getMesh()->getElementbuffer());
+
+	//Draw the triangles
+	glDrawElements(GL_TRIANGLES, _model->getMesh()->getIndices().size(), GL_UNSIGNED_SHORT, (void*)0);
 
 	glDisableVertexAttribArray(vertexPositionModelspaceID);
 	glDisableVertexAttribArray(vertexUVID);

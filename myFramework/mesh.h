@@ -24,6 +24,7 @@
 #include <glm/glm.hpp>
 
 #include <myFramework/material.h>
+#include <myFramework/vboindexing.h>
 
 class Mesh
 {
@@ -59,6 +60,10 @@ class Mesh
 		///@return GLuint normalbuffer.
 		GLuint getNormalbuffer() { return normalbuffer; };
 
+		///@brief Gets the element buffer.
+		///@return GLuint elementbuffer.
+		GLuint getElementbuffer() { return elementbuffer; };
+
 		///@brief Gets the vertices of the Mesh.
 		///@return std::vector<glm::vec3> vertices.
 		std::vector<glm::vec3> getVertices() { return vertices; };
@@ -71,6 +76,10 @@ class Mesh
 		///@return std::vector<glm::vec3> normals.
 		std::vector<glm::vec3> getNormals() { return normals; };
 
+		///@brief Gets the indices of the Mesh.
+		///@return std::vector<unsigned short> indices.
+		std::vector<unsigned short> getIndices() { return indices; };
+
 	private:
 		///@brief The vertex buffer of the Mesh.
 		GLuint vertexbuffer;
@@ -80,6 +89,9 @@ class Mesh
 
 		///@brief The normal buffer of the Mesh.
 		GLuint normalbuffer;
+
+		///@brief The element buffer for the Mesh.
+		GLuint elementbuffer;
 
 		///@brief The vertex array ID of the Mesh.
 		GLuint vertexArrayID;
@@ -92,6 +104,18 @@ class Mesh
 
 		///@brief The list of normals of this Mesh.
 		std::vector<glm::vec3> normals;
+
+		///@brief The list of indices of this Mesh.
+		std::vector<unsigned short> indices;
+
+		///@brief The list of indexed vertices of this Mesh.
+		std::vector<glm::vec3> indexedVertices;
+
+		///@brief The list of indexed UVs of this Mesh.
+		std::vector<glm::vec2> indexedUvs;
+
+		///@brief The list of indexed normals of this Mesh.
+		std::vector<glm::vec3> indexedNormals;
 
 		///@brief The vertex buffer data of this Mesh.
 		std::vector<GLfloat> vertexBufferdata;
