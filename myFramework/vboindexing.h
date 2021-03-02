@@ -5,8 +5,9 @@
 #include <map>
 
 #include <glm/glm.hpp>
-#include <string.h> // for memcmp
+#include <string.h>
 
+///@brief Indexes all the vertices, UVs and normals in the VBO
 void indexVBO(
 	std::vector<glm::vec3>& in_vertices,
 	std::vector<glm::vec2>& in_uvs,
