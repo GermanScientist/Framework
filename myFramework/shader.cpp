@@ -44,10 +44,9 @@ void Shader::load2DShaders() {
 
 //Load 3D shoaders
 void Shader::load3DShaders() {
-	programID = this->loadShaders("shaders/3D/model.vert", "shaders/3D/model.frag");;
+	loadShadowmap();
 
-	//Use our shader
-	glUseProgram(programID);
+	programID = this->loadShaders("shaders/3D/shadowMapping.vert", "shaders/3D/shadowMapping.frag");;
 
 	//Get a handle for our shader uniforms
 	matrixID = glGetUniformLocation(programID, "MVP");
@@ -61,7 +60,24 @@ void Shader::load3DShaders() {
 	textureID = glGetUniformLocation(programID, "myTextureSampler");
 	vertexUVID = glGetAttribLocation(programID, "vertexUV");
 
+	depthBiasID = glGetUniformLocation(programID, "DepthBiasMVP");
+	shadowMapID = glGetUniformLocation(programID, "shadowMap");
+
 	lightID = glGetUniformLocation(programID, "LightPosition_worldspace");
+	dirLightID = glGetUniformLocation(programID, "LightInvDirection_worldspace");
+}
+
+//Loads the shadowmap of a 3D object
+void Shader::loadShadowmap()
+{
+	// Create and compile our GLSL program from the shaders
+	depthProgramID = this->loadShaders("shaders/3D/depthRTT.vert", "shaders/3D/depthRTT.frag");
+
+	// Get a handle for our "MVP" uniform
+	depthMatrixID = glGetUniformLocation(depthProgramID, "depthMVP");
+
+	// Get a handle for our buffers
+	depthVertexPositionModelspaceID = glGetAttribLocation(depthProgramID, "vertexPosition_modelspace");
 }
 
 //Load shaders from file location

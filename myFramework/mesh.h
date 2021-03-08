@@ -48,6 +48,10 @@ class Mesh
 		///@return void
 		void generateBuffers(std::vector<GLfloat>& _vertexBufferdata, std::vector<GLfloat>& _uvBufferdata);
 
+		///@brief Generates and binds the shadowmap buffers for the Mesh
+		///@return void
+		void generateShadowmapBuffers();
+
 		///@brief Gets the vertex buffer.
 		///@return GLuint vertexbuffer.
 		GLuint getVertexbuffer() { return vertexbuffer; };
@@ -79,6 +83,10 @@ class Mesh
 		///@brief Gets the indices of the Mesh.
 		///@return std::vector<unsigned short> indices.
 		std::vector<unsigned short> getIndices() { return indices; };
+
+		//SHADOWMAPS
+		GLuint framebufferShadowmap;
+		GLuint depthTexture;
 
 	private:
 		///@brief The vertex buffer of the Mesh.
