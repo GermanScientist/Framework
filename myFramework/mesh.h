@@ -85,8 +85,8 @@ class Mesh
 		std::vector<unsigned short> getIndices() { return indices; };
 
 		//SHADOWMAPS
-		GLuint framebufferShadowmap;
-		GLuint depthTexture;
+        GLuint getFramebufferShadowmap() { return framebufferShadowmap; };
+        GLuint getDepthTexture() { return depthTexture; };
 
 	private:
 		///@brief The vertex buffer of the Mesh.
@@ -130,6 +130,10 @@ class Mesh
 
 		///@brief The UV buffer data of this Mesh.
 		std::vector<GLfloat> uvBufferdata;
+
+        //SHADOWMAPS
+        GLuint framebufferShadowmap;
+        GLuint depthTexture;
 };
 
 #endif /* MESH_H */

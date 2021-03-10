@@ -84,13 +84,13 @@ class Shader
 		GLuint getVertexNormalModelspaceID() { return vertexNormalModelspaceID; };
 
 		//SHADOWMAPS
-		GLuint depthBiasID;
-		GLuint shadowMapID;
-		GLuint dirLightID;
+        GLuint getDepthBiasID() { return depthBiasID; };
+        GLuint getShadowMapID() { return shadowMapID; };
+        GLuint getDirLightID() { return dirLightID; };
 
-		GLuint depthProgramID;
-		GLuint depthMatrixID;
-		GLuint depthVertexPositionModelspaceID;
+        GLuint getDepthProgramID() { return depthProgramID; };
+        GLuint getDepthMatrixID() { return depthMatrixID; };
+        GLuint getDepthVertexPositionModelspaceID() { return depthVertexPositionModelspaceID; };
 
 	private:
 		///@brief Loads the shaders.
@@ -128,6 +128,15 @@ class Shader
 
 		///@brief The ID of the vertex normal modelspace.
 		GLuint vertexNormalModelspaceID;
+
+        //SHADOWMAPS
+        GLuint depthBiasID;
+        GLuint shadowMapID;
+        GLuint dirLightID;
+
+        GLuint depthProgramID;
+        GLuint depthMatrixID;
+        GLuint depthVertexPositionModelspaceID;
 };
 
 #endif /* SHADER_H */

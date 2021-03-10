@@ -231,13 +231,13 @@ void Renderer::renderModel(Model* _model, glm::mat4 _modelMatrix)
 	Mesh* mesh = _model->getMesh();
 
 	//Render to our framebuffer
-	glBindFramebuffer(GL_FRAMEBUFFER, _model->getMesh()->framebufferShadowmap);
+	glBindFramebuffer(GL_FRAMEBUFFER, _model->getMesh()->getFramebufferShadowmap());
 
 	//Render on the whole framebuffer, complete from the lower left corner to the upper right
 	glViewport(0, 0, 1024, 1024); 
 
 	//Use our shader
-	glUseProgram(shader->depthProgramID);
+	glUseProgram(shader->getDepthProgramID());
 
 	glm::vec3 dirLight = glm::vec3(23.6f, 4.9f, 18.1f);
 
@@ -249,12 +249,12 @@ void Renderer::renderModel(Model* _model, glm::mat4 _modelMatrix)
 	glm::mat4 depthMVP = depthProjectionMatrix * depthViewMatrix * depthModelMatrix;
 
 	//Send our transformation to the currently bound shader, in the "MVP" uniform
-	glUniformMatrix4fv(shader->depthMatrixID, 1, GL_FALSE, &depthMVP[0][0]);
+	glUniformMatrix4fv(shader->getDepthMatrixID(), 1, GL_FALSE, &depthMVP[0][0]);
 
 	//1rst attribute buffer : vertices
-	glEnableVertexAttribArray(shader->depthVertexPositionModelspaceID);
+	glEnableVertexAttribArray(shader->getDepthVertexPositionModelspaceID());
 	glBindBuffer(GL_ARRAY_BUFFER, mesh->getVertexbuffer());
-	glVertexAttribPointer(shader->depthVertexPositionModelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+	glVertexAttribPointer(shader->getDepthVertexPositionModelspaceID(), 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
 	// Index buffer
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->getElementbuffer());
@@ -262,7 +262,7 @@ void Renderer::renderModel(Model* _model, glm::mat4 _modelMatrix)
 	//Draw the triangles
 	glDrawElements(GL_TRIANGLES, mesh->getIndices().size(), GL_UNSIGNED_SHORT, (void*)0);
 
-	glDisableVertexAttribArray(shader->depthVertexPositionModelspaceID);
+	glDisableVertexAttribArray(shader->getDepthVertexPositionModelspaceID());
 
 	//############   RENDER THE MODEL   ##############
 
@@ -290,8 +290,8 @@ void Renderer::renderModel(Model* _model, glm::mat4 _modelMatrix)
 	GLuint matrixID = shader->getMatrixID();
 	GLuint viewMatrixID = shader->getViewMatrixID();
 	GLuint modelMatrixID = shader->getModelMatrixID();
-	GLuint depthBiasID = shader->depthBiasID;
-	GLuint dirLightID = shader->dirLightID;
+	GLuint depthBiasID = shader->getDepthBiasID();
+	GLuint dirLightID = shader->getDirLightID();
 
 	//Get a handle for our buffers
 	GLuint vertexPositionModelspaceID = shader->getVertexPositionModelspaceID();
@@ -322,8 +322,8 @@ void Renderer::renderModel(Model* _model, glm::mat4 _modelMatrix)
 	glUniform1i(textureID, 0);
 
 	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, mesh->depthTexture);
-	glUniform1i(shader->shadowMapID, 1);
+	glBindTexture(GL_TEXTURE_2D, mesh->getDepthTexture());
+	glUniform1i(shader->getShadowMapID(), 1);
 
 	//1st attribute buffer : vertices
 	glEnableVertexAttribArray(vertexPositionModelspaceID);
