@@ -236,21 +236,10 @@ void Renderer::renderModel(Model* _model, glm::mat4 _modelMatrix)
 	//Render on the whole framebuffer, complete from the lower left corner to the upper right
 	glViewport(0, 0, 1024, 1024); 
 
-	//We don't use bias in the shader, but instead we draw back faces, 
-	//which are already separated from the front faces by a small distance 
-	//(if your geometry is made this way)
-	glEnable(GL_CULL_FACE);
-
-	//Cull back-facing triangles -> draw only front-facing triangles
-	glCullFace(GL_BACK); 
-
-	// Clear the screen
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
 	//Use our shader
 	glUseProgram(shader->depthProgramID);
 
-	glm::vec3 dirLight = glm::vec3(0.5f, 2, 2);
+	glm::vec3 dirLight = glm::vec3(23.6f, 4.9f, 18.1f);
 
 	// Compute the MVP matrix from the light's point of view
 	glm::mat4 depthProjectionMatrix = glm::ortho<float>(-10, 10, -10, 10, -10, 20);
@@ -280,12 +269,6 @@ void Renderer::renderModel(Model* _model, glm::mat4 _modelMatrix)
 	//Render to the screen
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	glViewport(0, 0, windowWidth, windowHeight); // Render on the whole framebuffer, complete from the lower left corner to the upper right
-
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK); // Cull back-facing triangles -> draw only front-facing triangles
-
-	//Clear the screen
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//Use our shader
 	glUseProgram(shader->getProgramID());
