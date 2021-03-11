@@ -239,13 +239,13 @@ void Renderer::renderModel(Model* _model, glm::mat4 _modelMatrix)
 	//Use our shader
 	glUseProgram(shader->getDepthProgramID());
 
-	glm::vec3 dirLight = glm::vec3(23.6f, 4.9f, 18.1f);
+	glm::vec3 dirLight = glm::vec3(01.2f, -2, 2);
 
 	// Compute the MVP matrix from the light's point of view
 	glm::mat4 depthProjectionMatrix = glm::ortho<float>(-10, 10, -10, 10, -10, 20);
-	glm::mat4 depthViewMatrix = glm::lookAt(dirLight, glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	glm::mat4 depthViewMatrix = glm::lookAt(dirLight, glm::vec3(0, 0, 0), glm::vec3(0, -1, 0));
 
-	glm::mat4 depthModelMatrix = glm::mat4(1.0);
+	glm::mat4 depthModelMatrix = glm::mat4(1.0) * _modelMatrix;
 	glm::mat4 depthMVP = depthProjectionMatrix * depthViewMatrix * depthModelMatrix;
 
 	//Send our transformation to the currently bound shader, in the "MVP" uniform

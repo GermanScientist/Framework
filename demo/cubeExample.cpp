@@ -3,7 +3,8 @@
 //Constructor
 CubeExample::CubeExample()
 {
-    this->addCube("assets/demo/cube/cube.dds");
+    //this->addCube("assets/demo/cube/cube.dds");
+    this->addModel("assets/demo/cube/cube.obj", "assets/demo/cube/cube.dds");
 }
 
 //Destructor

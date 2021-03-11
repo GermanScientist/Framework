@@ -30,6 +30,8 @@ private:
     CubeExample* cubeExample;
     GrassFloor* grassFloor;
     House* house;
+
+    float rotationSpeed;
 };
 
 #endif /* MYSCENE_H */
