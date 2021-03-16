@@ -39,4 +39,32 @@ void Model::loadObject(const char* _path)
 //Loads a cube for the model
 void Model::loadCube()
 {
+	this->vertices = {
+		glm::vec3(-1, -1, -1),
+		glm::vec3(1, -1, -1),
+		glm::vec3(1, 1, -1),
+		glm::vec3(-1, 1, -1),
+		glm::vec3(-1, -1, 1),
+		glm::vec3(1, -1, 1),
+		glm::vec3(1, 1, 1),
+		glm::vec3(-1, 1, 1)
+	};
+
+	this->uvs = {
+		glm::vec2(0, 0),
+		glm::vec2(1, 0),
+		glm::vec2(1, 1),
+		glm::vec2(0, 1)
+	};
+
+	this->normals = {
+		glm::vec3(0, 0, 1),
+		glm::vec3(1, 0, 0),
+		glm::vec3(0, 0, -1),
+		glm::vec3(-1, 0, 0),
+		glm::vec3(0, 1, 0),
+		glm::vec3(0, -1, 0)
+	};
+
+	mesh->generateBuffers(vertices, uvs, normals);
 }
