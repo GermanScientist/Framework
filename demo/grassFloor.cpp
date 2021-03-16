@@ -3,7 +3,9 @@
 //Constructor
 GrassFloor::GrassFloor()
 {
-    this->addModel("assets/demo/grass/grass.obj", "assets/demo/grass/GrassTexture.dds");
+    this->addModel();
+    this->getModel()->loadTexture("assets/demo/grass/GrassTexture.dds");
+    this->getModel()->loadObject("assets/demo/grass/grass.obj");
 }
 
 //Destructor

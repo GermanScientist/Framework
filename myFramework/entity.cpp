@@ -53,14 +53,14 @@ void Entity::removeChild(Entity* _child)
 }
 
 //Adds model to entity
-void Entity::addModel(const char* _path, const char* _imagepath)
+void Entity::addModel()
 {
 	if (model != nullptr) {
 		delete model;
 		model = nullptr;
 	}
 
-	model = new Model(_path, _imagepath);
+	model = new Model();
 }
 
 //Adds model to entity

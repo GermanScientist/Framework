@@ -32,12 +32,29 @@ class Model
 {
 	public:
 		///@brief Constructor of the Model
-		///@param _path The file location of the .obj file.
-		///@param _imagepath The file location of the texture.
-		Model(const char* _path, const char* _imagepath);
+		Model();
 
 		///@brief Destructor of the Model
 		virtual ~Model();
+
+		///@brief Loads a texture for the model
+		///@param _imagepath The file location of the texture.
+		///@return void.
+		void loadTexture(const char* _imagepath);
+
+		///@brief Loads a color for the model
+		///@param _color The color the model needs to be.
+		///@return void.
+		void loadColor(std::string _color);
+
+		///@brief Loads a .obj file for the model.
+		///@param _path The file location of the .obj file.
+		///@return void.
+		void loadObject(const char* _path);
+
+		///@brief Loads a cube for the model.
+		///@return void.
+		void loadCube();
 
 		///@brief Gets the material of this Model.
 		///@return Material* material.
