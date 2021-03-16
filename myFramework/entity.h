@@ -91,7 +91,7 @@ class Entity
 		///@param _path The file location of the .obj file.
 		///@param _imagepath The file location of the texture.
 		///@return void
-		void addModel(const char* _path, const char* _imagepath);
+		void addModel();
 
 		///@brief Adds a sprite to this Entity
 		///@param _imagepath The file location of the texture.
@@ -140,6 +140,15 @@ class Entity
 
 		///@brief The height of this Entity
 		unsigned int height;
+};
+
+class EntityContainer : public Entity {
+
+	public:
+		void update(float deltaTime);
+
+	private:
+
 };
 
 #endif /* ENTITY_H */

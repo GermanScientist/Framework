@@ -99,10 +99,6 @@ add_executable(main # g++ demo/main.cpp -o main
 	demo/main.cpp
 	demo/myScene.cpp
 	demo/myScene.h
-	demo/grassFloor.cpp
-	demo/grassFloor.h
-	demo/cubeExample.cpp
-	demo/cubeExample.h
 	demo/house.cpp
 	demo/house.h
 )

@@ -3,7 +3,9 @@
 //Constructor
 House::House()
 {
-    this->addModel("assets/demo/house/house.obj", "assets/demo/house/House.dds");
+    this->addModel();
+    this->getModel()->loadTexture("assets/demo/house/House.dds");
+    this->getModel()->loadObject("assets/demo/house/house.obj");
 }
 
 //Destructor

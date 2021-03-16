@@ -39,10 +39,6 @@ class Shader
 		///@return void
 		void load3DShaders();
 
-		///@brief Loads the shaders for 3D entities/objects.
-		///@return void
-		void loadShadowmap();
-
 		///@brief Gets the program ID.
 		///@return GLuint programID
 		GLuint getProgramID() { return programID; };
@@ -83,15 +79,6 @@ class Shader
 		///@return GLuint getVertexNormalModelspaceID
 		GLuint getVertexNormalModelspaceID() { return vertexNormalModelspaceID; };
 
-		//SHADOWMAPS
-        GLuint getDepthBiasID() { return depthBiasID; };
-        GLuint getShadowMapID() { return shadowMapID; };
-        GLuint getDirLightID() { return dirLightID; };
-
-        GLuint getDepthProgramID() { return depthProgramID; };
-        GLuint getDepthMatrixID() { return depthMatrixID; };
-        GLuint getDepthVertexPositionModelspaceID() { return depthVertexPositionModelspaceID; };
-
 	private:
 		///@brief Loads the shaders.
 		///@param _vertex_file_path The file location of the vertexshader.
@@ -128,15 +115,6 @@ class Shader
 
 		///@brief The ID of the vertex normal modelspace.
 		GLuint vertexNormalModelspaceID;
-
-        //SHADOWMAPS
-        GLuint depthBiasID;
-        GLuint shadowMapID;
-        GLuint dirLightID;
-
-        GLuint depthProgramID;
-        GLuint depthMatrixID;
-        GLuint depthVertexPositionModelspaceID;
 };
 
 #endif /* SHADER_H */

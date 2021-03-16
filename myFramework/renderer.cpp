@@ -224,74 +224,17 @@ void Renderer::renderCube(Cube* _cube, glm::mat4 _modelMatrix)
 //Render a model
 void Renderer::renderModel(Model* _model, glm::mat4 _modelMatrix)
 {
-	//############   RENDER THE SHADOWMAP   ##############
-	
-	//A pointer to the shader
-	Shader* shader = _model->getMaterial()->getShader();
-	Mesh* mesh = _model->getMesh();
-
-	//Render to our framebuffer
-	glBindFramebuffer(GL_FRAMEBUFFER, _model->getMesh()->getFramebufferShadowmap());
-
-	//Render on the whole framebuffer, complete from the lower left corner to the upper right
-	glViewport(0, 0, 1024, 1024); 
-
-	//Use our shader
-	glUseProgram(shader->getDepthProgramID());
-
-	glm::vec3 dirLight = glm::vec3(01.2f, -2, 2);
-
-	// Compute the MVP matrix from the light's point of view
-	glm::mat4 depthProjectionMatrix = glm::ortho<float>(-10, 10, -10, 10, -10, 20);
-	glm::mat4 depthViewMatrix = glm::lookAt(dirLight, glm::vec3(0, 0, 0), glm::vec3(0, -1, 0));
-
-	glm::mat4 depthModelMatrix = glm::mat4(1.0) * _modelMatrix;
-	glm::mat4 depthMVP = depthProjectionMatrix * depthViewMatrix * depthModelMatrix;
-
-	//Send our transformation to the currently bound shader, in the "MVP" uniform
-	glUniformMatrix4fv(shader->getDepthMatrixID(), 1, GL_FALSE, &depthMVP[0][0]);
-
-	//1rst attribute buffer : vertices
-	glEnableVertexAttribArray(shader->getDepthVertexPositionModelspaceID());
-	glBindBuffer(GL_ARRAY_BUFFER, mesh->getVertexbuffer());
-	glVertexAttribPointer(shader->getDepthVertexPositionModelspaceID(), 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-
-	// Index buffer
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mesh->getElementbuffer());
-
-	//Draw the triangles
-	glDrawElements(GL_TRIANGLES, mesh->getIndices().size(), GL_UNSIGNED_SHORT, (void*)0);
-
-	glDisableVertexAttribArray(shader->getDepthVertexPositionModelspaceID());
-
-	//############   RENDER THE MODEL   ##############
-
-	//Render to the screen
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	glViewport(0, 0, windowWidth, windowHeight); // Render on the whole framebuffer, complete from the lower left corner to the upper right
-
-	//Use our shader
-	glUseProgram(shader->getProgramID());
-
 	glm::mat4 modelMatrix = _modelMatrix;
 
 	glm::mat4 MVP = projectionMatrix * viewMatrix * modelMatrix;
 
-	glm::mat4 biasMatrix(
-		0.5, 0.0, 0.0, 0.0,
-		0.0, 0.5, 0.0, 0.0,
-		0.0, 0.0, 0.5, 0.0,
-		0.5, 0.5, 0.5, 1.0
-	);
-
-	glm::mat4 depthBiasMVP = biasMatrix * depthMVP;
+	//A pointer to the shader
+	Shader* shader = _model->getMaterial()->getShader();
 
 	//Get a handle for our "MVP" uniform
 	GLuint matrixID = shader->getMatrixID();
 	GLuint viewMatrixID = shader->getViewMatrixID();
 	GLuint modelMatrixID = shader->getModelMatrixID();
-	GLuint depthBiasID = shader->getDepthBiasID();
-	GLuint dirLightID = shader->getDirLightID();
 
 	//Get a handle for our buffers
 	GLuint vertexPositionModelspaceID = shader->getVertexPositionModelspaceID();
@@ -302,10 +245,6 @@ void Renderer::renderModel(Model* _model, glm::mat4 _modelMatrix)
 	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
 	glUniformMatrix4fv(modelMatrixID, 1, GL_FALSE, &modelMatrix[0][0]);
 	glUniformMatrix4fv(viewMatrixID, 1, GL_FALSE, &viewMatrix[0][0]);
-
-	glUniformMatrix4fv(depthBiasID, 1, GL_FALSE, &depthBiasMVP[0][0]);
-
-	glUniform3f(dirLightID, dirLight.x, dirLight.y, dirLight.z);
 
 	//Light position
 	glm::vec3 lightPos = glm::vec3(-10, -7, 7);
@@ -320,10 +259,6 @@ void Renderer::renderModel(Model* _model, glm::mat4 _modelMatrix)
 	glBindTexture(GL_TEXTURE_2D, _model->getMaterial()->getTexture());
 
 	glUniform1i(textureID, 0);
-
-	glActiveTexture(GL_TEXTURE1);
-	glBindTexture(GL_TEXTURE_2D, mesh->getDepthTexture());
-	glUniform1i(shader->getShadowMapID(), 1);
 
 	//1st attribute buffer : vertices
 	glEnableVertexAttribArray(vertexPositionModelspaceID);
