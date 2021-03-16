@@ -142,4 +142,13 @@ class Entity
 		unsigned int height;
 };
 
+class EntityContainer : public Entity {
+
+	public:
+		void update(float deltaTime);
+
+	private:
+
+};
+
 #endif /* ENTITY_H */

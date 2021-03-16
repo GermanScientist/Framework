@@ -84,3 +84,7 @@ void Entity::addCube(const char* _imagepath)
 
 	cube = new Cube(_imagepath);
 }
+
+void EntityContainer::update(float deltaTime)
+{
+}

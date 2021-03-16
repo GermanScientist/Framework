@@ -14,8 +14,6 @@
 #include <myFramework/scene.h>
 #include <myFramework/vector.h>
 
-#include "cubeExample.h"
-#include "grassFloor.h"
 #include "house.h"
 
 class MyScene : public Scene
@@ -27,8 +25,6 @@ public:
 
 private:
 
-    CubeExample* cubeExample;
-    GrassFloor* grassFloor;
     House* house;
 };
 
