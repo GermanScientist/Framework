@@ -25,10 +25,7 @@ MyScene::MyScene()
     cube->addModel(); //Add a model to the entity
     cube->getModel()->loadTexture("assets/demo/cube/cube.dds"); //Load texture to model
 
-    if (false) //If true: Load .obj file
-        cube->getModel()->loadObject("assets/demo/cube/cube.obj"); //Load .obj file to model
-    else //If false: load cube (gives error popup)
-        cube->getModel()->loadCube(); //Load cube to the model
+    cube->getModel()->loadCube(); //Load cube to the model
 
     addChild(cube); //Add cube to the list of children of this scene
 
