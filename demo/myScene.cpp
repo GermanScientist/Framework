@@ -33,12 +33,18 @@ MyScene::MyScene()
     addChild(cube); //Add cube to the list of children of this scene
 
     
-    //----CREATE HOUSE----
-    house = new House();
-    house->position = Vector3(-10.0f, -0.4f, 5.0f);
-    house->scale = Vector3(3.5f, 3.5f, 3.5f);
-    house->rotation = Vector3(0.0f, 0.0f, 22.0f);
-    addChild(house);
+    //----CREATE FLOOR----
+    EntityContainer* house = new EntityContainer(); //Create entity
+
+    house->position = Vector3(-10.0f, -0.4f, 5.0f); //Set entity position
+    house->scale = Vector3(3.5f, 3.5f, 3.5f); //Set entity scale
+    house->rotation = Vector3(0.0f, 0.0f, 22.0f); //Set entity rotation
+
+    house->addModel(); //Add model to entity
+    house->getModel()->loadTexture("assets/demo/house/House.dds"); //Load texture to the model.
+    house->getModel()->loadObject("assets/demo/house/house.obj"); //Load obj to the model.
+
+    addChild(house); //Add floor to the list of children of this scene
 
     //----SET CAMERA POSITION----
     this->getCamera()->position = Vector3(0, -25, -60);

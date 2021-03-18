@@ -20,12 +20,7 @@ Mesh::~Mesh()
 }
 
 //Generate the buffers for the object
-void Mesh::generateBuffers(std::vector<glm::vec3>& _vertices, std::vector<glm::vec2>& _uvs, std::vector<glm::vec3>& _normals) {
-
-	//Assign lists/vectors
-	this->vertices = _vertices;
-	this->uvs = _uvs;
-	this->normals = _normals;
+void Mesh::generateMesh() {
 
 	//Generate and bind vertex arrays
 	glGenVertexArrays(1, &vertexArrayID);
@@ -43,25 +38,4 @@ void Mesh::generateBuffers(std::vector<glm::vec3>& _vertices, std::vector<glm::v
 	glGenBuffers(1, &normalbuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, normalbuffer);
 	glBufferData(GL_ARRAY_BUFFER, normals.size() * sizeof(glm::vec3), &normals[0], GL_STATIC_DRAW);
-}
-
-//Generate the buffers for the object
-void Mesh::generateBuffers(std::vector<GLfloat>& _vertexBufferdata, std::vector<GLfloat>& _uvBufferdata) {
-
-	//Assign lists/vectors
-	this->vertexBufferdata = _vertexBufferdata;
-	this->uvBufferdata = _uvBufferdata;
-
-	//Generate and bind vertex arrays
-	glGenVertexArrays(1, &vertexArrayID);
-	glBindVertexArray(vertexArrayID);
-
-	//Generate buffers
-	glGenBuffers(1, &vertexbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
-	glBufferData(GL_ARRAY_BUFFER, vertexBufferdata.size() * sizeof(GLfloat), &vertexBufferdata[0], GL_STATIC_DRAW);
-
-	glGenBuffers(1, &uvbuffer);
-	glBindBuffer(GL_ARRAY_BUFFER, uvbuffer);
-	glBufferData(GL_ARRAY_BUFFER, uvBufferdata.size() * sizeof(GLfloat), &uvBufferdata[0], GL_STATIC_DRAW);
 }

@@ -164,11 +164,18 @@ void Renderer::renderSprite(Sprite* _sprite, glm::mat4 _modelMatrix)
 	glBindBuffer(GL_ARRAY_BUFFER, _sprite->getMesh()->getUvbuffer());
 	glVertexAttribPointer(vertexUVID, 2, GL_FLOAT, GL_FALSE,  0, (void*)0);
 
+	//3nd attribute buffer : Normals
+	GLuint vertexNormalModelspaceID = shader->getVertexNormalModelspaceID();
+	glEnableVertexAttribArray(vertexNormalModelspaceID);
+	glBindBuffer(GL_ARRAY_BUFFER, _sprite->getMesh()->getNormalbuffer());
+	glVertexAttribPointer(vertexNormalModelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
+
 	//Draw the triangles
-	glDrawArrays(GL_TRIANGLES, 0, 2*3); // 2*3 indices starting at 0 -> 2 triangles
+	glDrawArrays(GL_TRIANGLES, 0, _sprite->getMesh()->vertices.size());
 
 	glDisableVertexAttribArray(vertexPositionID);
 	glDisableVertexAttribArray(vertexUVID);
+	glDisableVertexAttribArray(vertexNormalModelspaceID);
 }
 
 //Render a model
@@ -225,11 +232,8 @@ void Renderer::renderModel(Model* _model, glm::mat4 _modelMatrix)
 	glBindBuffer(GL_ARRAY_BUFFER, _model->getMesh()->getNormalbuffer());
 	glVertexAttribPointer(vertexNormalModelspaceID, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
 
-	//Bind the index buffer
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _model->getMesh()->getElementbuffer());
-
 	// Draw the triangles !
-	glDrawArrays(GL_TRIANGLES, 0, _model->getMesh()->getVertices().size());
+	glDrawArrays(GL_TRIANGLES, 0, _model->getMesh()->vertices.size());
 
 	glDisableVertexAttribArray(vertexPositionModelspaceID);
 	glDisableVertexAttribArray(vertexUVID);

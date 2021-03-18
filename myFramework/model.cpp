@@ -33,13 +33,18 @@ void Model::loadColor(std::string _color)
 void Model::loadObject(const char* _path)
 {
 	bool loaded = loadOBJ(_path, vertices, uvs, normals);
-	mesh->generateBuffers(vertices, uvs, normals);
+
+	mesh->vertices = this->vertices;
+	mesh->uvs = this->uvs;
+	mesh->normals = this->normals;
+
+	mesh->generateMesh();
 }
 
 //Loads a cube for the model
 void Model::loadCube()
 {
-	this->vertices = {
+	mesh->vertices = {
 		glm::vec3(-1.0f,-1.0f,-1.0f),
 		glm::vec3(-1.0f,-1.0f, 1.0f),
 		glm::vec3(-1.0f, 1.0f, 1.0f),
@@ -79,7 +84,7 @@ void Model::loadCube()
 	};
 
 	// Two UV coordinatesfor each vertex. They were created withe Blender.
-	this->uvs = {
+	mesh->uvs = {
 		glm::vec2(0.000059f, 1.0f - 0.000004f),
 		glm::vec2(0.000103f, 1.0f - 0.336048f),
 		glm::vec2(0.335973f, 1.0f - 0.335903f),
@@ -118,14 +123,14 @@ void Model::loadCube()
 		glm::vec2(0.667979f, 1.0f - 0.335851f)
 	};
 
-	this->normals = {
-		glm::vec3(0.0f, 1.0f, 0.0f),
-		glm::vec3(0.0f, 0.0f, 1.0f),
-		glm::vec3(-1.0f, 0.0f, 0.0f),
-		glm::vec3(0.0f, -1.0f, 0.0f),
-		glm::vec3(1.0f, 0.0f, 0.0f),
-		glm::vec3(0.0f, 0.0f, -1.0f)
+	mesh->normals = {
+		glm::vec3(0.0f, 0.0f, 0.0f),
+		glm::vec3(0.0f, 0.0f, 0.0f),
+		glm::vec3(0.0f, 0.0f, 0.0f),
+		glm::vec3(0.0f, 0.0f, 0.0f),
+		glm::vec3(0.0f, 0.0f, 0.0f),
+		glm::vec3(0.0f, 0.0f, 0.0f)
 	};
 
-	mesh->generateBuffers(vertices, uvs, normals);
+	mesh->generateMesh();
 }
