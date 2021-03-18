@@ -90,8 +90,6 @@ add_library(myFramework # ar rcs libmyFramework.a
 	myFramework/shader.cpp
 	myFramework/shader.h
 	myFramework/vector.h
-	myFramework/vboindexing.cpp
-	myFramework/vboindexing.h
 )
 
 # Main

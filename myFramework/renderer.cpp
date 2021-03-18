@@ -278,8 +278,8 @@ void Renderer::renderModel(Model* _model, glm::mat4 _modelMatrix)
 	//Bind the index buffer
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _model->getMesh()->getElementbuffer());
 
-	//Draw the triangles
-	glDrawElements(GL_TRIANGLES, _model->getMesh()->getIndices().size(), GL_UNSIGNED_SHORT, (void*)0);
+	// Draw the triangles !
+	glDrawArrays(GL_TRIANGLES, 0, _model->getMesh()->getVertices().size());
 
 	glDisableVertexAttribArray(vertexPositionModelspaceID);
 	glDisableVertexAttribArray(vertexUVID);
