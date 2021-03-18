@@ -10,6 +10,7 @@
 #include <GL/glew.h>
 
 #include <myFramework/entity.h>
+#include <myFramework/vector.h>
 
 class Player : public Entity
 {
@@ -19,7 +20,8 @@ public:
 	void update(float _deltaTime);
 
 private:
-
+	float speed;
+	float degrees;
 };
 
 #endif /* PLAYER */

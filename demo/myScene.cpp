@@ -6,7 +6,7 @@ MyScene::MyScene()
     //----CREATE FLOOR----
     EntityContainer* floor = new EntityContainer(); //Create entity
 
-    floor->rotation = Vector3(0.0f, 0.0f, 22.0f); //Set entity rotation
+    floor->rotation = Vector3(0.0f, 0.0f, Vector::deg2rad(180.0f)); //Set entity rotation
 
     floor->addModel(); //Add a model to the entity
     floor->getModel()->loadTexture("assets/demo/grass/GrassTexture.dds"); //Load texture to model
@@ -20,7 +20,7 @@ MyScene::MyScene()
 
     cube->position = Vector3(18.0f, -3.9f, -20.0f); //Set entity position
     cube->scale = Vector3(3.0f, 3.0f, 3.0f); //Set entity scale
-    cube->rotation = Vector3(0.0f, 0.0f, 22.0f); //Set entity rotation
+    cube->rotation = Vector3(0.0f, 0.0f, Vector::deg2rad(180.0f)); //Set entity rotation
 
     cube->addModel(); //Add a model to the entity
     cube->getModel()->loadTexture("assets/demo/cube/cube.dds"); //Load texture to model
@@ -36,9 +36,9 @@ MyScene::MyScene()
     //----CREATE HOUSE----
     EntityContainer* house = new EntityContainer(); //Create entity
 
-    house->position = Vector3(-10.0f, -0.4f, 5.0f); //Set entity position
+    house->position = Vector3(-10.0f, -0.5f, 5.0f); //Set entity position
     house->scale = Vector3(3.5f, 3.5f, 3.5f); //Set entity scale
-    house->rotation = Vector3(0.0f, 0.0f, 22.0f); //Set entity rotation
+    house->rotation = Vector3(0.0f, 0.0f, Vector::deg2rad(180.0f)); //Set entity rotation
 
     house->addModel(); //Add model to entity
     house->getModel()->loadTexture("assets/demo/house/House.dds"); //Load texture to the model.
@@ -65,5 +65,4 @@ MyScene::~MyScene()
 
 //Update function
 void MyScene::update(float _deltaTime) {
-
 }

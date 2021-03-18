@@ -248,6 +248,14 @@ class Vector_t
 		///@brief Overloads the != operator.
 		///@param _other The Vector you want to compare with this Vector.
 		bool operator!=(const Vector_t<T>& _other) const;
+
+		///@brief Changes radials to degrees.
+		///@param _radial The radial you want to be turned into degrees.
+		static T rad2deg(T _radial);
+
+		///@brief Changes degrees to radial.
+		///@param _degrees The degree you want to be turned into radials.
+		static T deg2rad(T _degrees);
 };
 
 //Vector1 typedefs
@@ -698,6 +706,18 @@ bool Vector_t<T>::operator==(const Vector_t<T>& _other) const {
 template <class T>
 bool Vector_t<T>::operator!=(const Vector_t<T>& _other) const {
 	return !(*this == _other);
+}
+
+template<class T>
+T Vector_t<T>::rad2deg(T _radial)
+{
+	return _radial * (180 / 3.1415926535897932384626433832795);
+}
+
+template<class T>
+T Vector_t<T>::deg2rad(T _degrees)
+{
+	return _degrees * (3.1415926535897932384626433832795 / 180);
 }
 
 //Iostream << and >> overloader
