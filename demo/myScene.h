@@ -13,7 +13,7 @@
 #include <myFramework/scene.h>
 #include <myFramework/vector.h>
 
-#include "house.h"
+#include "player.h"
 
 class MyScene : public Scene
 {
@@ -24,7 +24,7 @@ public:
 
 private:
 
-    House* house;
+    Player* player;
 };
 
 #endif /* MYSCENE_H */

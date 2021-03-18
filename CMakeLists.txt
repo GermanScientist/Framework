@@ -95,8 +95,8 @@ add_executable(main # g++ demo/main.cpp -o main
 	demo/main.cpp
 	demo/myScene.cpp
 	demo/myScene.h
-	demo/house.cpp
-	demo/house.h
+	demo/player.cpp
+	demo/player.h
 )
 target_link_libraries(main # g++ -lmyFramework
 	myFramework

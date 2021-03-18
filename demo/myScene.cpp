@@ -33,7 +33,7 @@ MyScene::MyScene()
     addChild(cube); //Add cube to the list of children of this scene
 
     
-    //----CREATE FLOOR----
+    //----CREATE HOUSE----
     EntityContainer* house = new EntityContainer(); //Create entity
 
     house->position = Vector3(-10.0f, -0.4f, 5.0f); //Set entity position
@@ -46,6 +46,11 @@ MyScene::MyScene()
 
     addChild(house); //Add floor to the list of children of this scene
 
+    //----CREATE PLAYER----
+    player = new Player();
+    player->position = Vector3(20.0f, -1.8f, 10.0f);
+    addChild(player);
+
     //----SET CAMERA POSITION----
     this->getCamera()->position = Vector3(0, -25, -60);
 }
@@ -54,8 +59,8 @@ MyScene::MyScene()
 MyScene::~MyScene()
 {
     //Remove house
-    removeChild(house);
-    delete house;
+    removeChild(player);
+    delete player;
 }
 
 //Update function

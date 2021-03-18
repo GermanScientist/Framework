@@ -1,5 +1,5 @@
-#ifndef HOUSE_H
-#define HOUSE_H
+#ifndef PLAYER_H
+#define PLAYER_H
 
 #include <cstdio>
 #include <cstdlib>
@@ -11,15 +11,15 @@
 
 #include <myFramework/entity.h>
 
-class House : public Entity
+class Player : public Entity
 {
 public:
-	House();
-	virtual ~House();
+	Player();
+	virtual ~Player();
 	void update(float _deltaTime);
 
 private:
 
 };
 
-#endif /* HOUSE_H */
+#endif /* PLAYER */
