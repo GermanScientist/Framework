@@ -27,7 +27,6 @@
 #include <fstream>
 
 #include <myFramework/sprite.h>
-#include <myFramework/cube.h>
 #include <myFramework/model.h>
 #include <myFramework/scene.h>
 #include <myFramework/camera.h>
@@ -53,12 +52,6 @@ class Renderer
 		///@param _modelMatrix The modelmatrix of the entity.
 		///@return void
 		void renderSprite(Sprite* _sprite, glm::mat4 _modelMatrix);
-
-		///@brief Renders the cube of an entity in the scene.
-		///@param _cube The cube that needs to be renderered.
-		///@param _modelMatrix The modelmatrix of the entity.
-		///@return void
-        void renderCube(Cube* _cube, glm::mat4 _modelMatrix);
 
 		///@brief Renders the cube of an entity in the scene.
 		///@param _model The model that needs to be renderered.

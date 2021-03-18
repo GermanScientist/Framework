@@ -29,7 +29,6 @@
 
 #include <myFramework/model.h>
 #include <myFramework/sprite.h>
-#include <myFramework/cube.h>
 
 class Entity
 {
@@ -65,10 +64,6 @@ class Entity
 		///@return Sprite* sprite
 		Sprite* getSprite() { return sprite; };
 
-		///@brief Get the cube of this Entity
-		///@return Cube* cube
-		Cube* getCube() { return cube; };
-
 		///@brief Get the width of this Entity
 		///@return unsigned int width
 		unsigned int getWidth() { return width; };
@@ -98,11 +93,6 @@ class Entity
 		///@return void
 		void addSprite(const std::string& _imagepath);
 
-		///@brief Adds a cube to this Entity
-		///@param _imagepath The file location of the texture.
-		///@return void
-		void addCube(const char* _imagepath);
-
 		///@brief Gets the list of children of this Entity
 		///@return std::vector<Entity*> children
 		std::vector<Entity*> getChildren() { return children; };
@@ -124,9 +114,6 @@ class Entity
 
 		///@brief The sprite of this Entity
 		Sprite* sprite;
-
-		///@brief The cube of this Entity
-		Cube* cube;
 		
 	protected:
 		///@brief The material of this Entity

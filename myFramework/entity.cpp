@@ -14,7 +14,6 @@ Entity::Entity()
 
 	model = nullptr;
 	sprite = nullptr;
-	cube = nullptr;
 }
 
 //Destructor
@@ -72,17 +71,6 @@ void Entity::addSprite(const std::string& _imagepath)
 	}
 
 	sprite = new Sprite(_imagepath);
-}
-
-//Adds cube to entity
-void Entity::addCube(const char* _imagepath)
-{
-	if (cube != nullptr) {
-		delete cube;
-		cube = nullptr;
-	}
-
-	cube = new Cube(_imagepath);
 }
 
 void EntityContainer::update(float deltaTime)

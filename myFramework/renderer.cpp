@@ -120,15 +120,6 @@ void Renderer::renderEntity(Entity* _entity, glm::mat4 _modelMatrix) {
 		this->renderSprite(sprite, _modelMatrix);
 	}
 
-	//Check wheter we need to render any cubes
-	Cube* cube = _entity->getCube();
-
-	if (cube != nullptr) {
-
-		//Render the Sprite
-		this->renderCube(cube, _modelMatrix);
-	}
-
 	//Render all children of this entity
 	std::vector<Entity*> children = _entity->getChildren();
 	
@@ -178,47 +169,6 @@ void Renderer::renderSprite(Sprite* _sprite, glm::mat4 _modelMatrix)
 
 	glDisableVertexAttribArray(vertexPositionID);
 	glDisableVertexAttribArray(vertexUVID);
-}
-
-//Render a cube
-void Renderer::renderCube(Cube* _cube, glm::mat4 _modelMatrix)
-{
-	glm::mat4 modelMatrix = _modelMatrix;
-
-	glm::mat4 MVP = projectionMatrix * viewMatrix * modelMatrix;
-
-	//A pointer to the shader
-	Shader* shader = _cube->getMaterial()->getShader();
-
-	//Send our transformation to the currently bound shader, in the "MVP" uniform
-	GLuint matrixID = shader->getMatrixID();
-	glUniformMatrix4fv(matrixID, 1, GL_FALSE, &MVP[0][0]);
-
-	//Bind our texture in Texture Unit 0
-	glActiveTexture(GL_TEXTURE0);
-
-	//Set our "textureSampler" sampler to user Texture Unit 0
-	GLuint textureID = shader->getTextureID();
-	glActiveTexture(GL_TEXTURE0);
-	glBindTexture(GL_TEXTURE_2D, _cube->getMaterial()->getTexture());
-
-	glUniform1i(textureID, 0);
-
-	//1rst attribute buffer : vertices
-	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, _cube->getMesh()->getVertexbuffer());
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-
-	//2nd attribute buffer : UVs
-	glEnableVertexAttribArray(1);
-	glBindBuffer(GL_ARRAY_BUFFER, _cube->getMesh()->getUvbuffer());
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, (void*)0);
-
-	//Draw the triangle !
-	glDrawArrays(GL_TRIANGLES, 0, 12*3); // 12*3 indices starting at 0 -> 12 triangles
-
-	glDisableVertexAttribArray(0);
-	glDisableVertexAttribArray(1);
 }
 
 //Render a model

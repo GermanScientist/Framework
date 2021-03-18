@@ -22,7 +22,6 @@
 #include <algorithm>
 #include <myFramework/entity.h>
 #include <myFramework/sprite.h>
-#include <myFramework/cube.h>
 #include <myFramework/model.h>
 
 #include <myFramework/camera.h>
