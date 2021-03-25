@@ -26,7 +26,5 @@ void Scene::updateEntity(Entity* _entity, float _deltaTime) {
 	std::vector<Entity*> children = _entity->getChildren();
 
 	for (Entity* c : children)
-	{
 		this->updateEntity(c, _deltaTime);
-	}
 }

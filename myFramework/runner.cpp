@@ -24,11 +24,10 @@ void Runner::run(Scene* _scene) {
     //Render the scene
     renderer->renderScene(_scene);
 
-    if (glfwWindowShouldClose(renderer->getWindow()) == 1 || glfwGetKey(renderer->getWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS) {
+    if (glfwWindowShouldClose(renderer->getWindow()) == 1 || glfwGetKey(renderer->getWindow(), GLFW_KEY_ESCAPE) == GLFW_PRESS)
         _scene->exit();
-    }
 
-    //glfwTerminate();
+    /*glfwTerminate();*/
 }
 
 //Update delta time function

@@ -103,30 +103,23 @@ void Renderer::renderEntity(Entity* _entity, glm::mat4 _modelMatrix) {
 
 	_modelMatrix *= modelMatrix;
 
+	//Check wheter we need to render any sprites
+	Sprite* sprite = _entity->getSprite();
+
+	if (sprite != nullptr)
+		this->renderSprite(sprite, _modelMatrix);
+
 	//Check wheter we need to render any models
 	Model* model = _entity->getModel();
 
-	if (model != nullptr) {
-		//Render the Model
+	if (model != nullptr)
 		this->renderModel(model, _modelMatrix);
-	}
-
-	//Check wheter we need to render any models
-	Sprite* sprite = _entity->getSprite();
-
-	if (sprite != nullptr) {
-		
-		//Render the Sprite
-		this->renderSprite(sprite, _modelMatrix);
-	}
 
 	//Render all children of this entity
 	std::vector<Entity*> children = _entity->getChildren();
 	
 	for(Entity* c : children)
-	{
 		this->renderEntity(c, _modelMatrix);
-	}
 }
 
 //Render a sprite
